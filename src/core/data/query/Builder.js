@@ -7,10 +7,7 @@ export default class Builder{
     _groups = null;
     _limit = null;
     _offset = null;
-    _with = null;
-    
-    _model = null;
-    
+
     _connection = null;
     _grammar = null;
     _processor = null;
@@ -65,23 +62,7 @@ export default class Builder{
         this._offset = offset;
         return this;
     }
-    
-    with(...args){
-        args = Array.isArray(args) ? args : [args];
-        this._with = this._with == null ? args : this._with.concat(args);
-        return this;
-    }
-    
-    scope(name = '', ...args){
-        // Scopes are treated as additional wheres.
-        this._wheres.push({
-            type: "scope",
-            name: name,
-            args: args
-        });
-        return this;
-    }
-    
+        
     // Computed on above methods    
     forPage(page, perPage = 15){
         return this.offset((page-1)*perPage).limit(perPage);
@@ -142,14 +123,6 @@ export default class Builder{
     
     async destroy(pks, data){
         return this._processor.processDestroy(this, await this._connection.destroy(this._grammar.compileDestroy(this, pks), pks));
-    }
-    
-    
-    // Setters
-    setModel(model = null){
-        this._model = model;
-        this.from(model.getTable());
-        return this;
     }
     
     // Getters for the query

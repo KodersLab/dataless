@@ -1,7 +1,8 @@
 import EventEmitter from '../../utils/EventEmitter';
 import DatabaseManager from '../DatabaseManager';
 import Collection from './Collection';
-import Builder from '../query/Builder';
+import Builder from './Builder';
+import BaseBuilder from '../query/Builder';
 
 export default class Model extends EventEmitter{
     _connection = null;
@@ -82,7 +83,7 @@ export default class Model extends EventEmitter{
     newQueryWithoutScopes(){
         var conn = this.getConnection();
         var grammar = conn.getQueryGrammar();
-        var builder = new Builder(conn, grammar, conn.getPostProcessor());
+        var builder = new Builder(new BaseBuilder(conn, grammar, conn.getPostProcessor()));
 
         return builder.setModel(this).with(this._with);
     }

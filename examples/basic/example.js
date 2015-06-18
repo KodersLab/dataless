@@ -12,7 +12,7 @@ class Profile extends Model{
 
 async function app(){
     
-    var profiles = await Profile.query().get();
+    var profiles = (await Profile.query().get());
     console.log('Via model', profiles);
     
     var profiles = await DB.table('auth/profiles').get();
