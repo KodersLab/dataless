@@ -5,6 +5,9 @@ class DatabaseManager{
     _connections = {};
     _configs = {};
     _default = "default";
+    _adapters = {
+        url: (name, config) => { return new UrlConnection(null, config['database'], config['prefix'] || '', config);}
+    };
 
     async connect(name = null){
         name = name != null ? name: this.getDefaultConnection();
@@ -46,14 +49,13 @@ class DatabaseManager{
 
     async makeConnection(name){
         var config = this.getConfig(name);
+        var driver = (config['driver'] || 'url').toLowerCase();
 
         var instance = null;
-        switch (config["driver"])
-        {
-            case "url":
-                instance = new UrlConnection(null, config["database"], config["prefix"], config);
-                break;
+        if(typeof this._adapters[driver] === 'undefined'){
+            throw "Unknown driver type "+driver;
         }
+        instance = this._adapters[driver](name, config);
 
         await instance.connect();
         return instance;
@@ -64,8 +66,7 @@ class DatabaseManager{
         return _connections[name].setPdo(fresh.getPdo()).setReadPdo(fresh.getReadPdo());
     }
 
-    connections()
-    {
+    connections(){
         var result = [];
         for(var k in this._connections){
             if(this._connections.hasOwnProperty(k)){
@@ -75,19 +76,16 @@ class DatabaseManager{
         return result;
     }
 
-    getDefaultConnection()
-    {
+    getDefaultConnection(){
         return this._default;
     }
 
-    parseConnectionName(name = null)
-    {
+    parseConnectionName(name = null){
         name = name != null ? name: this.getDefaultConnection();
         return name.indexOf("::read") === name.length - 6 || name.indexOf("::write") === name.length - 7 ? name.split("::") : [name, null];
     }
 
-    setPdoForType(connection, type = null)
-    {
+    setPdoForType(connection, type = null){
         if (type == "read")
         {
             connection.setPdo(connection.getReadPdo());
@@ -99,8 +97,7 @@ class DatabaseManager{
         return connection;
     }
 
-    connection(name = null)
-    {
+    connection(name = null){
         var p = this.parseConnectionName(name);
         name = p[0];
         var type = p[1];
@@ -122,13 +119,15 @@ class DatabaseManager{
         }
     }
 
-    addConnection(name, config)
-    {
+    addConnection(name, config){
         this._configs[name] = config;
     }
 
-    getConfig(name = null)
-    {
+    addAdapter(name, adapterFn){
+        this._adapters[name] = adapterFn;
+    }
+
+    getConfig(name = null){
         name = name != null ? name : this.getDefaultConnection();
 
         if (typeof this._configs[name] === 'undefined')

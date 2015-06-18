@@ -716,38 +716,6 @@
 	    _inherits(Connection, _EventEmitter);
 	
 	    _createClass(Connection, [{
-	        key: 'getConfig',
-	        value: function getConfig() {
-	            var name = arguments[0] === undefined ? '' : arguments[0];
-	
-	            return typeof this._config[name] === 'undefined' ? null : this._config[name];
-	        }
-	    }, {
-	        key: 'setConfig',
-	        value: function setConfig(name, value) {
-	            return this._config[name] = value;
-	        }
-	    }, {
-	        key: 'useDefaultQueryGrammar',
-	        value: function useDefaultQueryGrammar() {
-	            return this._queryGrammar = new _grammarGrammar2['default']();
-	        }
-	    }, {
-	        key: 'useDefaultPostProcessor',
-	        value: function useDefaultPostProcessor() {
-	            return this._postProcessor = new _processorProcessor2['default']();
-	        }
-	    }, {
-	        key: 'getQueryGrammar',
-	        value: function getQueryGrammar() {
-	            return this._queryGrammar;
-	        }
-	    }, {
-	        key: 'getPostProcessor',
-	        value: function getPostProcessor() {
-	            return this._postProcessor;
-	        }
-	    }, {
 	        key: 'table',
 	        value: function table(_table) {
 	            var query = new _Query2['default'](this, this.getQueryGrammar(), this.getPostProcessor());
@@ -778,6 +746,38 @@
 	
 	            this._reconnector = reconnector;
 	            return this;
+	        }
+	    }, {
+	        key: 'getConfig',
+	        value: function getConfig() {
+	            var name = arguments[0] === undefined ? '' : arguments[0];
+	
+	            return typeof this._config[name] === 'undefined' ? null : this._config[name];
+	        }
+	    }, {
+	        key: 'setConfig',
+	        value: function setConfig(name, value) {
+	            return this._config[name] = value;
+	        }
+	    }, {
+	        key: 'useDefaultQueryGrammar',
+	        value: function useDefaultQueryGrammar() {
+	            return this._queryGrammar = new _grammarGrammar2['default']();
+	        }
+	    }, {
+	        key: 'useDefaultPostProcessor',
+	        value: function useDefaultPostProcessor() {
+	            return this._postProcessor = new _processorProcessor2['default']();
+	        }
+	    }, {
+	        key: 'getQueryGrammar',
+	        value: function getQueryGrammar() {
+	            return this._queryGrammar;
+	        }
+	    }, {
+	        key: 'getPostProcessor',
+	        value: function getPostProcessor() {
+	            return this._postProcessor;
 	        }
 	    }, {
 	        key: 'connect',
@@ -3401,6 +3401,11 @@
 	        this._connections = {};
 	        this._configs = {};
 	        this._default = 'default';
+	        this._adapters = {
+	            url: function url(name, config) {
+	                return new _UrlConnection2['default'](null, config['database'], config['prefix'] || '', config);
+	            }
+	        };
 	    }
 	
 	    _createClass(DatabaseManager, [{
@@ -3504,28 +3509,31 @@
 	    }, {
 	        key: 'makeConnection',
 	        value: function makeConnection(name) {
-	            var config, instance;
+	            var config, driver, instance;
 	            return _regeneratorRuntime.async(function makeConnection$(context$2$0) {
 	                while (1) switch (context$2$0.prev = context$2$0.next) {
 	                    case 0:
 	                        config = this.getConfig(name);
+	                        driver = (config['driver'] || 'url').toLowerCase();
 	                        instance = null;
-	                        context$2$0.t0 = config['driver'];
-	                        context$2$0.next = context$2$0.t0 === 'url' ? 5 : 7;
-	                        break;
+	
+	                        if (!(typeof this._adapters[driver] === 'undefined')) {
+	                            context$2$0.next = 5;
+	                            break;
+	                        }
+	
+	                        throw 'Unknown driver type ' + driver;
 	
 	                    case 5:
-	                        instance = new _UrlConnection2['default'](null, config['database'], config['prefix'], config);
-	                        return context$2$0.abrupt('break', 7);
+	                        instance = this._adapters[driver](name, config);
 	
-	                    case 7:
-	                        context$2$0.next = 9;
+	                        context$2$0.next = 8;
 	                        return _regeneratorRuntime.awrap(instance.connect());
 	
-	                    case 9:
+	                    case 8:
 	                        return context$2$0.abrupt('return', instance);
 	
-	                    case 10:
+	                    case 9:
 	                    case 'end':
 	                        return context$2$0.stop();
 	                }
@@ -3611,6 +3619,11 @@
 	        key: 'addConnection',
 	        value: function addConnection(name, config) {
 	            this._configs[name] = config;
+	        }
+	    }, {
+	        key: 'addAdapter',
+	        value: function addAdapter(name, adapterFn) {
+	            this._adapters[name] = adapterFn;
 	        }
 	    }, {
 	        key: 'getConfig',

@@ -25,6 +25,21 @@ export default class Connection extends EventEmitter{
         this.useDefaultPostProcessor();
     }
     
+    table(table)
+    {
+        var query = new Query(this, this.getQueryGrammar(), this.getPostProcessor());
+        return query.from(table);
+    }
+    
+    async select(query, useReadPdo){
+        return await this.selectingStatement(query, useReadPdo);    
+    }
+    
+    setReconnector(reconnector = null){
+        this._reconnector = reconnector;
+        return this;
+    }
+    
     getConfig(name = ''){
         return typeof this._config[name] === 'undefined' ? null : this._config[name];
     }
@@ -47,21 +62,6 @@ export default class Connection extends EventEmitter{
     
     getPostProcessor(){
         return this._postProcessor;
-    }
-    
-    table(table)
-    {
-        var query = new Query(this, this.getQueryGrammar(), this.getPostProcessor());
-        return query.from(table);
-    }
-    
-    async select(query, useReadPdo){
-        return await this.selectingStatement(query, useReadPdo);    
-    }
-    
-    setReconnector(reconnector = null){
-        this._reconnector = reconnector;
-        return this;
     }
     
     async connect(){
