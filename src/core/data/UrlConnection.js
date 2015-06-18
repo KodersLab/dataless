@@ -1,6 +1,6 @@
 import qs from 'qs';
-import UrlGrammar from './grammar/UrlGrammar';
-import UrlProcessor from './processor/UrlProcessor';
+import UrlGrammar from './query/grammar/UrlGrammar';
+import UrlProcessor from './query/processor/UrlProcessor';
 import Connection from './Connection';
 import HTTP from '../protocol/HTTP';
 

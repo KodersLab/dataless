@@ -1,12 +1,20 @@
 // should be replaced with import {DatabaseManager, DB} from 'dataless'
-import {DatabaseManager, DB} from '../../src/index';
+import {DatabaseManager, DB, Model} from '../../src/index';
 
 DatabaseManager.addConnection("default", {
     driver: "url",
     database: "http://localhost:100/api/v1/"
 });
 
+class Profile extends Model{
+    _table = 'auth/profiles';
+}
+
 async function app(){
+    
+    var profiles = await Profile.query().get();
+    console.log('Via model', profiles);
+    
     var profiles = await DB.table('auth/profiles').get();
     var profilesCount = await DB.table('auth/profiles').count();
     var latestProfiles = await DB.table('auth/profiles').orderBy('id', 'DESC').get();

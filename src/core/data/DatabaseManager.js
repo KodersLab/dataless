@@ -6,7 +6,9 @@ class DatabaseManager{
     _configs = {};
     _default = "default";
     _adapters = {
-        url: (name, config) => { return new UrlConnection(null, config['database'], config['prefix'] || '', config);}
+        url: (name, config) => {
+            return new UrlConnection(null, config['database'], config['prefix'], config);
+        }
     };
 
     async connect(name = null){

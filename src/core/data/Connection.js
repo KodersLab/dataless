@@ -1,7 +1,7 @@
 import EventEmitter from '../utils/EventEmitter';
-import Grammar from './grammar/Grammar';
-import Processor from './processor/Processor';
-import Query from './Query';
+import Grammar from './query/grammar/Grammar';
+import Processor from './query/processor/Processor';
+import Query from './query/Builder';
 
 export default class Connection extends EventEmitter{
     _pdo = null;
