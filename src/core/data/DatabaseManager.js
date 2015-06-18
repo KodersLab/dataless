@@ -1,35 +1,50 @@
+import Connection from './Connection';
+import UrlConnection from './UrlConnection';
 
 class DatabaseManager{
     _connections = {};
     _configs = {};
     _default = "default";
 
-    disconnect(name = null)
-    {
-        if (this.connection(name) != null)
+    async connect(name = null){
+        name = name != null ? name: this.getDefaultConnection();
+        
+        var p = this.parseConnectionName(name);
+        name = p[0];
+        var type = p[1];
+
+        if (typeof this._connections[name] === 'undefined')
         {
-            this.connection(name).disconnect();
+            var connection = await this.makeConnection(name);
+            this.setPdoForType(connection, type);
+            this._connections[name] = this.prepare(connection);
         }
     }
 
-    reconnect(name = null)
-    {
+    async disconnect(name = null){
+        if (this.connection(name) != null)
+        {
+            await this.connection(name).disconnect();
+        }
+    }
+
+    async reconnect(name = null){
         var name = name != null ? name : getDefaultConnection()
         this.disconnect(name);
         if(typeof this._connections[name] === 'undefined'){
             return this.connection(name);
         }
-        return this.refreshPdoConnections(name);
+        return await this.refreshPdoConnections(name);
     }
 
-    refreshPdoConnections(name)
-    {
-        var fresh = this.makeConnection(name);
-        return _connections[name].setPdo(fresh.getPdo()).setReadPdo(fresh.getReadPdo());
+    prepare(connection){
+        connection.setReconnector((c) => {
+            return this.reconnect(c.getName());
+        });
+        return connection;
     }
 
-    makeConnection(name)
-    {
+    async makeConnection(name){
         var config = this.getConfig(name);
 
         var instance = null;
@@ -40,8 +55,13 @@ class DatabaseManager{
                 break;
         }
 
-        instance.connect();
+        await instance.connect();
         return instance;
+    }
+
+    async refreshPdoConnections(name){
+        var fresh = await this.makeConnection(name);
+        return _connections[name].setPdo(fresh.getPdo()).setReadPdo(fresh.getReadPdo());
     }
 
     connections()
@@ -62,7 +82,7 @@ class DatabaseManager{
 
     parseConnectionName(name = null)
     {
-        name = name != null ? name: getDefaultConnection();
+        name = name != null ? name: this.getDefaultConnection();
         return name.indexOf("::read") === name.length - 6 || name.indexOf("::write") === name.length - 7 ? name.split("::") : [name, null];
     }
 
@@ -87,9 +107,7 @@ class DatabaseManager{
 
         if (typeof this._connections[name] === 'undefined')
         {
-            var connection = this.makeConnection(name);
-            this.setPdoForType(connection, type);
-            this._connections[name] = this.prepare(connection);
+            throw "Connection "+name+" is not ready yet. Have you called DatabaseManager.connect('"+name+"') before this query?";
         }
         if (name == null)
         {
@@ -111,20 +129,13 @@ class DatabaseManager{
 
     getConfig(name = null)
     {
-        name = name != null ? name : getDefaultConnection();
+        name = name != null ? name : this.getDefaultConnection();
 
-        if (typeof _configs['name'] === 'undefined')
+        if (typeof this._configs[name] === 'undefined')
         {
             throw "Database "+name+" not configured.";
         }
-        return _configs[name];
-    }
-
-    prepare(connection){
-        connection.setReconnector((c) => {
-            return this.reconnect(c.getName());
-        });
-        return connection;
+        return this._configs[name];
     }
 }
 

@@ -14,7 +14,13 @@ export default class UrlConnection extends Connection{
         return this._postProcessor = new UrlProcessor();
     }
     
-    async select(query){
+    async connect(){
+    }
+    
+    async disconnect(){   
+    }
+    
+    async selectingStatement(query, useReadPdo = true){
         var from = query.from;
         delete query['from'];
         

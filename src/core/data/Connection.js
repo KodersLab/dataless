@@ -8,6 +8,8 @@ export default class Connection extends EventEmitter{
     _database = null;
     _tablePrefix = null;
     _config = null;
+    _reconnector = null;
+    
     _queryGrammar = null;
     _postProcessor = null;
     
@@ -53,7 +55,24 @@ export default class Connection extends EventEmitter{
         return query.from(table);
     }
     
-    async select(query){
+    async select(query, useReadPdo){
+        return await this.selectingStatement(query, useReadPdo);    
+    }
+    
+    setReconnector(reconnector = null){
+        this._reconnector = reconnector;
+        return this;
+    }
+    
+    async connect(){
+        throw "This should be implemented by custom connection.";
+    }
+    
+    async disconnect(){
+        throw "This should be implemented by custom connection.";
+    }
+    
+    async selectingStatement(query, useReadPdo = true){
         throw "This should be implemented by custom connection.";
     }
 }

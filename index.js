@@ -400,25 +400,25 @@
 	
 	var _Object$defineProperty = __webpack_require__(1)['default'];
 	
-	var _interopRequire = __webpack_require__(62)['default'];
+	var _interopRequire = __webpack_require__(15)['default'];
 	
 	_Object$defineProperty(exports, '__esModule', {
 	        value: true
 	});
 	
-	var _grammar = __webpack_require__(67);
+	var _grammar = __webpack_require__(16);
 	
 	exports.Grammar = _interopRequire(_grammar);
 	
-	var _processor = __webpack_require__(68);
+	var _processor = __webpack_require__(20);
 	
 	exports.Processor = _interopRequire(_processor);
 	
-	var _Connection = __webpack_require__(15);
+	var _Connection = __webpack_require__(22);
 	
 	exports.Connection = _interopRequire(_Connection);
 	
-	var _Query = __webpack_require__(66);
+	var _Query = __webpack_require__(68);
 	
 	exports.Query = _interopRequire(_Query);
 	
@@ -426,47 +426,265 @@
 	
 	exports.DatabaseManager = _interopRequire(_DatabaseManager);
 	
+	var _DB = __webpack_require__(79);
+	
+	exports.DB = _interopRequire(_DB);
+	
 	var _UrlConnection = __webpack_require__(70);
 	
 	exports.UrlConnection = _interopRequire(_UrlConnection);
 
 /***/ },
 /* 15 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	exports["default"] = function (obj) {
+	  return obj && obj.__esModule ? obj["default"] : obj;
+	};
+	
+	exports.__esModule = true;
+
+/***/ },
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _inherits = __webpack_require__(16)['default'];
+	var _Object$defineProperty = __webpack_require__(1)['default'];
 	
-	var _get = __webpack_require__(19)['default'];
+	var _interopRequire = __webpack_require__(15)['default'];
 	
-	var _createClass = __webpack_require__(20)['default'];
+	_Object$defineProperty(exports, '__esModule', {
+	  value: true
+	});
 	
-	var _classCallCheck = __webpack_require__(21)['default'];
+	var _Grammar = __webpack_require__(17);
+	
+	exports.Grammar = _interopRequire(_Grammar);
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var _createClass = __webpack_require__(18)["default"];
+	
+	var _classCallCheck = __webpack_require__(19)["default"];
+	
+	var _Object$defineProperty = __webpack_require__(1)["default"];
+	
+	_Object$defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var Grammar = (function () {
+	    function Grammar() {
+	        _classCallCheck(this, Grammar);
+	
+	        this._toCompile = ["columns", "aggregate", "from", "with", "filters", "orders", "limit", "offset"];
+	    }
+	
+	    _createClass(Grammar, [{
+	        key: "compileSelect",
+	        value: function compileSelect(query) {
+	            return this.compileComponents(query);
+	        }
+	    }, {
+	        key: "compileComponents",
+	        value: function compileComponents(query) {
+	            var name, ucname;
+	            var result = {};
+	
+	            for (var i = 0; i < this._toCompile.length; i++) {
+	                name = this._toCompile[i];
+	                ucname = name.charAt(0).toUpperCase() + name.substring(1);
+	                result[name] = this["compile" + ucname](query["_" + name]);
+	            }
+	            return result;
+	        }
+	    }, {
+	        key: "compileColumns",
+	        value: function compileColumns(value) {
+	            return value === null ? undefined : value;
+	        }
+	    }, {
+	        key: "compileAggregate",
+	        value: function compileAggregate(value) {
+	            return value === null ? undefined : value;
+	        }
+	    }, {
+	        key: "compileFrom",
+	        value: function compileFrom(value) {
+	            return value === null ? undefined : value;
+	        }
+	    }, {
+	        key: "compileWith",
+	        value: function compileWith(value) {
+	            return value === null ? undefined : value;
+	        }
+	    }, {
+	        key: "compileFilters",
+	        value: function compileFilters(value) {
+	            return value === null ? undefined : value;
+	        }
+	    }, {
+	        key: "compileOrders",
+	        value: function compileOrders(value) {
+	            return value === null ? undefined : value;
+	        }
+	    }, {
+	        key: "compileLimit",
+	        value: function compileLimit(value) {
+	            return value === null ? undefined : value;
+	        }
+	    }, {
+	        key: "compileOffset",
+	        value: function compileOffset(value) {
+	            return value === null ? undefined : value;
+	        }
+	    }]);
+	
+	    return Grammar;
+	})();
+	
+	exports["default"] = Grammar;
+	module.exports = exports["default"];
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var _Object$defineProperty = __webpack_require__(1)["default"];
+	
+	exports["default"] = (function () {
+	  function defineProperties(target, props) {
+	    for (var i = 0; i < props.length; i++) {
+	      var descriptor = props[i];
+	      descriptor.enumerable = descriptor.enumerable || false;
+	      descriptor.configurable = true;
+	      if ("value" in descriptor) descriptor.writable = true;
+	
+	      _Object$defineProperty(target, descriptor.key, descriptor);
+	    }
+	  }
+	
+	  return function (Constructor, protoProps, staticProps) {
+	    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+	    if (staticProps) defineProperties(Constructor, staticProps);
+	    return Constructor;
+	  };
+	})();
+	
+	exports.__esModule = true;
+
+/***/ },
+/* 19 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	exports["default"] = function (instance, Constructor) {
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError("Cannot call a class as a function");
+	  }
+	};
+	
+	exports.__esModule = true;
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
 	
 	var _Object$defineProperty = __webpack_require__(1)['default'];
 	
-	var _regeneratorRuntime = __webpack_require__(22)['default'];
+	var _interopRequire = __webpack_require__(15)['default'];
 	
-	var _interopRequireDefault = __webpack_require__(60)['default'];
+	_Object$defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _Processor = __webpack_require__(21);
+	
+	exports.Processor = _interopRequire(_Processor);
+
+/***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var _createClass = __webpack_require__(18)["default"];
+	
+	var _classCallCheck = __webpack_require__(19)["default"];
+	
+	var _Object$defineProperty = __webpack_require__(1)["default"];
+	
+	_Object$defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var Processor = (function () {
+	    function Processor() {
+	        _classCallCheck(this, Processor);
+	    }
+	
+	    _createClass(Processor, [{
+	        key: "processSelect",
+	        value: function processSelect(query, result) {
+	            return result;
+	        }
+	    }]);
+	
+	    return Processor;
+	})();
+	
+	exports["default"] = Processor;
+	module.exports = exports["default"];
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _inherits = __webpack_require__(23)['default'];
+	
+	var _get = __webpack_require__(26)['default'];
+	
+	var _createClass = __webpack_require__(18)['default'];
+	
+	var _classCallCheck = __webpack_require__(19)['default'];
+	
+	var _Object$defineProperty = __webpack_require__(1)['default'];
+	
+	var _regeneratorRuntime = __webpack_require__(27)['default'];
+	
+	var _interopRequireDefault = __webpack_require__(65)['default'];
 	
 	_Object$defineProperty(exports, '__esModule', {
 	    value: true
 	});
 	
-	var _utilsEventEmitter = __webpack_require__(61);
+	var _utilsEventEmitter = __webpack_require__(66);
 	
 	var _utilsEventEmitter2 = _interopRequireDefault(_utilsEventEmitter);
 	
-	var _grammarGrammar = __webpack_require__(64);
+	var _grammarGrammar = __webpack_require__(17);
 	
 	var _grammarGrammar2 = _interopRequireDefault(_grammarGrammar);
 	
-	var _processorProcessor = __webpack_require__(65);
+	var _processorProcessor = __webpack_require__(21);
 	
 	var _processorProcessor2 = _interopRequireDefault(_processorProcessor);
 	
-	var _Query = __webpack_require__(66);
+	var _Query = __webpack_require__(68);
 	
 	var _Query2 = _interopRequireDefault(_Query);
 	
@@ -483,6 +701,7 @@
 	        this._database = null;
 	        this._tablePrefix = null;
 	        this._config = null;
+	        this._reconnector = null;
 	        this._queryGrammar = null;
 	        this._postProcessor = null;
 	        this._pdo = pdo;
@@ -536,8 +755,63 @@
 	        }
 	    }, {
 	        key: 'select',
-	        value: function select(query) {
+	        value: function select(query, useReadPdo) {
 	            return _regeneratorRuntime.async(function select$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        context$2$0.next = 2;
+	                        return _regeneratorRuntime.awrap(this.selectingStatement(query, useReadPdo));
+	
+	                    case 2:
+	                        return context$2$0.abrupt('return', context$2$0.sent);
+	
+	                    case 3:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'setReconnector',
+	        value: function setReconnector() {
+	            var reconnector = arguments[0] === undefined ? null : arguments[0];
+	
+	            this._reconnector = reconnector;
+	            return this;
+	        }
+	    }, {
+	        key: 'connect',
+	        value: function connect() {
+	            return _regeneratorRuntime.async(function connect$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        throw 'This should be implemented by custom connection.';
+	
+	                    case 1:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'disconnect',
+	        value: function disconnect() {
+	            return _regeneratorRuntime.async(function disconnect$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        throw 'This should be implemented by custom connection.';
+	
+	                    case 1:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'selectingStatement',
+	        value: function selectingStatement(query) {
+	            var useReadPdo = arguments[1] === undefined ? true : arguments[1];
+	            return _regeneratorRuntime.async(function selectingStatement$(context$2$0) {
 	                while (1) switch (context$2$0.prev = context$2$0.next) {
 	                    case 0:
 	                        throw 'This should be implemented by custom connection.';
@@ -557,12 +831,12 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 16 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	var _Object$create = __webpack_require__(17)["default"];
+	var _Object$create = __webpack_require__(24)["default"];
 	
 	exports["default"] = function (subClass, superClass) {
 	  if (typeof superClass !== "function" && superClass !== null) {
@@ -583,13 +857,13 @@
 	exports.__esModule = true;
 
 /***/ },
-/* 17 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(18), __esModule: true };
+	module.exports = { "default": __webpack_require__(25), __esModule: true };
 
 /***/ },
-/* 18 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(3);
@@ -598,7 +872,7 @@
 	};
 
 /***/ },
-/* 19 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -646,50 +920,7 @@
 	exports.__esModule = true;
 
 /***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var _Object$defineProperty = __webpack_require__(1)["default"];
-	
-	exports["default"] = (function () {
-	  function defineProperties(target, props) {
-	    for (var i = 0; i < props.length; i++) {
-	      var descriptor = props[i];
-	      descriptor.enumerable = descriptor.enumerable || false;
-	      descriptor.configurable = true;
-	      if ("value" in descriptor) descriptor.writable = true;
-	
-	      _Object$defineProperty(target, descriptor.key, descriptor);
-	    }
-	  }
-	
-	  return function (Constructor, protoProps, staticProps) {
-	    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-	    if (staticProps) defineProperties(Constructor, staticProps);
-	    return Constructor;
-	  };
-	})();
-	
-	exports.__esModule = true;
-
-/***/ },
-/* 21 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	exports["default"] = function (instance, Constructor) {
-	  if (!(instance instanceof Constructor)) {
-	    throw new TypeError("Cannot call a class as a function");
-	  }
-	};
-	
-	exports.__esModule = true;
-
-/***/ },
-/* 22 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {// This method of obtaining a reference to the global object needs to be
@@ -710,7 +941,7 @@
 	// Force reevalutation of runtime.js.
 	g.regeneratorRuntime = undefined;
 	
-	module.exports = __webpack_require__(23);
+	module.exports = __webpack_require__(28);
 	
 	if (hadRuntime) {
 	  // Restore the original runtime.
@@ -725,7 +956,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 23 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process) {/**
@@ -740,13 +971,13 @@
 	
 	"use strict";
 	
-	var _Symbol = __webpack_require__(25)["default"];
+	var _Symbol = __webpack_require__(30)["default"];
 	
-	var _Symbol$iterator = __webpack_require__(36)["default"];
+	var _Symbol$iterator = __webpack_require__(41)["default"];
 	
-	var _Object$create = __webpack_require__(17)["default"];
+	var _Object$create = __webpack_require__(24)["default"];
 	
-	var _Promise = __webpack_require__(45)["default"];
+	var _Promise = __webpack_require__(50)["default"];
 	
 	!(function (global) {
 	  "use strict";
@@ -1330,10 +1561,10 @@
 	// object, this seems to be the most reliable technique that does not
 	// use indirect eval (which violates Content Security Policy).
 	typeof global === "object" ? global : typeof window === "object" ? window : typeof self === "object" ? self : undefined);
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(24)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(29)))
 
 /***/ },
-/* 24 */
+/* 29 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -1429,33 +1660,33 @@
 
 
 /***/ },
-/* 25 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(26), __esModule: true };
+	module.exports = { "default": __webpack_require__(31), __esModule: true };
 
 /***/ },
-/* 26 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(27);
+	__webpack_require__(32);
 	module.exports = __webpack_require__(3).core.Symbol;
 
 /***/ },
-/* 27 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	// ECMAScript 6 symbols shim
 	var $        = __webpack_require__(3)
-	  , setTag   = __webpack_require__(28).set
-	  , uid      = __webpack_require__(31)
-	  , shared   = __webpack_require__(30)
+	  , setTag   = __webpack_require__(33).set
+	  , uid      = __webpack_require__(36)
+	  , shared   = __webpack_require__(35)
 	  , $def     = __webpack_require__(9)
-	  , $redef   = __webpack_require__(32)
-	  , keyOf    = __webpack_require__(33)
-	  , enumKeys = __webpack_require__(34)
-	  , assertObject = __webpack_require__(35).obj
+	  , $redef   = __webpack_require__(37)
+	  , keyOf    = __webpack_require__(38)
+	  , enumKeys = __webpack_require__(39)
+	  , assertObject = __webpack_require__(40).obj
 	  , ObjectProto = Object.prototype
 	  , DESC     = $.DESC
 	  , has      = $.has
@@ -1603,7 +1834,7 @@
 	    'hasInstance,isConcatSpreadable,iterator,match,replace,search,' +
 	    'species,split,toPrimitive,toStringTag,unscopables'
 	  ).split(','), function(it){
-	    var sym = __webpack_require__(29)(it);
+	    var sym = __webpack_require__(34)(it);
 	    symbolStatics[it] = useNative ? sym : wrap(sym);
 	  }
 	);
@@ -1637,11 +1868,11 @@
 	setTag($.g.JSON, 'JSON', true);
 
 /***/ },
-/* 28 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var $        = __webpack_require__(3)
-	  , TAG      = __webpack_require__(29)('toStringTag')
+	  , TAG      = __webpack_require__(34)('toStringTag')
 	  , toString = {}.toString;
 	function cof(it){
 	  return toString.call(it).slice(8, -1);
@@ -1657,18 +1888,18 @@
 	module.exports = cof;
 
 /***/ },
-/* 29 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var global = __webpack_require__(3).g
-	  , store  = __webpack_require__(30)('wks');
+	  , store  = __webpack_require__(35)('wks');
 	module.exports = function(name){
 	  return store[name] || (store[name] =
-	    global.Symbol && global.Symbol[name] || __webpack_require__(31).safe('Symbol.' + name));
+	    global.Symbol && global.Symbol[name] || __webpack_require__(36).safe('Symbol.' + name));
 	};
 
 /***/ },
-/* 30 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var $      = __webpack_require__(3)
@@ -1679,7 +1910,7 @@
 	};
 
 /***/ },
-/* 31 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var sid = 0;
@@ -1690,13 +1921,13 @@
 	module.exports = uid;
 
 /***/ },
-/* 32 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__(3).hide;
 
 /***/ },
-/* 33 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(3);
@@ -1710,7 +1941,7 @@
 	};
 
 /***/ },
-/* 34 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(3);
@@ -1725,7 +1956,7 @@
 	};
 
 /***/ },
-/* 35 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(3);
@@ -1748,31 +1979,31 @@
 	module.exports = assert;
 
 /***/ },
-/* 36 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(37), __esModule: true };
+	module.exports = { "default": __webpack_require__(42), __esModule: true };
 
 /***/ },
-/* 37 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(38);
-	__webpack_require__(42);
-	module.exports = __webpack_require__(29)('iterator');
+	__webpack_require__(43);
+	__webpack_require__(47);
+	module.exports = __webpack_require__(34)('iterator');
 
 /***/ },
-/* 38 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var set   = __webpack_require__(3).set
-	  , $at   = __webpack_require__(39)(true)
-	  , ITER  = __webpack_require__(31).safe('iter')
-	  , $iter = __webpack_require__(40)
+	  , $at   = __webpack_require__(44)(true)
+	  , ITER  = __webpack_require__(36).safe('iter')
+	  , $iter = __webpack_require__(45)
 	  , step  = $iter.step;
 	
 	// 21.1.3.27 String.prototype[@@iterator]()
-	__webpack_require__(41)(String, 'String', function(iterated){
+	__webpack_require__(46)(String, 'String', function(iterated){
 	  set(this, ITER, {o: String(iterated), i: 0});
 	// 21.1.5.2.1 %StringIteratorPrototype%.next()
 	}, function(){
@@ -1787,7 +2018,7 @@
 	});
 
 /***/ },
-/* 39 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// true  -> String#at
@@ -1809,18 +2040,18 @@
 	};
 
 /***/ },
-/* 40 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	var $                 = __webpack_require__(3)
-	  , cof               = __webpack_require__(28)
+	  , cof               = __webpack_require__(33)
 	  , classof           = cof.classof
-	  , assert            = __webpack_require__(35)
+	  , assert            = __webpack_require__(40)
 	  , assertObject      = assert.obj
-	  , SYMBOL_ITERATOR   = __webpack_require__(29)('iterator')
+	  , SYMBOL_ITERATOR   = __webpack_require__(34)('iterator')
 	  , FF_ITERATOR       = '@@iterator'
-	  , Iterators         = __webpack_require__(30)('iterators')
+	  , Iterators         = __webpack_require__(35)('iterators')
 	  , IteratorPrototype = {};
 	// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
 	setIterator(IteratorPrototype, $.that);
@@ -1863,15 +2094,15 @@
 	};
 
 /***/ },
-/* 41 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var $def            = __webpack_require__(9)
-	  , $redef          = __webpack_require__(32)
+	  , $redef          = __webpack_require__(37)
 	  , $               = __webpack_require__(3)
-	  , cof             = __webpack_require__(28)
-	  , $iter           = __webpack_require__(40)
-	  , SYMBOL_ITERATOR = __webpack_require__(29)('iterator')
+	  , cof             = __webpack_require__(33)
+	  , $iter           = __webpack_require__(45)
+	  , SYMBOL_ITERATOR = __webpack_require__(34)('iterator')
 	  , FF_ITERATOR     = '@@iterator'
 	  , KEYS            = 'keys'
 	  , VALUES          = 'values'
@@ -1918,13 +2149,13 @@
 	};
 
 /***/ },
-/* 42 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(43);
+	__webpack_require__(48);
 	var $           = __webpack_require__(3)
-	  , Iterators   = __webpack_require__(40).Iterators
-	  , ITERATOR    = __webpack_require__(29)('iterator')
+	  , Iterators   = __webpack_require__(45).Iterators
+	  , ITERATOR    = __webpack_require__(34)('iterator')
 	  , ArrayValues = Iterators.Array
 	  , NL          = $.g.NodeList
 	  , HTC         = $.g.HTMLCollection
@@ -1937,13 +2168,13 @@
 	Iterators.NodeList = Iterators.HTMLCollection = ArrayValues;
 
 /***/ },
-/* 43 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var $          = __webpack_require__(3)
-	  , setUnscope = __webpack_require__(44)
-	  , ITER       = __webpack_require__(31).safe('iter')
-	  , $iter      = __webpack_require__(40)
+	  , setUnscope = __webpack_require__(49)
+	  , ITER       = __webpack_require__(36).safe('iter')
+	  , $iter      = __webpack_require__(45)
 	  , step       = $iter.step
 	  , Iterators  = $iter.Iterators;
 	
@@ -1951,7 +2182,7 @@
 	// 22.1.3.13 Array.prototype.keys()
 	// 22.1.3.29 Array.prototype.values()
 	// 22.1.3.30 Array.prototype[@@iterator]()
-	__webpack_require__(41)(Array, 'Array', function(iterated, kind){
+	__webpack_require__(46)(Array, 'Array', function(iterated, kind){
 	  $.set(this, ITER, {o: $.toObject(iterated), i: 0, k: kind});
 	// 22.1.5.2.1 %ArrayIteratorPrototype%.next()
 	}, function(){
@@ -1976,63 +2207,63 @@
 	setUnscope('entries');
 
 /***/ },
-/* 44 */
+/* 49 */
 /***/ function(module, exports) {
 
 	module.exports = function(){ /* empty */ };
 
 /***/ },
-/* 45 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(46), __esModule: true };
+	module.exports = { "default": __webpack_require__(51), __esModule: true };
 
 /***/ },
-/* 46 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
+	__webpack_require__(52);
+	__webpack_require__(43);
 	__webpack_require__(47);
-	__webpack_require__(38);
-	__webpack_require__(42);
-	__webpack_require__(48);
+	__webpack_require__(53);
 	module.exports = __webpack_require__(3).core.Promise;
 
 /***/ },
-/* 47 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	// 19.1.3.6 Object.prototype.toString()
-	var cof = __webpack_require__(28)
+	var cof = __webpack_require__(33)
 	  , tmp = {};
-	tmp[__webpack_require__(29)('toStringTag')] = 'z';
+	tmp[__webpack_require__(34)('toStringTag')] = 'z';
 	if(__webpack_require__(3).FW && cof(tmp) != 'z'){
-	  __webpack_require__(32)(Object.prototype, 'toString', function toString(){
+	  __webpack_require__(37)(Object.prototype, 'toString', function toString(){
 	    return '[object ' + cof.classof(this) + ']';
 	  }, true);
 	}
 
 /***/ },
-/* 48 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	var $        = __webpack_require__(3)
-	  , ctx      = __webpack_require__(50)
-	  , cof      = __webpack_require__(28)
+	  , ctx      = __webpack_require__(55)
+	  , cof      = __webpack_require__(33)
 	  , $def     = __webpack_require__(9)
-	  , assert   = __webpack_require__(35)
-	  , forOf    = __webpack_require__(51)
-	  , setProto = __webpack_require__(53).set
-	  , same     = __webpack_require__(49)
-	  , species  = __webpack_require__(54)
-	  , SPECIES  = __webpack_require__(29)('species')
-	  , RECORD   = __webpack_require__(31).safe('record')
+	  , assert   = __webpack_require__(40)
+	  , forOf    = __webpack_require__(56)
+	  , setProto = __webpack_require__(58).set
+	  , same     = __webpack_require__(54)
+	  , species  = __webpack_require__(59)
+	  , SPECIES  = __webpack_require__(34)('species')
+	  , RECORD   = __webpack_require__(36).safe('record')
 	  , PROMISE  = 'Promise'
 	  , global   = $.g
 	  , process  = global.process
 	  , isNode   = cof(process) == 'process'
-	  , asap     = process && process.nextTick || __webpack_require__(55).set
+	  , asap     = process && process.nextTick || __webpack_require__(60).set
 	  , P        = global[PROMISE]
 	  , isFunction     = $.isFunction
 	  , isObject       = $.isObject
@@ -2202,7 +2433,7 @@
 	      $reject.call(record, err);
 	    }
 	  };
-	  __webpack_require__(58)(P.prototype, {
+	  __webpack_require__(63)(P.prototype, {
 	    // 25.4.5.3 Promise.prototype.then(onFulfilled, onRejected)
 	    then: function then(onFulfilled, onRejected){
 	      var S = assertObject(assertObject(this).constructor)[SPECIES];
@@ -2247,7 +2478,7 @@
 	      ? x : new this(function(res){ res(x); });
 	  }
 	});
-	$def($def.S + $def.F * !(useNative && __webpack_require__(59)(function(iter){
+	$def($def.S + $def.F * !(useNative && __webpack_require__(64)(function(iter){
 	  P.all(iter)['catch'](function(){});
 	})), PROMISE, {
 	  // 25.4.4.1 Promise.all(iterable)
@@ -2279,7 +2510,7 @@
 	});
 
 /***/ },
-/* 49 */
+/* 54 */
 /***/ function(module, exports) {
 
 	module.exports = Object.is || function is(x, y){
@@ -2287,11 +2518,11 @@
 	};
 
 /***/ },
-/* 50 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Optional / simple context binding
-	var assertFunction = __webpack_require__(35).fn;
+	var assertFunction = __webpack_require__(40).fn;
 	module.exports = function(fn, that, length){
 	  assertFunction(fn);
 	  if(~length && that === undefined)return fn;
@@ -2311,12 +2542,12 @@
 	};
 
 /***/ },
-/* 51 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var ctx  = __webpack_require__(50)
-	  , get  = __webpack_require__(40).get
-	  , call = __webpack_require__(52);
+	var ctx  = __webpack_require__(55)
+	  , get  = __webpack_require__(45).get
+	  , call = __webpack_require__(57);
 	module.exports = function(iterable, entries, fn, that){
 	  var iterator = get(iterable)
 	    , f        = ctx(fn, that, entries ? 2 : 1)
@@ -2329,10 +2560,10 @@
 	};
 
 /***/ },
-/* 52 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var assertObject = __webpack_require__(35).obj;
+	var assertObject = __webpack_require__(40).obj;
 	function close(iterator){
 	  var ret = iterator['return'];
 	  if(ret !== undefined)assertObject(ret.call(iterator));
@@ -2349,13 +2580,13 @@
 	module.exports = call;
 
 /***/ },
-/* 53 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Works with __proto__ only. Old v8 can't work with null proto objects.
 	/* eslint-disable no-proto */
 	var $      = __webpack_require__(3)
-	  , assert = __webpack_require__(35);
+	  , assert = __webpack_require__(40);
 	function check(O, proto){
 	  assert.obj(O);
 	  assert(proto === null || $.isObject(proto), proto, ": can't set as prototype!");
@@ -2364,7 +2595,7 @@
 	  set: Object.setPrototypeOf || ('__proto__' in {} // eslint-disable-line
 	    ? function(buggy, set){
 	        try {
-	          set = __webpack_require__(50)(Function.call, $.getDesc(Object.prototype, '__proto__').set, 2);
+	          set = __webpack_require__(55)(Function.call, $.getDesc(Object.prototype, '__proto__').set, 2);
 	          set({}, []);
 	        } catch(e){ buggy = true; }
 	        return function setPrototypeOf(O, proto){
@@ -2379,11 +2610,11 @@
 	};
 
 /***/ },
-/* 54 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var $       = __webpack_require__(3)
-	  , SPECIES = __webpack_require__(29)('species');
+	  , SPECIES = __webpack_require__(34)('species');
 	module.exports = function(C){
 	  if($.DESC && !(SPECIES in C))$.setDesc(C, SPECIES, {
 	    configurable: true,
@@ -2392,15 +2623,15 @@
 	};
 
 /***/ },
-/* 55 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	var $      = __webpack_require__(3)
-	  , ctx    = __webpack_require__(50)
-	  , cof    = __webpack_require__(28)
-	  , invoke = __webpack_require__(56)
-	  , cel    = __webpack_require__(57)
+	  , ctx    = __webpack_require__(55)
+	  , cof    = __webpack_require__(33)
+	  , invoke = __webpack_require__(61)
+	  , cel    = __webpack_require__(62)
 	  , global             = $.g
 	  , isFunction         = $.isFunction
 	  , html               = $.html
@@ -2476,7 +2707,7 @@
 	};
 
 /***/ },
-/* 56 */
+/* 61 */
 /***/ function(module, exports) {
 
 	// Fast apply
@@ -2500,7 +2731,7 @@
 	};
 
 /***/ },
-/* 57 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var $        = __webpack_require__(3)
@@ -2513,20 +2744,20 @@
 	};
 
 /***/ },
-/* 58 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $redef = __webpack_require__(32);
+	var $redef = __webpack_require__(37);
 	module.exports = function(target, src){
 	  for(var key in src)$redef(target, key, src[key]);
 	  return target;
 	};
 
 /***/ },
-/* 59 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var SYMBOL_ITERATOR = __webpack_require__(29)('iterator')
+	var SYMBOL_ITERATOR = __webpack_require__(34)('iterator')
 	  , SAFE_CLOSING    = false;
 	try {
 	  var riter = [7][SYMBOL_ITERATOR]();
@@ -2547,7 +2778,7 @@
 	};
 
 /***/ },
-/* 60 */
+/* 65 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2561,38 +2792,26 @@
 	exports.__esModule = true;
 
 /***/ },
-/* 61 */
+/* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _Object$defineProperty = __webpack_require__(1)['default'];
 	
-	var _interopRequire = __webpack_require__(62)['default'];
+	var _interopRequire = __webpack_require__(15)['default'];
 	
 	_Object$defineProperty(exports, '__esModule', {
 	  value: true
 	});
 	
-	var _eventemitter3 = __webpack_require__(63);
+	var _eventemitter3 = __webpack_require__(67);
 	
 	exports['default'] = _interopRequire(_eventemitter3);
 	module.exports = exports['default'];
 
 /***/ },
-/* 62 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	exports["default"] = function (obj) {
-	  return obj && obj.__esModule ? obj["default"] : obj;
-	};
-	
-	exports.__esModule = true;
-
-/***/ },
-/* 63 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2860,141 +3079,18 @@
 
 
 /***/ },
-/* 64 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	var _createClass = __webpack_require__(20)["default"];
+	var _createClass = __webpack_require__(18)["default"];
 	
-	var _classCallCheck = __webpack_require__(21)["default"];
-	
-	var _Object$defineProperty = __webpack_require__(1)["default"];
-	
-	_Object$defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var Grammar = (function () {
-	    function Grammar() {
-	        _classCallCheck(this, Grammar);
-	
-	        this._toCompile = ["columns", "aggregate", "from", "with", "filters", "orders", "limit", "offset"];
-	    }
-	
-	    _createClass(Grammar, [{
-	        key: "compileSelect",
-	        value: function compileSelect(query) {
-	            return this.compileComponents(query);
-	        }
-	    }, {
-	        key: "compileComponents",
-	        value: function compileComponents(query) {
-	            var name, ucname;
-	            var result = {};
-	
-	            for (var i = 0; i < this._toCompile.length; i++) {
-	                name = this._toCompile[i];
-	                ucname = name.charAt(0).toUpperCase() + name.substring(1);
-	                result[name] = this["compile" + ucname](query["_" + name]);
-	            }
-	            return result;
-	        }
-	    }, {
-	        key: "compileColumns",
-	        value: function compileColumns(value) {
-	            return value === null ? undefined : value;
-	        }
-	    }, {
-	        key: "compileAggregate",
-	        value: function compileAggregate(value) {
-	            return value === null ? undefined : value;
-	        }
-	    }, {
-	        key: "compileFrom",
-	        value: function compileFrom(value) {
-	            return value === null ? undefined : value;
-	        }
-	    }, {
-	        key: "compileWith",
-	        value: function compileWith(value) {
-	            return value === null ? undefined : value;
-	        }
-	    }, {
-	        key: "compileFilters",
-	        value: function compileFilters(value) {
-	            return value === null ? undefined : value;
-	        }
-	    }, {
-	        key: "compileOrders",
-	        value: function compileOrders(value) {
-	            return value === null ? undefined : value;
-	        }
-	    }, {
-	        key: "compileLimit",
-	        value: function compileLimit(value) {
-	            return value === null ? undefined : value;
-	        }
-	    }, {
-	        key: "compileOffset",
-	        value: function compileOffset(value) {
-	            return value === null ? undefined : value;
-	        }
-	    }]);
-	
-	    return Grammar;
-	})();
-	
-	exports["default"] = Grammar;
-	module.exports = exports["default"];
-
-/***/ },
-/* 65 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var _createClass = __webpack_require__(20)["default"];
-	
-	var _classCallCheck = __webpack_require__(21)["default"];
+	var _classCallCheck = __webpack_require__(19)["default"];
 	
 	var _Object$defineProperty = __webpack_require__(1)["default"];
 	
-	_Object$defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var Processor = (function () {
-	    function Processor() {
-	        _classCallCheck(this, Processor);
-	    }
-	
-	    _createClass(Processor, [{
-	        key: "processSelect",
-	        value: function processSelect(query, result) {
-	            return result;
-	        }
-	    }]);
-	
-	    return Processor;
-	})();
-	
-	exports["default"] = Processor;
-	module.exports = exports["default"];
-
-/***/ },
-/* 66 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var _createClass = __webpack_require__(20)["default"];
-	
-	var _classCallCheck = __webpack_require__(21)["default"];
-	
-	var _Object$defineProperty = __webpack_require__(1)["default"];
-	
-	var _regeneratorRuntime = __webpack_require__(22)["default"];
+	var _regeneratorRuntime = __webpack_require__(27)["default"];
 	
 	_Object$defineProperty(exports, "__esModule", {
 	    value: true
@@ -3271,56 +3367,32 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 67 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _Object$defineProperty = __webpack_require__(1)['default'];
-	
-	var _interopRequire = __webpack_require__(62)['default'];
-	
-	_Object$defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	var _Grammar = __webpack_require__(64);
-	
-	exports.Grammar = _interopRequire(_Grammar);
-
-/***/ },
-/* 68 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _Object$defineProperty = __webpack_require__(1)['default'];
-	
-	var _interopRequire = __webpack_require__(62)['default'];
-	
-	_Object$defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	var _Processor = __webpack_require__(65);
-	
-	exports.Processor = _interopRequire(_Processor);
-
-/***/ },
 /* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
-	var _createClass = __webpack_require__(20)["default"];
+	var _createClass = __webpack_require__(18)['default'];
 	
-	var _classCallCheck = __webpack_require__(21)["default"];
+	var _classCallCheck = __webpack_require__(19)['default'];
 	
-	var _Object$defineProperty = __webpack_require__(1)["default"];
+	var _Object$defineProperty = __webpack_require__(1)['default'];
 	
-	_Object$defineProperty(exports, "__esModule", {
+	var _regeneratorRuntime = __webpack_require__(27)['default'];
+	
+	var _interopRequireDefault = __webpack_require__(65)['default'];
+	
+	_Object$defineProperty(exports, '__esModule', {
 	    value: true
 	});
+	
+	var _Connection = __webpack_require__(22);
+	
+	var _Connection2 = _interopRequireDefault(_Connection);
+	
+	var _UrlConnection = __webpack_require__(70);
+	
+	var _UrlConnection2 = _interopRequireDefault(_UrlConnection);
 	
 	var DatabaseManager = (function () {
 	    function DatabaseManager() {
@@ -3328,53 +3400,159 @@
 	
 	        this._connections = {};
 	        this._configs = {};
-	        this._default = "default";
+	        this._default = 'default';
 	    }
 	
 	    _createClass(DatabaseManager, [{
-	        key: "disconnect",
+	        key: 'connect',
+	        value: function connect() {
+	            var name = arguments[0] === undefined ? null : arguments[0];
+	            var p, type, connection;
+	            return _regeneratorRuntime.async(function connect$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        name = name != null ? name : this.getDefaultConnection();
+	
+	                        p = this.parseConnectionName(name);
+	
+	                        name = p[0];
+	                        type = p[1];
+	
+	                        if (!(typeof this._connections[name] === 'undefined')) {
+	                            context$2$0.next = 10;
+	                            break;
+	                        }
+	
+	                        context$2$0.next = 7;
+	                        return _regeneratorRuntime.awrap(this.makeConnection(name));
+	
+	                    case 7:
+	                        connection = context$2$0.sent;
+	
+	                        this.setPdoForType(connection, type);
+	                        this._connections[name] = this.prepare(connection);
+	
+	                    case 10:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'disconnect',
 	        value: function disconnect() {
 	            var name = arguments[0] === undefined ? null : arguments[0];
+	            return _regeneratorRuntime.async(function disconnect$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        if (!(this.connection(name) != null)) {
+	                            context$2$0.next = 3;
+	                            break;
+	                        }
 	
-	            if (this.connection(name) != null) {
-	                this.connection(name).disconnect();
-	            }
+	                        context$2$0.next = 3;
+	                        return _regeneratorRuntime.awrap(this.connection(name).disconnect());
+	
+	                    case 3:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
 	        }
 	    }, {
-	        key: "reconnect",
+	        key: 'reconnect',
 	        value: function reconnect() {
 	            var name = arguments[0] === undefined ? null : arguments[0];
+	            var name;
+	            return _regeneratorRuntime.async(function reconnect$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        name = name != null ? name : getDefaultConnection();
 	
-	            var name = name != null ? name : getDefaultConnection();
-	            this.disconnect(name);
-	            if (typeof this._connections[name] === "undefined") {
-	                return this.connection(name);
-	            }
-	            return this.refreshPdoConnections(name);
+	                        this.disconnect(name);
+	
+	                        if (!(typeof this._connections[name] === 'undefined')) {
+	                            context$2$0.next = 4;
+	                            break;
+	                        }
+	
+	                        return context$2$0.abrupt('return', this.connection(name));
+	
+	                    case 4:
+	                        context$2$0.next = 6;
+	                        return _regeneratorRuntime.awrap(this.refreshPdoConnections(name));
+	
+	                    case 6:
+	                        return context$2$0.abrupt('return', context$2$0.sent);
+	
+	                    case 7:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
 	        }
 	    }, {
-	        key: "refreshPdoConnections",
-	        value: function refreshPdoConnections(name) {
-	            var fresh = this.makeConnection(name);
-	            return _connections[name].setPdo(fresh.getPdo()).setReadPdo(fresh.getReadPdo());
+	        key: 'prepare',
+	        value: function prepare(connection) {
+	            var _this = this;
+	
+	            connection.setReconnector(function (c) {
+	                return _this.reconnect(c.getName());
+	            });
+	            return connection;
 	        }
 	    }, {
-	        key: "makeConnection",
+	        key: 'makeConnection',
 	        value: function makeConnection(name) {
-	            var config = this.getConfig(name);
+	            var config, instance;
+	            return _regeneratorRuntime.async(function makeConnection$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        config = this.getConfig(name);
+	                        instance = null;
+	                        context$2$0.t0 = config['driver'];
+	                        context$2$0.next = context$2$0.t0 === 'url' ? 5 : 7;
+	                        break;
 	
-	            var instance = null;
-	            switch (config["driver"]) {
-	                case "url":
-	                    instance = new UrlConnection(null, config["database"], config["prefix"], config);
-	                    break;
-	            }
+	                    case 5:
+	                        instance = new _UrlConnection2['default'](null, config['database'], config['prefix'], config);
+	                        return context$2$0.abrupt('break', 7);
 	
-	            instance.connect();
-	            return instance;
+	                    case 7:
+	                        context$2$0.next = 9;
+	                        return _regeneratorRuntime.awrap(instance.connect());
+	
+	                    case 9:
+	                        return context$2$0.abrupt('return', instance);
+	
+	                    case 10:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
 	        }
 	    }, {
-	        key: "connections",
+	        key: 'refreshPdoConnections',
+	        value: function refreshPdoConnections(name) {
+	            var fresh;
+	            return _regeneratorRuntime.async(function refreshPdoConnections$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        context$2$0.next = 2;
+	                        return _regeneratorRuntime.awrap(this.makeConnection(name));
+	
+	                    case 2:
+	                        fresh = context$2$0.sent;
+	                        return context$2$0.abrupt('return', _connections[name].setPdo(fresh.getPdo()).setReadPdo(fresh.getReadPdo()));
+	
+	                    case 4:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'connections',
 	        value: function connections() {
 	            var result = [];
 	            for (var k in this._connections) {
@@ -3385,32 +3563,32 @@
 	            return result;
 	        }
 	    }, {
-	        key: "getDefaultConnection",
+	        key: 'getDefaultConnection',
 	        value: function getDefaultConnection() {
 	            return this._default;
 	        }
 	    }, {
-	        key: "parseConnectionName",
+	        key: 'parseConnectionName',
 	        value: function parseConnectionName() {
 	            var name = arguments[0] === undefined ? null : arguments[0];
 	
-	            name = name != null ? name : getDefaultConnection();
-	            return name.indexOf("::read") === name.length - 6 || name.indexOf("::write") === name.length - 7 ? name.split("::") : [name, null];
+	            name = name != null ? name : this.getDefaultConnection();
+	            return name.indexOf('::read') === name.length - 6 || name.indexOf('::write') === name.length - 7 ? name.split('::') : [name, null];
 	        }
 	    }, {
-	        key: "setPdoForType",
+	        key: 'setPdoForType',
 	        value: function setPdoForType(connection) {
 	            var type = arguments[1] === undefined ? null : arguments[1];
 	
-	            if (type == "read") {
+	            if (type == 'read') {
 	                connection.setPdo(connection.getReadPdo());
-	            } else if (type == "write") {
+	            } else if (type == 'write') {
 	                connection.setReadPdo(connection.getPdo());
 	            }
 	            return connection;
 	        }
 	    }, {
-	        key: "connection",
+	        key: 'connection',
 	        value: function connection() {
 	            var name = arguments[0] === undefined ? null : arguments[0];
 	
@@ -3418,53 +3596,41 @@
 	            name = p[0];
 	            var type = p[1];
 	
-	            if (typeof this._connections[name] === "undefined") {
-	                var connection = this.makeConnection(name);
-	                this.setPdoForType(connection, type);
-	                this._connections[name] = this.prepare(connection);
+	            if (typeof this._connections[name] === 'undefined') {
+	                throw 'Connection ' + name + ' is not ready yet. Have you called DatabaseManager.connect(\'' + name + '\') before this query?';
 	            }
 	            if (name == null) {
 	                return typeof this._connections[this.getDefaultConnection()] ? this._connections[this.getDefaultConnection()] : null;
-	            } else if (typeof this._connections[name] === "undefined") {
+	            } else if (typeof this._connections[name] === 'undefined') {
 	                return null;
 	            } else {
 	                return this._connections[name];
 	            }
 	        }
 	    }, {
-	        key: "addConnection",
+	        key: 'addConnection',
 	        value: function addConnection(name, config) {
 	            this._configs[name] = config;
 	        }
 	    }, {
-	        key: "getConfig",
+	        key: 'getConfig',
 	        value: function getConfig() {
 	            var name = arguments[0] === undefined ? null : arguments[0];
 	
-	            name = name != null ? name : getDefaultConnection();
+	            name = name != null ? name : this.getDefaultConnection();
 	
-	            if (typeof _configs["name"] === "undefined") {
-	                throw "Database " + name + " not configured.";
+	            if (typeof this._configs[name] === 'undefined') {
+	                throw 'Database ' + name + ' not configured.';
 	            }
-	            return _configs[name];
-	        }
-	    }, {
-	        key: "prepare",
-	        value: function prepare(connection) {
-	            var _this = this;
-	
-	            connection.setReconnector(function (c) {
-	                return _this.reconnect(c.getName());
-	            });
-	            return connection;
+	            return this._configs[name];
 	        }
 	    }]);
 	
 	    return DatabaseManager;
 	})();
 	
-	exports["default"] = new DatabaseManager();
-	module.exports = exports["default"];
+	exports['default'] = new DatabaseManager();
+	module.exports = exports['default'];
 
 /***/ },
 /* 70 */
@@ -3472,17 +3638,17 @@
 
 	'use strict';
 	
-	var _inherits = __webpack_require__(16)['default'];
+	var _inherits = __webpack_require__(23)['default'];
 	
-	var _createClass = __webpack_require__(20)['default'];
+	var _createClass = __webpack_require__(18)['default'];
 	
-	var _classCallCheck = __webpack_require__(21)['default'];
+	var _classCallCheck = __webpack_require__(19)['default'];
 	
 	var _Object$defineProperty = __webpack_require__(1)['default'];
 	
-	var _regeneratorRuntime = __webpack_require__(22)['default'];
+	var _regeneratorRuntime = __webpack_require__(27)['default'];
 	
-	var _interopRequireDefault = __webpack_require__(60)['default'];
+	var _interopRequireDefault = __webpack_require__(65)['default'];
 	
 	_Object$defineProperty(exports, '__esModule', {
 	    value: true
@@ -3500,7 +3666,7 @@
 	
 	var _processorUrlProcessor2 = _interopRequireDefault(_processorUrlProcessor);
 	
-	var _Connection2 = __webpack_require__(15);
+	var _Connection2 = __webpack_require__(22);
 	
 	var _Connection3 = _interopRequireDefault(_Connection2);
 	
@@ -3530,10 +3696,33 @@
 	            return this._postProcessor = new _processorUrlProcessor2['default']();
 	        }
 	    }, {
-	        key: 'select',
-	        value: function select(query) {
+	        key: 'connect',
+	        value: function connect() {
+	            return _regeneratorRuntime.async(function connect$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'disconnect',
+	        value: function disconnect() {
+	            return _regeneratorRuntime.async(function disconnect$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'selectingStatement',
+	        value: function selectingStatement(query) {
+	            var useReadPdo = arguments[1] === undefined ? true : arguments[1];
 	            var from, k, baseUrl;
-	            return _regeneratorRuntime.async(function select$(context$2$0) {
+	            return _regeneratorRuntime.async(function selectingStatement$(context$2$0) {
 	                while (1) switch (context$2$0.prev = context$2$0.next) {
 	                    case 0:
 	                        from = query.from;
@@ -4097,21 +4286,21 @@
 
 	'use strict';
 	
-	var _inherits = __webpack_require__(16)['default'];
+	var _inherits = __webpack_require__(23)['default'];
 	
-	var _createClass = __webpack_require__(20)['default'];
+	var _createClass = __webpack_require__(18)['default'];
 	
-	var _classCallCheck = __webpack_require__(21)['default'];
+	var _classCallCheck = __webpack_require__(19)['default'];
 	
 	var _Object$defineProperty = __webpack_require__(1)['default'];
 	
-	var _interopRequireDefault = __webpack_require__(60)['default'];
+	var _interopRequireDefault = __webpack_require__(65)['default'];
 	
 	_Object$defineProperty(exports, '__esModule', {
 	    value: true
 	});
 	
-	var _Grammar2 = __webpack_require__(64);
+	var _Grammar2 = __webpack_require__(17);
 	
 	var _Grammar3 = _interopRequireDefault(_Grammar2);
 	
@@ -4156,9 +4345,9 @@
 
 	"use strict";
 	
-	var _createClass = __webpack_require__(20)["default"];
+	var _createClass = __webpack_require__(18)["default"];
 	
-	var _classCallCheck = __webpack_require__(21)["default"];
+	var _classCallCheck = __webpack_require__(19)["default"];
 	
 	var _Object$defineProperty = __webpack_require__(1)["default"];
 	
@@ -4190,17 +4379,17 @@
 
 	'use strict';
 	
-	var _inherits = __webpack_require__(16)['default'];
+	var _inherits = __webpack_require__(23)['default'];
 	
-	var _createClass = __webpack_require__(20)['default'];
+	var _createClass = __webpack_require__(18)['default'];
 	
-	var _classCallCheck = __webpack_require__(21)['default'];
+	var _classCallCheck = __webpack_require__(19)['default'];
 	
 	var _Object$defineProperty = __webpack_require__(1)['default'];
 	
-	var _Promise = __webpack_require__(45)['default'];
+	var _Promise = __webpack_require__(50)['default'];
 	
-	var _interopRequireDefault = __webpack_require__(60)['default'];
+	var _interopRequireDefault = __webpack_require__(65)['default'];
 	
 	_Object$defineProperty(exports, '__esModule', {
 	    value: true
@@ -4210,7 +4399,7 @@
 	
 	var _qs2 = _interopRequireDefault(_qs);
 	
-	var _utilsEventEmitter = __webpack_require__(61);
+	var _utilsEventEmitter = __webpack_require__(66);
 	
 	var _utilsEventEmitter2 = _interopRequireDefault(_utilsEventEmitter);
 	
@@ -4322,6 +4511,48 @@
 	})(_utilsEventEmitter2['default']);
 	
 	exports['default'] = new HTTP();
+	module.exports = exports['default'];
+
+/***/ },
+/* 79 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = __webpack_require__(18)['default'];
+	
+	var _classCallCheck = __webpack_require__(19)['default'];
+	
+	var _Object$defineProperty = __webpack_require__(1)['default'];
+	
+	var _interopRequireDefault = __webpack_require__(65)['default'];
+	
+	_Object$defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	
+	var _DatabaseManager = __webpack_require__(69);
+	
+	var _DatabaseManager2 = _interopRequireDefault(_DatabaseManager);
+	
+	var DB = (function () {
+	    function DB() {
+	        _classCallCheck(this, DB);
+	    }
+	
+	    _createClass(DB, [{
+	        key: 'table',
+	        value: function table() {
+	            var name = arguments[0] === undefined ? '' : arguments[0];
+	
+	            return _DatabaseManager2['default'].connection().table(name);
+	        }
+	    }]);
+	
+	    return DB;
+	})();
+	
+	exports['default'] = new DB();
 	module.exports = exports['default'];
 
 /***/ }
