@@ -68,7 +68,7 @@ export default class Builder{
     
     with(...args){
         args = Array.isArray(args) ? args : [args];
-        this._with = this._with.concat(args);
+        this._with = this._with == null ? args : this._with.concat(args);
         return this;
     }
     
@@ -148,6 +148,8 @@ export default class Builder{
     // Setters
     setModel(model = null){
         this._model = model;
+        this.from(model.getTable());
+        return this;
     }
     
     // Getters for the query

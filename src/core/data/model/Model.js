@@ -20,6 +20,7 @@ export default class Model extends EventEmitter{
     _with = [];
     
     constructor(attributes = {}){
+        super();
         //this.bootIfNotBooted(); TODO: Needed?
         this.syncOriginal();
         this.fill(attributes);
@@ -27,7 +28,7 @@ export default class Model extends EventEmitter{
     }
         
     static query(){
-        return (new this.constructor()).newQuery();
+        return (new this()).newQuery();
     }    
     
     static resolveConnection(name = null){
@@ -36,7 +37,7 @@ export default class Model extends EventEmitter{
     
     static hydrate(items = [], connection = null)
     {
-        var instance = new this.constructor();
+        var instance = new this();
         instance.setConnection(connection);
 
         var coll = items.map((item) =>
@@ -96,6 +97,10 @@ export default class Model extends EventEmitter{
             }
         }
         return this;
+    }
+    
+    getTable(){
+        return this._table;
     }
     
     getConnection(){
