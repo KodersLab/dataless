@@ -34,4 +34,28 @@ export default class UrlConnection extends Connection{
         var baseUrl = this._database + from;
         return await HTTP.get(baseUrl + (baseUrl.indexOf('?') > -1 ? '&' : '?') + qs.stringify(query));
     }
+    
+    async insertingStatement(query, data){
+        var from = query.from;
+        delete query['from'];
+        
+        var baseUrl = this._database + from;
+        return await HTTP.post(baseUrl, data);
+    }
+    
+    async updatingStatement(query, pks, data){
+        var from = query.from;
+        delete query['from'];
+        
+        var baseUrl = this._database + from;
+        return await HTTP.post(baseUrl, data);
+    }
+    
+    async destroyingStatement(query, pks){
+        var from = query.from;
+        delete query['from'];
+        
+        var baseUrl = this._database + from;
+        return await HTTP.delete(baseUrl);
+    }
 }

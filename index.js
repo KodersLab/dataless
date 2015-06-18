@@ -493,6 +493,21 @@
 	            return this.compileComponents(query);
 	        }
 	    }, {
+	        key: "compileInsert",
+	        value: function compileInsert(query, data) {
+	            return this.compileComponents(query);
+	        }
+	    }, {
+	        key: "compileUpdate",
+	        value: function compileUpdate(query, pks, data) {
+	            return this.compileComponents(query);
+	        }
+	    }, {
+	        key: "compileDestroy",
+	        value: function compileDestroy(query, pks) {
+	            return this.compileComponents(query);
+	        }
+	    }, {
 	        key: "compileComponents",
 	        value: function compileComponents(query) {
 	            var name, ucname;
@@ -640,6 +655,21 @@
 	        value: function processSelect(query, result) {
 	            return result;
 	        }
+	    }, {
+	        key: "processInsert",
+	        value: function processInsert(query, result) {
+	            return result;
+	        }
+	    }, {
+	        key: "processUpdate",
+	        value: function processUpdate(query, result) {
+	            return result;
+	        }
+	    }, {
+	        key: "processDelete",
+	        value: function processDelete(query, result) {
+	            return result;
+	        }
 	    }]);
 	
 	    return Processor;
@@ -740,6 +770,60 @@
 	            }, null, this);
 	        }
 	    }, {
+	        key: 'insert',
+	        value: function insert(query, data) {
+	            return _regeneratorRuntime.async(function insert$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        context$2$0.next = 2;
+	                        return _regeneratorRuntime.awrap(this.insertingStatement(query, data));
+	
+	                    case 2:
+	                        return context$2$0.abrupt('return', context$2$0.sent);
+	
+	                    case 3:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'update',
+	        value: function update(query, pks, data) {
+	            return _regeneratorRuntime.async(function update$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        context$2$0.next = 2;
+	                        return _regeneratorRuntime.awrap(this.updatingStatement(query, pks, data));
+	
+	                    case 2:
+	                        return context$2$0.abrupt('return', context$2$0.sent);
+	
+	                    case 3:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'destroy',
+	        value: function destroy(query, pks) {
+	            return _regeneratorRuntime.async(function destroy$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        context$2$0.next = 2;
+	                        return _regeneratorRuntime.awrap(this.destroyingStatement(query, pks));
+	
+	                    case 2:
+	                        return context$2$0.abrupt('return', context$2$0.sent);
+	
+	                    case 3:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
 	        key: 'setReconnector',
 	        value: function setReconnector() {
 	            var reconnector = arguments[0] === undefined ? null : arguments[0];
@@ -812,6 +896,48 @@
 	        value: function selectingStatement(query) {
 	            var useReadPdo = arguments[1] === undefined ? true : arguments[1];
 	            return _regeneratorRuntime.async(function selectingStatement$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        throw 'This should be implemented by custom connection.';
+	
+	                    case 1:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'insertingStatement',
+	        value: function insertingStatement(query, data) {
+	            return _regeneratorRuntime.async(function insertingStatement$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        throw 'This should be implemented by custom connection.';
+	
+	                    case 1:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'updatingStatement',
+	        value: function updatingStatement(query, data) {
+	            return _regeneratorRuntime.async(function updatingStatement$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        throw 'This should be implemented by custom connection.';
+	
+	                    case 1:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'destroyingStatement',
+	        value: function destroyingStatement(query, data) {
+	            return _regeneratorRuntime.async(function destroyingStatement$(context$2$0) {
 	                while (1) switch (context$2$0.prev = context$2$0.next) {
 	                    case 0:
 	                        throw 'This should be implemented by custom connection.';
@@ -3358,6 +3484,63 @@
 	                }
 	            }, null, this);
 	        }
+	    }, {
+	        key: "insert",
+	        value: function insert(data) {
+	            return _regeneratorRuntime.async(function insert$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        context$2$0.next = 2;
+	                        return _regeneratorRuntime.awrap(this._connection.insert(this._grammar.compileInsert(this, data), data));
+	
+	                    case 2:
+	                        context$2$0.t0 = context$2$0.sent;
+	                        return context$2$0.abrupt("return", this._processor.processInsert(this, context$2$0.t0));
+	
+	                    case 4:
+	                    case "end":
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: "update",
+	        value: function update(pks, data) {
+	            return _regeneratorRuntime.async(function update$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        context$2$0.next = 2;
+	                        return _regeneratorRuntime.awrap(this._connection.update(this._grammar.compileUpdate(this, pks, data), pks, data));
+	
+	                    case 2:
+	                        context$2$0.t0 = context$2$0.sent;
+	                        return context$2$0.abrupt("return", this._processor.processUpdate(this, context$2$0.t0));
+	
+	                    case 4:
+	                    case "end":
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: "destroy",
+	        value: function destroy(pks, data) {
+	            return _regeneratorRuntime.async(function destroy$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        context$2$0.next = 2;
+	                        return _regeneratorRuntime.awrap(this._connection.destroy(this._grammar.compileDestroy(this, pks), pks));
+	
+	                    case 2:
+	                        context$2$0.t0 = context$2$0.sent;
+	                        return context$2$0.abrupt("return", this._processor.processDestroy(this, context$2$0.t0));
+	
+	                    case 4:
+	                    case "end":
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
 	    }]);
 	
 	    return Query;
@@ -3757,6 +3940,78 @@
 	                        return context$2$0.abrupt('return', context$2$0.sent);
 	
 	                    case 7:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'insertingStatement',
+	        value: function insertingStatement(query, data) {
+	            var from, baseUrl;
+	            return _regeneratorRuntime.async(function insertingStatement$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        from = query.from;
+	
+	                        delete query['from'];
+	
+	                        baseUrl = this._database + from;
+	                        context$2$0.next = 5;
+	                        return _regeneratorRuntime.awrap(_protocolHTTP2['default'].post(baseUrl, data));
+	
+	                    case 5:
+	                        return context$2$0.abrupt('return', context$2$0.sent);
+	
+	                    case 6:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'updatingStatement',
+	        value: function updatingStatement(query, pks, data) {
+	            var from, baseUrl;
+	            return _regeneratorRuntime.async(function updatingStatement$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        from = query.from;
+	
+	                        delete query['from'];
+	
+	                        baseUrl = this._database + from;
+	                        context$2$0.next = 5;
+	                        return _regeneratorRuntime.awrap(_protocolHTTP2['default'].post(baseUrl, data));
+	
+	                    case 5:
+	                        return context$2$0.abrupt('return', context$2$0.sent);
+	
+	                    case 6:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'destroyingStatement',
+	        value: function destroyingStatement(query, pks) {
+	            var from, baseUrl;
+	            return _regeneratorRuntime.async(function destroyingStatement$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        from = query.from;
+	
+	                        delete query['from'];
+	
+	                        baseUrl = this._database + from;
+	                        context$2$0.next = 5;
+	                        return _regeneratorRuntime.awrap(_protocolHTTP2['default']['delete'](baseUrl));
+	
+	                    case 5:
+	                        return context$2$0.abrupt('return', context$2$0.sent);
+	
+	                    case 6:
 	                    case 'end':
 	                        return context$2$0.stop();
 	                }
@@ -4329,6 +4584,23 @@
 	    _inherits(UrlGrammar, _Grammar);
 	
 	    _createClass(UrlGrammar, [{
+	        key: 'compileInsert',
+	        value: function compileInsert(query, data) {
+	            return { from: this.compileFrom(query._from) };
+	        }
+	    }, {
+	        key: 'compileUpdate',
+	        value: function compileUpdate(query, pks, data) {
+	            if (Array.isArray(pks)) throw 'UrlConnection does not support updating multiple records.';
+	            return { from: this.compileFrom(query._from) + '/' + pks };
+	        }
+	    }, {
+	        key: 'compileDestroy',
+	        value: function compileDestroy(query, pks, data) {
+	            if (Array.isArray(pks)) throw 'UrlConnection does not support destroying multiple records.';
+	            return { from: this.compileFrom(query._from) + '/' + pks };
+	        }
+	    }, {
 	        key: 'compileColumns',
 	
 	        // &columns=id,name,surname
@@ -4376,6 +4648,21 @@
 	    _createClass(UrlProcessor, [{
 	        key: "processSelect",
 	        value: function processSelect(query, result) {
+	            return result.value;
+	        }
+	    }, {
+	        key: "processInsert",
+	        value: function processInsert(query, result) {
+	            return result.value;
+	        }
+	    }, {
+	        key: "processUpdate",
+	        value: function processUpdate(query, result) {
+	            return result.value;
+	        }
+	    }, {
+	        key: "processDestroy",
+	        value: function processDestroy(query, result) {
 	            return result.value;
 	        }
 	    }]);

@@ -5,6 +5,18 @@ export default class Grammar{
         return this.compileComponents(query);
     }
     
+    compileInsert(query, data){
+        return this.compileComponents(query);
+    }
+    
+    compileUpdate(query, pks, data){
+        return this.compileComponents(query);
+    }
+    
+    compileDestroy(query, pks){
+        return this.compileComponents(query);
+    }
+    
     compileComponents(query){
         var name, ucname;
         var result = {};

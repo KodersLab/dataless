@@ -35,6 +35,18 @@ export default class Connection extends EventEmitter{
         return await this.selectingStatement(query, useReadPdo);    
     }
     
+    async insert(query, data){
+        return await this.insertingStatement(query, data);
+    }
+    
+    async update(query, pks, data){
+        return await this.updatingStatement(query, pks, data);
+    }
+    
+    async destroy(query, pks){
+        return await this.destroyingStatement(query, pks);
+    }
+    
     setReconnector(reconnector = null){
         this._reconnector = reconnector;
         return this;
@@ -73,6 +85,18 @@ export default class Connection extends EventEmitter{
     }
     
     async selectingStatement(query, useReadPdo = true){
+        throw "This should be implemented by custom connection.";
+    }
+    
+    async insertingStatement(query, data){
+        throw "This should be implemented by custom connection.";
+    }
+    
+    async updatingStatement(query, data){
+        throw "This should be implemented by custom connection.";
+    }
+    
+    async destroyingStatement(query, data){
         throw "This should be implemented by custom connection.";
     }
 }

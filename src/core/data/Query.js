@@ -136,4 +136,16 @@ export default class Query{
     async count(){
         return await this.aggregate("count");
     }
+    
+    async insert(data){
+        return this._processor.processInsert(this, await this._connection.insert(this._grammar.compileInsert(this, data), data));
+    }
+    
+    async update(pks, data){
+        return this._processor.processUpdate(this, await this._connection.update(this._grammar.compileUpdate(this, pks, data), pks, data));
+    }
+    
+    async destroy(pks, data){
+        return this._processor.processDestroy(this, await this._connection.destroy(this._grammar.compileDestroy(this, pks), pks));
+    }
 }
