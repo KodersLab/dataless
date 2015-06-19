@@ -12,14 +12,22 @@ export default class UrlGrammar extends Grammar{
         return {from: this.compileFrom(query._from)};
     }
 
-    compileUpdate(query, pks){
-        if(Array.isArray(pks)){ throw 'UrlConnection does not support updating multiple records.'; }
-        return {from: this.compileFrom(query._from) + '/' + pks};
+    compileInsertGetId(query){
+        return {from: this.compileFrom(query._from)};
     }
 
-    compileDestroy(query, pks){
-        if(Array.isArray(pks)){ throw 'UrlConnection does not support destroying multiple records.'; }
-        return {from: this.compileFrom(query._from) + '/' + pks};
+    compileUpdate(query){
+        if(query._modelBuilder === null){ throw 'UrlConnection does not support updating without a model (due to rest limitations).'; }
+        var result = super.compileComponents(query);
+        result.from = this.compileFrom(query._from) + '/' + query._modelBuilder._model.getKey();
+        return result;
+    }
+
+    compileDestroy(query){
+        if(query._modelBuilder === null){ throw 'UrlConnection does not support deleting without a model (due to rest limitations).'; }
+        var result = super.compileComponents(query);
+        result.from = this.compileFrom(query._from) + '/' + query._modelBuilder._model.getKey();
+        return result;
     }
 
     // &columns=id,name,surname

@@ -117,15 +117,22 @@ export default class Builder{
     }
 
     async insert(data){
-        return await this._processor.processInsert(this, await this._connection.insert(this._grammar.compileInsert(this, data), data));
+        return await this._connection.insert(this._grammar.compileInsert(this, data), data);
     }
 
-    async update(pks, data){
-        return await this._processor.processUpdate(this, await this._connection.update(this._grammar.compileUpdate(this, pks, data), pks, data));
+    async insertGetId(values, sequence = null)
+    {
+        var sql = this._grammar.compileInsertGetId(this, values, sequence);
+
+        return await this._processor.processInsertGetId(this, sql, values, sequence);
     }
 
-    async destroy(pks){
-        return await this._processor.processDestroy(this, await this._connection.destroy(this._grammar.compileDestroy(this, pks), pks));
+    async update(data){
+        return await this._connection.update(this._grammar.compileUpdate(this, data), data);
+    }
+
+    async destroy(){
+        return await this._connection.destroy(this._grammar.compileDestroy(this));
     }
 
     // Getters for the query

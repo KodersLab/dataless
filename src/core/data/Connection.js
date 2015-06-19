@@ -32,19 +32,19 @@ export default class Connection extends EventEmitter{
     }
 
     async select(query, useReadPdo){
-        return await this.selectingStatement(query, useReadPdo);
+        return await this._postProcessor.processSelect(query, await this.selectingStatement(query, useReadPdo));
     }
 
     async insert(query, data){
-        return await this.insertingStatement(query, data);
+        return await this._postProcessor.processInsert(query, await this.insertingStatement(query, data));
     }
 
-    async update(query, pks, data){
-        return await this.updatingStatement(query, pks, data);
+    async update(query, data){
+        return await this._postProcessor.processUpdate(query, await this.updatingStatement(query, data));
     }
 
-    async destroy(query, pks){
-        return await this.destroyingStatement(query, pks);
+    async destroy(query){
+        return await this._postProcessor.processDestroy(query, await this.destroyingStatement(query));
     }
 
     setReconnector(reconnector = null){

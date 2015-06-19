@@ -45,7 +45,7 @@ export default class UrlConnection extends Connection{
         return await HTTP.post(baseUrl, data);
     }
 
-    async updatingStatement(query, pks, data){
+    async updatingStatement(query, data){
         var from = query.from;
         delete query.from;
 

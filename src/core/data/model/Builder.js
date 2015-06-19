@@ -39,9 +39,9 @@ class Builder{
     async find(pks = [], columns = null){
         var result;
         if(Array.isArray(pks)){
-            result = this.where(this._model.getPrimaryKey(), 'in', pks).get(columns);
+            result = this.where(this._model.getQualifiedKeyName(), 'in', pks).get(columns);
         }else{
-            result = this.where(this._model.getPrimaryKey(), '=', pks).first(columns);
+            result = this.where(this._model.getQualifiedKeyName(), '=', pks).first(columns);
         }
         return await result;
     }

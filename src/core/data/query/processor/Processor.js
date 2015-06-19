@@ -7,6 +7,10 @@ export default class Processor{
         return result;
     }
 
+    async processInsertGetId(query, sql, values){
+        return await query.getConnection().insert(sql, values);
+    }
+
     async processUpdate(query, result){
         return result;
     }

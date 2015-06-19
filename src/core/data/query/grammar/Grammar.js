@@ -9,6 +9,10 @@ export default class Grammar{
         return this.compileComponents(query);
     }
 
+    compileInsertGetId(query){
+        return this.compileComponents(query);
+    }
+
     compileUpdate(query){
         return this.compileComponents(query);
     }
