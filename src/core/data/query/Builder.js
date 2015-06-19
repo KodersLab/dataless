@@ -80,7 +80,7 @@ export default class Builder{
     
     async get(columns = null){
         this._columns = this._columns === null ? columns : this._columns;
-        return this._processor.processSelect(this, await this._connection.select(this.toSql()));
+        return await this._processor.processSelect(this, await this._connection.select(this.toSql()));
     }
     
     async first(columns = null){
@@ -116,15 +116,15 @@ export default class Builder{
     }
     
     async insert(data){
-        return this._processor.processInsert(this, await this._connection.insert(this._grammar.compileInsert(this, data), data));
+        return await this._processor.processInsert(this, await this._connection.insert(this._grammar.compileInsert(this, data), data));
     }
     
     async update(pks, data){
-        return this._processor.processUpdate(this, await this._connection.update(this._grammar.compileUpdate(this, pks, data), pks, data));
+        return await this._processor.processUpdate(this, await this._connection.update(this._grammar.compileUpdate(this, pks, data), pks, data));
     }
     
     async destroy(pks, data){
-        return this._processor.processDestroy(this, await this._connection.destroy(this._grammar.compileDestroy(this, pks), pks));
+        return await this._processor.processDestroy(this, await this._connection.destroy(this._grammar.compileDestroy(this, pks), pks));
     }
     
     // Getters for the query

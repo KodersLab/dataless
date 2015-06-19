@@ -53,11 +53,11 @@ export default class UrlConnection extends Connection{
         return await HTTP.post(baseUrl, data);
     }
 
-    async destroyingStatement(query, pks){
+    async destroyingStatement(query){
         var from = query.from;
         delete query.from;
 
-        var baseUrl = this._database + from + '/' + pks;
+        var baseUrl = this._database + from;
         return await HTTP.delete(baseUrl);
     }
 }

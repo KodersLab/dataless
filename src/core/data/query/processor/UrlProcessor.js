@@ -1,17 +1,17 @@
 export default class UrlProcessor{
-    processSelect(query, result){
+    async processSelect(query, result){
         return result.value;
     }
 
-    processInsert(query, result){
+    async processInsert(query, result){
         return result.value;
     }
 
-    processUpdate(query, result){
+    async processUpdate(query, result){
         return result.value;
     }
 
-    processDestroy(query, result){
+    async processDestroy(query, result){
         return result.value;
     }
 }
