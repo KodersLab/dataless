@@ -4,7 +4,7 @@ import EventEmitter from '../utils/EventEmitter';
 class HTTP extends EventEmitter{
     _pending = 0;
 
-    ajax(method, url, body = {}, type = 'json', options = {}){
+    ajax(method, url, body = {}, type = 'json'){
 
         method = method.toUpperCase();
 
@@ -14,21 +14,21 @@ class HTTP extends EventEmitter{
             url = url + (url.indexOf('?') > -1 ? '&' : '?') + '_randomCacheBuster=' + Math.random();
 
             var xhr = null;
-            try{xhr = new XMLHttpRequest(); }catch(e1){try{xhr = ActiveXObject('Msxml3.XMLHTTP'); }catch(e2){try{xhr = ActiveXObject('Msxml2.XMLHTTP.6.0'); }catch(e3){try{xhr = ActiveXObject('Msxml2.XMLHTTP.3.0'); }catch(e4){try{xhr = ActiveXObject('Msxml2.XMLHTTP'); }catch(e5){try{xhr = ActiveXObject('Microsoft.XMLHTTP'); }catch(e6){}}}}}}
+            try{xhr = new XMLHttpRequest(); }catch(e1){try{xhr = new window.ActiveXObject('Msxml3.XMLHTTP'); }catch(e2){try{xhr = new window.ActiveXObject('Msxml2.XMLHTTP.6.0'); }catch(e3){try{xhr = new window.ActiveXObject('Msxml2.XMLHTTP.3.0'); }catch(e4){try{xhr = new window.ActiveXObject('Msxml2.XMLHTTP'); }catch(e5){try{xhr = new window.ActiveXObject('Microsoft.XMLHTTP'); }catch(e6){ throw 'Unable to start an XMLHttpRequest since it\'s not supported.'; }}}}}}
 
-            xhr.open(method,  url, true);
+            xhr.open(method, url, true);
             if(method === 'POST'){
                 xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             }
 
-            this[type + 'PreRequest'](xhr, method, options);
+            this[type + 'PreRequest'](xhr, method);
 
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === 4) {
                     if(xhr.status === 200){
-                        resolve(this[type + 'ParseData'](xhr.responseText, options));
+                        resolve(this[type + 'ParseData'](xhr.responseText));
                     }else{
-                        reject(xhr, options);
+                        reject(xhr);
                     }
                     this ._pending--;
                     this.emit('ajaxEnd', this._pending);
@@ -59,11 +59,11 @@ class HTTP extends EventEmitter{
         return this.ajax('POST', url, data);
     }
 
-    jsonPreRequest(xhr, method, options){
+    jsonPreRequest(xhr){
         xhr.setRequestHeader('Accept', 'application/json');
     }
 
-    jsonParseData(data, options){
+    jsonParseData(data){
         return JSON.parse(data);
     }
 }

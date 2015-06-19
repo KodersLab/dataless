@@ -11,8 +11,8 @@ class DatabaseManager{
     };
 
     async connect(name = null){
-        name = name != null ? name: this.getDefaultConnection();
-        
+        name = name != null ? name : this.getDefaultConnection();
+
         var p = this.parseConnectionName(name);
         name = p[0];
         var type = p[1];
@@ -33,7 +33,7 @@ class DatabaseManager{
     }
 
     async reconnect(name = null){
-        var name = name != null ? name : getDefaultConnection()
+        name = name != null ? name : this.getDefaultConnection();
         this.disconnect(name);
         if(typeof this._connections[name] === 'undefined'){
             return this.connection(name);
@@ -50,11 +50,11 @@ class DatabaseManager{
 
     async makeConnection(name){
         var config = this.getConfig(name);
-        var driver = (config['driver'] || 'url').toLowerCase();
+        var driver = (config.driver || 'url').toLowerCase();
 
         var instance = null;
         if(typeof this._adapters[driver] === 'undefined'){
-            throw "Unknown driver type "+driver;
+            throw 'Unknown driver type ' + driver;
         }
         instance = this._adapters[driver](name, config);
 
@@ -64,7 +64,7 @@ class DatabaseManager{
 
     async refreshPdoConnections(name){
         var fresh = await this.makeConnection(name);
-        return _connections[name].setPdo(fresh.getPdo()).setReadPdo(fresh.getReadPdo());
+        return this._connections[name].setPdo(fresh.getPdo()).setReadPdo(fresh.getReadPdo());
     }
 
     connections(){
@@ -82,16 +82,16 @@ class DatabaseManager{
     }
 
     parseConnectionName(name = null){
-        name = name != null ? name: this.getDefaultConnection();
-        return name.indexOf("::read") === name.length - 6 || name.indexOf("::write") === name.length - 7 ? name.split("::") : [name, null];
+        name = name != null ? name : this.getDefaultConnection();
+        return name.indexOf('::read') === name.length - 6 || name.indexOf('::write') === name.length - 7 ? name.split('::') : [name, null];
     }
 
     setPdoForType(connection, type = null){
-        if (type == "read")
+        if (type === 'read')
         {
             connection.setPdo(connection.getReadPdo());
         }
-        else if (type == "write")
+        else if (type === 'write')
         {
             connection.setReadPdo(connection.getPdo());
         }
@@ -101,11 +101,10 @@ class DatabaseManager{
     connection(name = null){
         var p = this.parseConnectionName(name);
         name = p[0];
-        var type = p[1];
 
         if (typeof this._connections[name] === 'undefined')
         {
-            throw "Connection "+name+" is not ready yet. Have you called DatabaseManager.connect('"+name+"') before this query?";
+            throw 'Connection ' + name + ' is not ready yet. Have you called DatabaseManager.connect(\'' + name + '\') before this query?';
         }
         if (name == null)
         {
@@ -133,7 +132,7 @@ class DatabaseManager{
 
         if (typeof this._configs[name] === 'undefined')
         {
-            throw "Database "+name+" not configured.";
+            throw 'Database ' + name + ' not configured.';
         }
         return this._configs[name];
     }

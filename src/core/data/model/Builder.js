@@ -65,14 +65,16 @@ class Builder{
 var _passthru = ['insert', 'insertGetId', 'getBindings', 'toSql', 'exists', 'count', 'min', 'max', 'avg', 'sum'];
 var _keys = Object.getOwnPropertyNames(BaseBuilder.prototype);
 
+function wrapMethod(k){
+    return function(...args){
+        var result = this._query[k].apply(this._query, args);
+        return _passthru.indexOf(k) > -1 ? result : this;
+    };
+}
+
 for(var i = 0; i < _keys.length; i++){
     if(BaseBuilder.prototype.hasOwnProperty(_keys[i]) && typeof Builder.prototype[_keys[i]] === 'undefined'){
-        Builder.prototype[_keys[i]] = (function(k){
-            return function(...args){
-                var result = this._query[k].apply(this._query, args);
-                return _passthru.indexOf(k) > -1 ? result : this;
-            };
-        })(_keys[i]);
+        Builder.prototype[_keys[i]] = wrapMethod(_keys[i]);
     }
 }
 
