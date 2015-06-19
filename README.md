@@ -5,10 +5,10 @@ A javascript DBAL with multiple adapters that aims to provide data access in bro
 ----------
 ## Todo
 
- - Support object memory adapter via lodash
- - Support mutation (rpc calls to a function set on the db)
- - Provide laravel relay adapter
- - DOCS!!! D:
+ - [ ] Support object memory adapter via lodash
+ - [ ] Support mutation (rpc calls to a function set on the db)
+ - [ ] Provide laravel relay adapter
+ - [ ] DOCS!!! D:
 
 ## Code example
 
