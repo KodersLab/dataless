@@ -80,7 +80,7 @@ export default class Builder{
 
     async get(columns = null){
         this._columns = this._columns === null ? columns : this._columns;
-        return await this._processor.processSelect(this, await this._connection.select(this.toSql()));
+        return await this._connection.select(this.toSql());
     }
 
     async first(columns = null){

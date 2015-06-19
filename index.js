@@ -583,15 +583,9 @@
 	                        return _regeneratorRuntime.awrap(this._connection.select(this.toSql()));
 	
 	                    case 3:
-	                        context$2$0.t0 = context$2$0.sent;
-	                        context$2$0.t1 = this._processor.processSelect(this, context$2$0.t0);
-	                        context$2$0.next = 7;
-	                        return _regeneratorRuntime.awrap(context$2$0.t1);
-	
-	                    case 7:
 	                        return context$2$0.abrupt('return', context$2$0.sent);
 	
-	                    case 8:
+	                    case 4:
 	                    case 'end':
 	                        return context$2$0.stop();
 	                }
