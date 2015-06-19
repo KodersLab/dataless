@@ -1,6 +1,13 @@
 import Grammar from './Grammar';
 
 export default class UrlGrammar extends Grammar{
+    
+    compileComponents(query){
+        var {_with} = query._modelBuilder == null ? {} : query._modelBuilder;
+        var result = super.compileComponents(query);
+        result.with = _with;
+        return result;
+    }
 
     compileInsert(query, data){
         return {from: this.compileFrom(query._from)};

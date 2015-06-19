@@ -1,5 +1,5 @@
 export default class Grammar{
-    _toCompile = ["columns", "aggregate", "from", "wheres", "orders", "groups", "limit", "offset", "with"];
+    _toCompile = ["columns", "aggregate", "from", "wheres", "orders", "groups", "limit", "offset"];
     
     compileSelect(query){
         return this.compileComponents(query);
@@ -36,9 +36,6 @@ export default class Grammar{
         return value === null ? undefined : value;
     }
     compileFrom(value){
-        return value === null ? undefined : value;
-    }
-    compileWith(value){
         return value === null ? undefined : value;
     }
     compileWheres(value){

@@ -17,6 +17,7 @@ async function app(){
     var firstProfile = await Profile.query().first();
     var theProfile = await Profile.query().find(1);
     var activeProfiles = await Profile.query().where('active','=',true).get();
+    var profileWithUser = await Profile.query().with('user').first();
     
     var insertedProfile = await Profile.query().insert({ name: 'Nutella!'});
     
