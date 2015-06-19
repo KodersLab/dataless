@@ -1,13 +1,12 @@
-import Connection from './Connection';
 import UrlConnection from './UrlConnection';
 
 class DatabaseManager{
     _connections = {};
     _configs = {};
-    _default = "default";
+    _default = 'default';
     _adapters = {
         url: (name, config) => {
-            return new UrlConnection(null, config['database'], config['prefix'], config);
+            return new UrlConnection(null, config.database, config.prefix, config);
         }
     };
 

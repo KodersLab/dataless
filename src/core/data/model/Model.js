@@ -19,7 +19,7 @@ export default class Model extends EventEmitter{
     _casts = {};
     _exists = false;
     _with = [];
-    
+
     constructor(attributes = {}){
         super();
         //this.bootIfNotBooted(); TODO: Needed?
@@ -27,15 +27,15 @@ export default class Model extends EventEmitter{
         this.fill(attributes);
         return this;
     }
-        
+
     static query(){
         return (new this()).newQuery();
-    }    
-    
+    }
+
     static resolveConnection(name = null){
         return DatabaseManager.connection(name);
     }
-    
+
     static hydrate(items = [], connection = null)
     {
         var instance = new this();
@@ -48,7 +48,7 @@ export default class Model extends EventEmitter{
 
         return instance.newCollection(coll);
     }
-    
+
     fill(attributes = {}){
         for(var k in attributes){
             if(attributes.hasOwnProperty(k)){
@@ -56,11 +56,11 @@ export default class Model extends EventEmitter{
             }
         }
     }
-    
+
     newCollection(models){
         return new Collection(Array.isArray(models) ? models : [models]);
     }
-    
+
     newFromBuilder(attributes = {}, connection = null)
     {
         var model = this.newInstance({}, true);
@@ -68,18 +68,18 @@ export default class Model extends EventEmitter{
         model.setConnection(connection != null ? null : connection);
         return model;
     }
-    
+
     newInstance(attributes = {}, exists = false)
     {
         var model = new this.constructor(attributes);
         model._exists = exists;
         return model;
     }
-    
+
     newQuery(){
         return this.newQueryWithoutScopes();
     }
-    
+
     newQueryWithoutScopes(){
         var conn = this.getConnection();
         var grammar = conn.getQueryGrammar();
@@ -87,7 +87,7 @@ export default class Model extends EventEmitter{
 
         return builder.setModel(this).with(this._with);
     }
-    
+
     syncOriginal()
     {
         this._original = {};
@@ -100,28 +100,27 @@ export default class Model extends EventEmitter{
         return this;
     }
 
-    
     getTable(){
         return this._table;
     }
-    
+
     getPrimaryKey(){
         return this._primaryKey;
     }
-    
+
     getConnection(){
         return this.constructor.resolveConnection(this._connection);
     }
-    
+
     getConnectionName(){
         return this._connection;
     }
-    
+
     setConnection(name = null){
         this._connection = name;
         return this;
     }
-    
+
     setRawAttributes(attributes, sync = false)
     {
         this._attributes = {};

@@ -137,6 +137,7 @@
 	                console.log("The first profile is ", firstProfile);
 	                console.log("The profile #1 is ", theProfile);
 	                console.log("Currently active profiles are", activeProfiles);
+	                console.log("A profile with its user", profileWithUser);
 	                console.log("===");
 	                console.log("Inserted profile:", insertedProfile);
 	                console.log("===");
@@ -144,7 +145,7 @@
 	                console.log("===");
 	                console.log("Deleted profile:", deletedProfile);
 	
-	            case 41:
+	            case 42:
 	            case "end":
 	                return context$1$0.stop();
 	        }
@@ -963,13 +964,13 @@
 /* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(28), __esModule: true };
+	module.exports = { "default": __webpack_require__(29), __esModule: true };
 
 /***/ },
 /* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(29), __esModule: true };
+	module.exports = { "default": __webpack_require__(28), __esModule: true };
 
 /***/ },
 /* 13 */
@@ -1543,7 +1544,7 @@
 	
 	var _inherits = __webpack_require__(2)['default'];
 	
-	var _get = __webpack_require__(31)['default'];
+	var _get = __webpack_require__(32)['default'];
 	
 	var _createClass = __webpack_require__(30)['default'];
 	
@@ -1553,7 +1554,7 @@
 	
 	var _regeneratorRuntime = __webpack_require__(4)['default'];
 	
-	var _interopRequireDefault = __webpack_require__(32)['default'];
+	var _interopRequireDefault = __webpack_require__(31)['default'];
 	
 	_Object$defineProperty(exports, '__esModule', {
 	    value: true
@@ -1827,7 +1828,7 @@
 	
 	var _regeneratorRuntime = __webpack_require__(4)['default'];
 	
-	var _interopRequireDefault = __webpack_require__(32)['default'];
+	var _interopRequireDefault = __webpack_require__(31)['default'];
 	
 	_Object$defineProperty(exports, '__esModule', {
 	    value: true
@@ -2104,7 +2105,7 @@
 	
 	var _Object$defineProperty = __webpack_require__(7)['default'];
 	
-	var _interopRequireDefault = __webpack_require__(32)['default'];
+	var _interopRequireDefault = __webpack_require__(31)['default'];
 	
 	_Object$defineProperty(exports, '__esModule', {
 	    value: true
@@ -2142,7 +2143,7 @@
 	
 	var _inherits = __webpack_require__(2)['default'];
 	
-	var _get = __webpack_require__(31)['default'];
+	var _get = __webpack_require__(32)['default'];
 	
 	var _createClass = __webpack_require__(30)['default'];
 	
@@ -2150,7 +2151,7 @@
 	
 	var _Object$defineProperty = __webpack_require__(7)['default'];
 	
-	var _interopRequireDefault = __webpack_require__(32)['default'];
+	var _interopRequireDefault = __webpack_require__(31)['default'];
 	
 	_Object$defineProperty(exports, '__esModule', {
 	    value: true
@@ -2361,7 +2362,7 @@
 	
 	var _regeneratorRuntime = __webpack_require__(4)['default'];
 	
-	var _interopRequireDefault = __webpack_require__(32)['default'];
+	var _interopRequireDefault = __webpack_require__(31)['default'];
 	
 	_Object$defineProperty(exports, '__esModule', {
 	    value: true
@@ -2371,11 +2372,11 @@
 	
 	var _qs2 = _interopRequireDefault(_qs);
 	
-	var _queryGrammarUrlGrammar = __webpack_require__(38);
+	var _queryGrammarUrlGrammar = __webpack_require__(36);
 	
 	var _queryGrammarUrlGrammar2 = _interopRequireDefault(_queryGrammarUrlGrammar);
 	
-	var _queryProcessorUrlProcessor = __webpack_require__(39);
+	var _queryProcessorUrlProcessor = __webpack_require__(37);
 	
 	var _queryProcessorUrlProcessor2 = _interopRequireDefault(_queryProcessorUrlProcessor);
 	
@@ -2383,7 +2384,7 @@
 	
 	var _Connection3 = _interopRequireDefault(_Connection2);
 	
-	var _protocolHTTP = __webpack_require__(40);
+	var _protocolHTTP = __webpack_require__(38);
 	
 	var _protocolHTTP2 = _interopRequireDefault(_protocolHTTP);
 	
@@ -2553,13 +2554,13 @@
 /* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(36), __esModule: true };
+	module.exports = { "default": __webpack_require__(39), __esModule: true };
 
 /***/ },
 /* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(37), __esModule: true };
+	module.exports = { "default": __webpack_require__(40), __esModule: true };
 
 /***/ },
 /* 25 */
@@ -2681,8 +2682,8 @@
 
 	var $ = __webpack_require__(43);
 	__webpack_require__(44);
-	module.exports = function getOwnPropertyNames(it){
-	  return $.getNames(it);
+	module.exports = function getOwnPropertyDescriptor(it, key){
+	  return $.getDesc(it, key);
 	};
 
 /***/ },
@@ -2691,8 +2692,8 @@
 
 	var $ = __webpack_require__(43);
 	__webpack_require__(44);
-	module.exports = function getOwnPropertyDescriptor(it, key){
-	  return $.getDesc(it, key);
+	module.exports = function getOwnPropertyNames(it){
+	  return $.getNames(it);
 	};
 
 /***/ },
@@ -2726,6 +2727,20 @@
 
 /***/ },
 /* 31 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	exports["default"] = function (obj) {
+	  return obj && obj.__esModule ? obj : {
+	    "default": obj
+	  };
+	};
+	
+	exports.__esModule = true;
+
+/***/ },
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2768,20 +2783,6 @@
 	      return getter.call(receiver);
 	    }
 	  }
-	};
-	
-	exports.__esModule = true;
-
-/***/ },
-/* 32 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	exports["default"] = function (obj) {
-	  return obj && obj.__esModule ? obj : {
-	    "default": obj
-	  };
 	};
 	
 	exports.__esModule = true;
@@ -2879,7 +2880,7 @@
 	
 	var _Object$getOwnPropertyNames = __webpack_require__(11)['default'];
 	
-	var _interopRequireDefault = __webpack_require__(32)['default'];
+	var _interopRequireDefault = __webpack_require__(31)['default'];
 	
 	_Object$defineProperty(exports, '__esModule', {
 	    value: true
@@ -3073,29 +3074,11 @@
 /* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(45);
-	__webpack_require__(46);
-	module.exports = __webpack_require__(47)('iterator');
-
-/***/ },
-/* 37 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(48);
-	__webpack_require__(45);
-	__webpack_require__(46);
-	__webpack_require__(49);
-	module.exports = __webpack_require__(43).core.Promise;
-
-/***/ },
-/* 38 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 	
 	var _inherits = __webpack_require__(2)['default'];
 	
-	var _get = __webpack_require__(31)['default'];
+	var _get = __webpack_require__(32)['default'];
 	
 	var _createClass = __webpack_require__(30)['default'];
 	
@@ -3103,7 +3086,7 @@
 	
 	var _Object$defineProperty = __webpack_require__(7)['default'];
 	
-	var _interopRequireDefault = __webpack_require__(32)['default'];
+	var _interopRequireDefault = __webpack_require__(31)['default'];
 	
 	_Object$defineProperty(exports, '__esModule', {
 	    value: true
@@ -3181,7 +3164,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 39 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -3268,7 +3251,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 40 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3283,7 +3266,7 @@
 	
 	var _Promise = __webpack_require__(24)['default'];
 	
-	var _interopRequireDefault = __webpack_require__(32)['default'];
+	var _interopRequireDefault = __webpack_require__(31)['default'];
 	
 	_Object$defineProperty(exports, '__esModule', {
 	    value: true
@@ -3418,6 +3401,24 @@
 	module.exports = exports['default'];
 
 /***/ },
+/* 39 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(45);
+	__webpack_require__(46);
+	module.exports = __webpack_require__(47)('iterator');
+
+/***/ },
+/* 40 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(48);
+	__webpack_require__(45);
+	__webpack_require__(46);
+	__webpack_require__(49);
+	module.exports = __webpack_require__(43).core.Promise;
+
+/***/ },
 /* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -3441,7 +3442,7 @@
 /* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(55);
+	module.exports = __webpack_require__(52);
 
 
 /***/ },
@@ -3497,7 +3498,7 @@
 	  return it;
 	}
 	
-	var $ = module.exports = __webpack_require__(52)({
+	var $ = module.exports = __webpack_require__(53)({
 	  g: global,
 	  core: core,
 	  html: global.document && document.documentElement,
@@ -3550,7 +3551,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var $        = __webpack_require__(43)
-	  , $def     = __webpack_require__(53)
+	  , $def     = __webpack_require__(54)
 	  , isObject = $.isObject
 	  , toObject = $.toObject;
 	$.each.call(('freeze,seal,preventExtensions,isFrozen,isSealed,isExtensible,' +
@@ -3577,7 +3578,7 @@
 	    return fn(Object($.assertDefined(it)));
 	  } : ID == 8 ? function keys(it){
 	    return fn(toObject(it));
-	  } : __webpack_require__(54).get;
+	  } : __webpack_require__(55).get;
 	  try {
 	    fn('z');
 	  } catch(e){
@@ -3664,7 +3665,7 @@
 	var $        = __webpack_require__(43)
 	  , ctx      = __webpack_require__(65)
 	  , cof      = __webpack_require__(62)
-	  , $def     = __webpack_require__(53)
+	  , $def     = __webpack_require__(54)
 	  , assert   = __webpack_require__(66)
 	  , forOf    = __webpack_require__(67)
 	  , setProto = __webpack_require__(68).set
@@ -3932,7 +3933,7 @@
 	  , setTag   = __webpack_require__(62).set
 	  , uid      = __webpack_require__(57)
 	  , shared   = __webpack_require__(60)
-	  , $def     = __webpack_require__(53)
+	  , $def     = __webpack_require__(54)
 	  , $redef   = __webpack_require__(63)
 	  , keyOf    = __webpack_require__(73)
 	  , enumKeys = __webpack_require__(74)
@@ -3944,7 +3945,7 @@
 	  , getDesc  = $.getDesc
 	  , setDesc  = $.setDesc
 	  , desc     = $.desc
-	  , $names   = __webpack_require__(54)
+	  , $names   = __webpack_require__(55)
 	  , getNames = $names.get
 	  , toObject = $.toObject
 	  , $Symbol  = $.g.Symbol
@@ -4389,6 +4390,27 @@
 /* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
+	// Load modules
+	
+	var Stringify = __webpack_require__(75);
+	var Parse = __webpack_require__(76);
+	
+	
+	// Declare internals
+	
+	var internals = {};
+	
+	
+	module.exports = {
+	    stringify: Stringify,
+	    parse: Parse
+	};
+
+
+/***/ },
+/* 53 */
+/***/ function(module, exports, __webpack_require__) {
+
 	module.exports = function($){
 	  $.FW   = false;
 	  $.path = $.core;
@@ -4396,7 +4418,7 @@
 	};
 
 /***/ },
-/* 53 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var $          = __webpack_require__(43)
@@ -4449,7 +4471,7 @@
 	module.exports = $def;
 
 /***/ },
-/* 54 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
@@ -4472,27 +4494,6 @@
 	  if(windowNames && toString.call(it) == '[object Window]')return getWindowNames(it);
 	  return getNames($.toObject(it));
 	};
-
-/***/ },
-/* 55 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// Load modules
-	
-	var Stringify = __webpack_require__(75);
-	var Parse = __webpack_require__(76);
-	
-	
-	// Declare internals
-	
-	var internals = {};
-	
-	
-	module.exports = {
-	    stringify: Stringify,
-	    parse: Parse
-	};
-
 
 /***/ },
 /* 56 */
@@ -4585,7 +4586,7 @@
 /* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $def            = __webpack_require__(53)
+	var $def            = __webpack_require__(54)
 	  , $redef          = __webpack_require__(63)
 	  , $               = __webpack_require__(43)
 	  , cof             = __webpack_require__(62)
