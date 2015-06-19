@@ -99,13 +99,27 @@ export default class Model extends EventEmitter{
         }
         return this;
     }
+
     
     getTable(){
         return this._table;
     }
     
+    getPrimaryKey(){
+        return this._primaryKey;
+    }
+    
     getConnection(){
         return this.constructor.resolveConnection(this._connection);
+    }
+    
+    getConnectionName(){
+        return this._connection;
+    }
+    
+    setConnection(name = null){
+        this._connection = name;
+        return this;
     }
     
     setRawAttributes(attributes, sync = false)
@@ -121,10 +135,5 @@ export default class Model extends EventEmitter{
         {
             this.syncOriginal();
         }
-    }
-    
-    setConnection(name = null){
-        this._connection = name;
-        return this;
     }
 }

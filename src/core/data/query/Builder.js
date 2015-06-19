@@ -11,6 +11,7 @@ export default class Builder{
     _connection = null;
     _grammar = null;
     _processor = null;
+    _modelBuilder = null;
     
     constructor(connection, grammar, processor){
         this._connection = connection;
@@ -58,6 +59,10 @@ export default class Builder{
         return this;
     }
     
+    take(limit = null){
+        return this.limit(limit);
+    }
+    
     offset(offset = null){
         this._offset = offset;
         return this;
@@ -87,14 +92,11 @@ export default class Builder{
     }
     
     async find(pks = [], columns = null){
-        pks = Array.isArray(pks) ? pks : [pks];
-        var filter = {
-            type: "pks",
-            pks: pks
-        };
-        this._wheres = this._wheres === null ? [filter] : this._wheres.concat([filter]);
-        var result = this.get(columns);
-        this._wheres.splice(this._wheres.indexOf(filter), 1);
+        if(Array.isArray(pks)){
+            var result = this.where("id", "in", pks).get(columns);
+        }else{
+            var result = this.where("id", "=", pks).first(columns);
+        }
         return await result;
     }
     
@@ -136,5 +138,9 @@ export default class Builder{
     
     getConnection(){
         return this._connection;
+    }
+    
+    getComponent(name){
+        return this['_'+name];
     }
 }

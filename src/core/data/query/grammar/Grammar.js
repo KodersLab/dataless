@@ -24,7 +24,7 @@ export default class Grammar{
         for(var i = 0; i < this._toCompile.length; i++){
             name = this._toCompile[i];
             ucname = name.charAt(0).toUpperCase() + name.substring(1);
-            result[name] = this['compile'+ucname](query['_'+name]);
+            result[name] = this['compile'+ucname](query.getComponent(name));
         }
         return result;
     }

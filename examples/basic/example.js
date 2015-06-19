@@ -10,26 +10,24 @@ class Profile extends Model{
     _table = 'auth/profiles';
 }
 
-async function app(){
+async function app(){ 
+    var profiles = await Profile.query().limit(10).get();
+    var profilesCount = await Profile.query().count();
+    var latestProfiles = await Profile.query().orderBy('id', 'DESC').get();
+    var firstProfile = await Profile.query().first();
+    var theProfile = await Profile.query().find(1);
+    var activeProfiles = await Profile.query().where('active','=',true).get();
     
-    var profiles = (await Profile.query().get());
-    console.log('Via model', profiles);
+    var insertedProfile = await Profile.query().insert({ name: 'Nutella!'});
     
-    var profiles = await DB.table('auth/profiles').get();
-    var profilesCount = await DB.table('auth/profiles').count();
-    var latestProfiles = await DB.table('auth/profiles').orderBy('id', 'DESC').get();
-    var theProfile = await DB.table('auth/profiles').find(1);
-    var activeProfiles = await DB.table('auth/profiles').where('active','=',true).get();
+    var updatedProfile = await Profile.query().update(1, {name:'New Nutella!'});
     
-    var insertedProfile = await DB.table('auth/profiles').insert({ name: 'Nutella!'});
-    
-    var updatedProfile = await DB.table('auth/profiles').update(1, {name:'New Nutella!'});
-    
-    var deletedProfile = await DB.table('auth/profiles').destroy(1);
+    var deletedProfile = await Profile.query().destroy(1);
     
     
     console.log('There are '+profilesCount+' profiles:', profiles);
     console.log('Sorted by latest', latestProfiles);
+    console.log('The first profile is ', firstProfile);
     console.log('The profile #1 is ', theProfile);
     console.log('Currently active profiles are', activeProfiles);
     console.log('===');
