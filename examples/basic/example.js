@@ -31,6 +31,7 @@ async function app(){
     console.log('The first profile is ', firstProfile);
     console.log('The profile #1 is ', theProfile);
     console.log('Currently active profiles are', activeProfiles);
+    console.log('A profile with its user', profileWithUser);
     console.log('===');
     console.log('Inserted profile:', insertedProfile);
     console.log('===');
