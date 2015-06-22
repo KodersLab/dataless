@@ -158,14 +158,14 @@ export default class Query{
     }
 
     setConnection(connection = null){
-        this._connection = null;
+        this._connection = connection;
         return this;
     }
-    
+
     getModel(){
         return this._model;
     }
-    
+
     getConnection(){
         return this._connection;
     }

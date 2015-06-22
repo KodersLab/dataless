@@ -8,7 +8,7 @@ export default class UrlConnection extends Connection{
         this._postProcessor = new UrlProcessor();
         return this;
     }
-    
+
     async connect(){
         // nothing to do here
     }
@@ -51,18 +51,18 @@ export default class UrlConnection extends Connection{
 
     // Actual implementation of the connection.
     async selectingStatement(query){
-        return HTTP.get(this.getConfig('database','') + this._buildSelectUrl(query));
+        return HTTP.get(this.getConfig('database', '') + this._buildSelectUrl(query));
     }
 
     async insertingStatement(query, data){
-        return HTTP.post(this.getConfig('database','') + this._buildSelectUrl(query), data);
+        return HTTP.post(this.getConfig('database', '') + this._buildSelectUrl(query), data);
     }
 
     async updatingStatement(query, data){
-        return HTTP.post(this.getConfig('database','') + this._buildModelUrl(query), data);
+        return HTTP.post(this.getConfig('database', '') + this._buildModelUrl(query), data);
     }
 
     async destroyingStatement(query){
-        return HTTP.delete(this.getConfig('database','') + this._buildModelUrl(query));
+        return HTTP.delete(this.getConfig('database', '') + this._buildModelUrl(query));
     }
 }

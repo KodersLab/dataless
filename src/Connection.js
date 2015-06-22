@@ -56,7 +56,7 @@ export default class Connection extends EventEmitter{
     async destroy(query){
         return await this._postProcessor.processDestroy(query, await this.destroyingStatement(query));
     }
-    
+
     async connect(){
         throw '#connect(): This should be implemented by custom connection.';
     }

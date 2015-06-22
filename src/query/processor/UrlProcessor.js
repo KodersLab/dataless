@@ -1,6 +1,6 @@
 import Processor from './Processor';
 
-export default class UrlProcessor{
+export default class UrlProcessor extends Processor{
     async processSelect(query, result){
         return result.value;
     }

@@ -11,7 +11,7 @@ export default class MemoryConnection extends Connection{
     async disconnect(){
         // nothing to do here too
     }
-    
+
     makeFilterFn(wheres){
         return (row) => {
             return _.indexOf(_.map(wheres, (where) => {
@@ -19,8 +19,7 @@ export default class MemoryConnection extends Connection{
                     case 'basic':
                         switch(where.operator){
                             case '=':
-                                return row[where.column] == where.value;
-                                break;
+                                return row[where.column] === where.value;
                             default:
                                 throw 'Unsupported memory store operator ' + where.operator;
                         }
@@ -34,14 +33,12 @@ export default class MemoryConnection extends Connection{
 
     // Actual implementation of the connection.
     applyQuery(query, collection){
-        
         if(query._wheres !== null && Array.isArray(query._wheres)){
             collection = _.filter(collection, this.makeFilterFn(query._wheres));
         }
-        
         return collection;
     }
-    
+
     async selectingStatement(query){
         if(typeof this._db[query._from] === 'undefined'){
             this._db[query._from] = [];
@@ -77,7 +74,7 @@ export default class MemoryConnection extends Connection{
         this._db[query._from] = _.filter(this._db[query._from], (row) => _.indexOf(toDelete, row) === -1);
         return toDelete.length;
     }
-    
+
     toObject(){
         return this._db;
     }
