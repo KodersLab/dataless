@@ -58,5 +58,5 @@ async function app(){
     console.log('Memory store dump:', DatabaseManager.connection('memory').toObject());
 }
 
-// connect the db and let it fly! :D
+// connect all the db and let it fly! :D
 Promise.all([DatabaseManager.connect(), DatabaseManager.connect('memory')]).then(app, function(err){ console.log(err); });
