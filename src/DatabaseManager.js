@@ -1,12 +1,14 @@
 import EventEmitter from 'eventemitter3';
 import UrlConnection from './UrlConnection';
+import MemoryConnection from './MemoryConnection';
 
 class DatabaseManager extends EventEmitter{
     _connections = {};
     _configs = {};
     _default = 'default';
     _drivers = {
-        url: (config) => new UrlConnection(config)
+        url: (config) => new UrlConnection(config),
+        memory: (config) => new MemoryConnection(config)
     };
 
     async connect(name = null){

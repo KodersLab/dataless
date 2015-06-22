@@ -33,11 +33,11 @@ export default class Query{
         return this;
     }
 
-    where(column, operation, value, boolean = 'and'){
+    where(column, operator, value, boolean = 'and'){
         var where = {
             type: 'basic',
             column: column,
-            operation: operation,
+            operator: operator,
             value: value,
             boolean: boolean.toLowerCase()
         };
