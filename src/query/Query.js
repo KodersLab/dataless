@@ -1,32 +1,28 @@
-export default class Builder{
+export default class Query{
     _columns = null;
-    _aggregate = [];
+    _aggregate = null;
     _from = null;
     _wheres = null;
     _orders = null;
     _groups = null;
     _limit = null;
     _offset = null;
+    _with = null;
 
-    _connection = null;
-    _grammar = null;
-    _processor = null;
-    _modelBuilder = null;
+    _model = null;
 
-    constructor(connection, grammar, processor){
+    constructor(model = null, connection = null){
+        this._model = model;
         this._connection = connection;
-        this._grammar = grammar;
-        this._processor = processor;
     }
 
+    // Add members to query
     select(...columns){
-        if(columns.length === 0){ return this; }
-
         this._columns = Array.isArray(columns) ? columns : [columns];
         return this;
     }
 
-    addSelect(columns = []){
+    addSelect(columns = null){
         columns = Array.isArray(columns) ? columns : [columns];
         this._columns = this._columns === null ? columns : this._columns.concat(columns);
         return this;
@@ -68,35 +64,56 @@ export default class Builder{
         return this;
     }
 
-    // Computed on above methods
+    skip(offset = null){
+        return this.offset(offset);
+    }
+
     forPage(page, perPage = 15){
         return this.offset((page - 1) * perPage).limit(perPage);
     }
 
-    // Generators methods
-    toSql(){
-        return this._grammar.compileSelect(this);
+    with(args){
+        args = Array.isArray(args) ? args : [args];
+        if(args.length > 0){
+            this._with = this._with == null ? args : this._with.concat(args);
+        }
+        return this;
     }
 
-    async get(columns = null){
+    scope(name = '', ...args){
+        this._wheres.push({
+            type: 'scope',
+            name: name,
+            args: args
+        });
+        return this;
+    }
+
+    // Perform query methods
+    async getModels(columns = null){
         this._columns = this._columns === null ? columns : this._columns;
-        return await this._connection.select(this.toSql());
+        var results = await this._connection.select(this);
+        var connection = this._model.getConnectionName();
+
+        return this._model.constructor.hydrate(results, connection).all();
+    }
+
+    async get(columns = null)
+    {
+        var models = await this.getModels(columns);
+        return this._model.newCollection(models);
     }
 
     async first(columns = null){
-        var prev = this._limit;
-        var result = this.limit(1).get(columns);
-        this._limit = prev;
-        result = await result;
-        return result.length === 0 ? null : result[0];
+        return (await this.take(1).get(columns)).first();
     }
 
     async find(pks = [], columns = null){
         var result;
         if(Array.isArray(pks)){
-            result = this.where('id', 'in', pks).get(columns);
+            result = this.where(this._model.getQualifiedKeyName(), 'in', pks).get(columns);
         }else{
-            result = this.where('id', '=', pks).first(columns);
+            result = this.where(this._model.getQualifiedKeyName(), '=', pks).first(columns);
         }
         return await result;
     }
@@ -117,38 +134,39 @@ export default class Builder{
     }
 
     async insert(data){
-        return await this._connection.insert(this._grammar.compileInsert(this, data), data);
+        return await this._connection.insert(this, data);
     }
 
     async insertGetId(values, sequence = null)
     {
-        var sql = this._grammar.compileInsertGetId(this, values, sequence);
-
-        return await this._processor.processInsertGetId(this, sql, values, sequence);
+        return await this._connection.getPostProcessor().processInsertGetId(this, values, sequence);
     }
 
     async update(data){
-        return await this._connection.update(this._grammar.compileUpdate(this, data), data);
+        return await this._connection.update(this, data);
     }
 
     async destroy(){
-        return await this._connection.destroy(this._grammar.compileDestroy(this));
+        return await this._connection.destroy(this);
     }
 
-    // Getters for the query
-    getQueryGrammar(){
-        return this._queryGrammar;
+    // Getter and setter
+    setModel(model = null){
+        this._model = model;
+        this.from(model.getTable());
+        return this;
     }
 
-    getPostProcessor(){
-        return this._postProcessor;
+    setConnection(connection = null){
+        this._connection = null;
+        return this;
     }
-
+    
+    getModel(){
+        return this._model;
+    }
+    
     getConnection(){
         return this._connection;
-    }
-
-    getComponent(name){
-        return this['_' + name];
     }
 }

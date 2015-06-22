@@ -1,11 +1,9 @@
-import EventEmitter from '../../utils/EventEmitter';
-import DatabaseManager from '../DatabaseManager';
+import EventEmitter from 'eventemitter3';
 import Collection from './Collection';
-import Builder from './Builder';
-import BaseBuilder from '../query/Builder';
+import DatabaseManager from '../DatabaseManager';
+import Query from '../query/Query';
 
 export default class Model extends EventEmitter{
-    _connection = null;
     _table = null;
     _primaryKey = 'id';
     _incrementing = true;
@@ -13,12 +11,12 @@ export default class Model extends EventEmitter{
     _attributes = {};
     _original = {};
     _relations = {};
-    _fillable = [];
-    _guarded = [];
     _dates = [];
     _casts = {};
     _exists = false;
     _with = [];
+
+    _connection = null;
 
     constructor(attributes = {}){
         super();
@@ -82,8 +80,7 @@ export default class Model extends EventEmitter{
 
     newQueryWithoutScopes(){
         var conn = this.getConnection();
-        var grammar = conn.getQueryGrammar();
-        var builder = new Builder(new BaseBuilder(conn, grammar, conn.getPostProcessor()));
+        var builder = new Query(this, conn);
 
         return builder.setModel(this).with(this._with);
     }

@@ -1,3 +1,5 @@
+import Processor from './Processor';
+
 export default class UrlProcessor{
     async processSelect(query, result){
         return result.value;
@@ -7,10 +9,9 @@ export default class UrlProcessor{
         return result.value;
     }
 
-    async processInsertGetId(query, sql, values){
-        if(query._modelBuilder === null){ throw 'UrlConnection does not support insertGetId without a model (due to rest limitations).'; }
-        var result = await query.getConnection().insert(sql, values);
-        return result[query._modelBuilder._model.getKeyName()];
+    async processInsertGetId(query, values){
+        var result = await query.getConnection().insert(query, values);
+        return result[query._model.getKeyName()];
     }
 
     async processUpdate(query, result){

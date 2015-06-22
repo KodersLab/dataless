@@ -1,5 +1,5 @@
 import qs from 'qs';
-import EventEmitter from '../utils/EventEmitter';
+import EventEmitter from 'eventemitter3';
 
 class HTTP extends EventEmitter{
     _pending = 0;

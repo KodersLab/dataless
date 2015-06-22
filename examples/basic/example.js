@@ -19,7 +19,7 @@ class Profile extends Model{
 // the app function will be executed once the db is ready
 async function app(){ 
     // search profiles
-    var theProfile = await Profile.query().find(1);
+    var theProfile = await Profile.query().select('id','name').find(1);
     var profiles = await Profile.query().orderBy('id','DESC').where('active', '=', 'true').get();
     console.log(theProfile, profiles);
 

@@ -46,37 +46,189 @@
 
 	'use strict';
 	
-	var _Object$defineProperty = __webpack_require__(1)['default'];
+	var _interopRequire = __webpack_require__(50)['default'];
 	
-	var _defaults = __webpack_require__(5)['default'];
-	
-	var _interopRequireWildcard = __webpack_require__(13)['default'];
-	
-	_Object$defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
 	
-	var _coreData = __webpack_require__(14);
+	var _Connection = __webpack_require__(51);
 	
-	_defaults(exports, _interopRequireWildcard(_coreData));
+	exports.Connection = _interopRequire(_Connection);
+	
+	var _DatabaseManager = __webpack_require__(59);
+	
+	exports.DatabaseManager = _interopRequire(_DatabaseManager);
+	
+	var _DB = __webpack_require__(68);
+	
+	exports.DB = _interopRequire(_DB);
+	
+	var _queryProcessorProcessor = __webpack_require__(1);
+	
+	exports.Processor = _interopRequire(_queryProcessorProcessor);
+	
+	var _queryQuery = __webpack_require__(69);
+	
+	exports.Query = _interopRequire(_queryQuery);
+	
+	var _modelModel = __webpack_require__(70);
+	
+	exports.Model = _interopRequire(_modelModel);
+	
+	var _modelCollection = __webpack_require__(73);
+	
+	exports.Collection = _interopRequire(_modelCollection);
 
 /***/ },
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(2), __esModule: true };
+	"use strict";
+	
+	var _createClass = __webpack_require__(2)["default"];
+	
+	var _classCallCheck = __webpack_require__(7)["default"];
+	
+	var _regeneratorRuntime = __webpack_require__(8)["default"];
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var Processor = (function () {
+	    function Processor() {
+	        _classCallCheck(this, Processor);
+	    }
+	
+	    _createClass(Processor, [{
+	        key: "processSelect",
+	        value: function processSelect(query, result) {
+	            return _regeneratorRuntime.async(function processSelect$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        return context$2$0.abrupt("return", result);
+	
+	                    case 1:
+	                    case "end":
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: "processInsert",
+	        value: function processInsert(query, result) {
+	            return _regeneratorRuntime.async(function processInsert$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        return context$2$0.abrupt("return", result);
+	
+	                    case 1:
+	                    case "end":
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: "processInsertGetId",
+	        value: function processInsertGetId(query, values) {
+	            return _regeneratorRuntime.async(function processInsertGetId$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        context$2$0.next = 2;
+	                        return _regeneratorRuntime.awrap(query.getConnection().insert(query, values));
+	
+	                    case 2:
+	                        return context$2$0.abrupt("return", context$2$0.sent);
+	
+	                    case 3:
+	                    case "end":
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: "processUpdate",
+	        value: function processUpdate(query, result) {
+	            return _regeneratorRuntime.async(function processUpdate$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        return context$2$0.abrupt("return", result);
+	
+	                    case 1:
+	                    case "end":
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: "processDestroy",
+	        value: function processDestroy(query, result) {
+	            return _regeneratorRuntime.async(function processDestroy$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        return context$2$0.abrupt("return", result);
+	
+	                    case 1:
+	                    case "end":
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }]);
+	
+	    return Processor;
+	})();
+	
+	exports["default"] = Processor;
+	module.exports = exports["default"];
 
 /***/ },
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $ = __webpack_require__(3);
+	"use strict";
+	
+	var _Object$defineProperty = __webpack_require__(3)["default"];
+	
+	exports["default"] = (function () {
+	  function defineProperties(target, props) {
+	    for (var i = 0; i < props.length; i++) {
+	      var descriptor = props[i];
+	      descriptor.enumerable = descriptor.enumerable || false;
+	      descriptor.configurable = true;
+	      if ("value" in descriptor) descriptor.writable = true;
+	
+	      _Object$defineProperty(target, descriptor.key, descriptor);
+	    }
+	  }
+	
+	  return function (Constructor, protoProps, staticProps) {
+	    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+	    if (staticProps) defineProperties(Constructor, staticProps);
+	    return Constructor;
+	  };
+	})();
+	
+	exports.__esModule = true;
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(4), __esModule: true };
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(5);
 	module.exports = function defineProperty(it, key, desc){
 	  return $.setDesc(it, key, desc);
 	};
 
 /***/ },
-/* 3 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -128,7 +280,7 @@
 	  return it;
 	}
 	
-	var $ = module.exports = __webpack_require__(4)({
+	var $ = module.exports = __webpack_require__(6)({
 	  g: global,
 	  core: core,
 	  html: global.document && document.documentElement,
@@ -177,7 +329,7 @@
 	if(typeof __g != 'undefined')__g = global;
 
 /***/ },
-/* 4 */
+/* 6 */
 /***/ function(module, exports) {
 
 	module.exports = function($){
@@ -187,649 +339,7 @@
 	};
 
 /***/ },
-/* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var _Object$getOwnPropertyNames = __webpack_require__(6)["default"];
-	
-	var _Object$getOwnPropertyDescriptor = __webpack_require__(11)["default"];
-	
-	var _Object$defineProperty = __webpack_require__(1)["default"];
-	
-	exports["default"] = function (obj, defaults) {
-	  var keys = _Object$getOwnPropertyNames(defaults);
-	
-	  for (var i = 0; i < keys.length; i++) {
-	    var key = keys[i];
-	
-	    var value = _Object$getOwnPropertyDescriptor(defaults, key);
-	
-	    if (value && value.configurable && obj[key] === undefined) {
-	      _Object$defineProperty(obj, key, value);
-	    }
-	  }
-	
-	  return obj;
-	};
-	
-	exports.__esModule = true;
-
-/***/ },
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(7), __esModule: true };
-
-/***/ },
 /* 7 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var $ = __webpack_require__(3);
-	__webpack_require__(8);
-	module.exports = function getOwnPropertyNames(it){
-	  return $.getNames(it);
-	};
-
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var $        = __webpack_require__(3)
-	  , $def     = __webpack_require__(9)
-	  , isObject = $.isObject
-	  , toObject = $.toObject;
-	$.each.call(('freeze,seal,preventExtensions,isFrozen,isSealed,isExtensible,' +
-	  'getOwnPropertyDescriptor,getPrototypeOf,keys,getOwnPropertyNames').split(',')
-	, function(KEY, ID){
-	  var fn     = ($.core.Object || {})[KEY] || Object[KEY]
-	    , forced = 0
-	    , method = {};
-	  method[KEY] = ID == 0 ? function freeze(it){
-	    return isObject(it) ? fn(it) : it;
-	  } : ID == 1 ? function seal(it){
-	    return isObject(it) ? fn(it) : it;
-	  } : ID == 2 ? function preventExtensions(it){
-	    return isObject(it) ? fn(it) : it;
-	  } : ID == 3 ? function isFrozen(it){
-	    return isObject(it) ? fn(it) : true;
-	  } : ID == 4 ? function isSealed(it){
-	    return isObject(it) ? fn(it) : true;
-	  } : ID == 5 ? function isExtensible(it){
-	    return isObject(it) ? fn(it) : false;
-	  } : ID == 6 ? function getOwnPropertyDescriptor(it, key){
-	    return fn(toObject(it), key);
-	  } : ID == 7 ? function getPrototypeOf(it){
-	    return fn(Object($.assertDefined(it)));
-	  } : ID == 8 ? function keys(it){
-	    return fn(toObject(it));
-	  } : __webpack_require__(10).get;
-	  try {
-	    fn('z');
-	  } catch(e){
-	    forced = 1;
-	  }
-	  $def($def.S + $def.F * forced, 'Object', method);
-	});
-
-/***/ },
-/* 9 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var $          = __webpack_require__(3)
-	  , global     = $.g
-	  , core       = $.core
-	  , isFunction = $.isFunction;
-	function ctx(fn, that){
-	  return function(){
-	    return fn.apply(that, arguments);
-	  };
-	}
-	// type bitmap
-	$def.F = 1;  // forced
-	$def.G = 2;  // global
-	$def.S = 4;  // static
-	$def.P = 8;  // proto
-	$def.B = 16; // bind
-	$def.W = 32; // wrap
-	function $def(type, name, source){
-	  var key, own, out, exp
-	    , isGlobal = type & $def.G
-	    , isProto  = type & $def.P
-	    , target   = isGlobal ? global : type & $def.S
-	        ? global[name] : (global[name] || {}).prototype
-	    , exports  = isGlobal ? core : core[name] || (core[name] = {});
-	  if(isGlobal)source = name;
-	  for(key in source){
-	    // contains in native
-	    own = !(type & $def.F) && target && key in target;
-	    if(own && key in exports)continue;
-	    // export native or passed
-	    out = own ? target[key] : source[key];
-	    // prevent global pollution for namespaces
-	    if(isGlobal && !isFunction(target[key]))exp = source[key];
-	    // bind timers to global for call from export context
-	    else if(type & $def.B && own)exp = ctx(out, global);
-	    // wrap global constructors for prevent change them in library
-	    else if(type & $def.W && target[key] == out)!function(C){
-	      exp = function(param){
-	        return this instanceof C ? new C(param) : C(param);
-	      };
-	      exp.prototype = C.prototype;
-	    }(out);
-	    else exp = isProto && isFunction(out) ? ctx(Function.call, out) : out;
-	    // export
-	    exports[key] = exp;
-	    if(isProto)(exports.prototype || (exports.prototype = {}))[key] = out;
-	  }
-	}
-	module.exports = $def;
-
-/***/ },
-/* 10 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
-	var $ = __webpack_require__(3)
-	  , toString = {}.toString
-	  , getNames = $.getNames;
-	
-	var windowNames = typeof window == 'object' && Object.getOwnPropertyNames
-	  ? Object.getOwnPropertyNames(window) : [];
-	
-	function getWindowNames(it){
-	  try {
-	    return getNames(it);
-	  } catch(e){
-	    return windowNames.slice();
-	  }
-	}
-	
-	module.exports.get = function getOwnPropertyNames(it){
-	  if(windowNames && toString.call(it) == '[object Window]')return getWindowNames(it);
-	  return getNames($.toObject(it));
-	};
-
-/***/ },
-/* 11 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(12), __esModule: true };
-
-/***/ },
-/* 12 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var $ = __webpack_require__(3);
-	__webpack_require__(8);
-	module.exports = function getOwnPropertyDescriptor(it, key){
-	  return $.getDesc(it, key);
-	};
-
-/***/ },
-/* 13 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	exports["default"] = function (obj) {
-	  if (obj && obj.__esModule) {
-	    return obj;
-	  } else {
-	    var newObj = {};
-	
-	    if (obj != null) {
-	      for (var key in obj) {
-	        if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
-	      }
-	    }
-	
-	    newObj["default"] = obj;
-	    return newObj;
-	  }
-	};
-	
-	exports.__esModule = true;
-
-/***/ },
-/* 14 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _Object$defineProperty = __webpack_require__(1)['default'];
-	
-	var _interopRequire = __webpack_require__(58)['default'];
-	
-	_Object$defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	var _queryGrammarGrammar = __webpack_require__(59);
-	
-	exports.Grammar = _interopRequire(_queryGrammarGrammar);
-	
-	var _queryProcessorProcessor = __webpack_require__(60);
-	
-	exports.Processor = _interopRequire(_queryProcessorProcessor);
-	
-	var _Connection = __webpack_require__(61);
-	
-	exports.Connection = _interopRequire(_Connection);
-	
-	var _queryBuilder = __webpack_require__(15);
-	
-	exports.Builder = _interopRequire(_queryBuilder);
-	
-	var _DatabaseManager = __webpack_require__(67);
-	
-	exports.DatabaseManager = _interopRequire(_DatabaseManager);
-	
-	var _DB = __webpack_require__(77);
-	
-	exports.DB = _interopRequire(_DB);
-	
-	var _modelModel = __webpack_require__(78);
-	
-	exports.Model = _interopRequire(_modelModel);
-	
-	var _UrlConnection = __webpack_require__(68);
-	
-	exports.UrlConnection = _interopRequire(_UrlConnection);
-
-/***/ },
-/* 15 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _createClass = __webpack_require__(16)['default'];
-	
-	var _classCallCheck = __webpack_require__(17)['default'];
-	
-	var _Object$defineProperty = __webpack_require__(1)['default'];
-	
-	var _regeneratorRuntime = __webpack_require__(18)['default'];
-	
-	_Object$defineProperty(exports, '__esModule', {
-	    value: true
-	});
-	
-	var Builder = (function () {
-	    function Builder(connection, grammar, processor) {
-	        _classCallCheck(this, Builder);
-	
-	        this._columns = null;
-	        this._aggregate = [];
-	        this._from = null;
-	        this._wheres = null;
-	        this._orders = null;
-	        this._groups = null;
-	        this._limit = null;
-	        this._offset = null;
-	        this._connection = null;
-	        this._grammar = null;
-	        this._processor = null;
-	        this._modelBuilder = null;
-	
-	        this._connection = connection;
-	        this._grammar = grammar;
-	        this._processor = processor;
-	    }
-	
-	    _createClass(Builder, [{
-	        key: 'select',
-	        value: function select() {
-	            for (var _len = arguments.length, columns = Array(_len), _key = 0; _key < _len; _key++) {
-	                columns[_key] = arguments[_key];
-	            }
-	
-	            if (columns.length === 0) {
-	                return this;
-	            }
-	
-	            this._columns = Array.isArray(columns) ? columns : [columns];
-	            return this;
-	        }
-	    }, {
-	        key: 'addSelect',
-	        value: function addSelect() {
-	            var columns = arguments[0] === undefined ? [] : arguments[0];
-	
-	            columns = Array.isArray(columns) ? columns : [columns];
-	            this._columns = this._columns === null ? columns : this._columns.concat(columns);
-	            return this;
-	        }
-	    }, {
-	        key: 'from',
-	        value: function from() {
-	            var _from2 = arguments[0] === undefined ? null : arguments[0];
-	
-	            this._from = _from2;
-	            return this;
-	        }
-	    }, {
-	        key: 'where',
-	        value: function where(column, operation, value) {
-	            var boolean = arguments[3] === undefined ? 'and' : arguments[3];
-	
-	            var where = {
-	                type: 'basic',
-	                column: column,
-	                operation: operation,
-	                value: value,
-	                boolean: boolean.toLowerCase()
-	            };
-	            this._wheres = this._wheres === null ? [where] : this._wheres.concat([where]);
-	            return this;
-	        }
-	    }, {
-	        key: 'orderBy',
-	        value: function orderBy(name) {
-	            var dir = arguments[1] === undefined ? 'asc' : arguments[1];
-	
-	            this._orders = this._orders === null ? [[name, dir]] : this._orders.concat([[name, dir]]);
-	            return this;
-	        }
-	    }, {
-	        key: 'limit',
-	        value: function limit() {
-	            var _limit2 = arguments[0] === undefined ? null : arguments[0];
-	
-	            this._limit = _limit2;
-	            return this;
-	        }
-	    }, {
-	        key: 'take',
-	        value: function take() {
-	            var limit = arguments[0] === undefined ? null : arguments[0];
-	
-	            return this.limit(limit);
-	        }
-	    }, {
-	        key: 'offset',
-	        value: function offset() {
-	            var _offset2 = arguments[0] === undefined ? null : arguments[0];
-	
-	            this._offset = _offset2;
-	            return this;
-	        }
-	    }, {
-	        key: 'forPage',
-	
-	        // Computed on above methods
-	        value: function forPage(page) {
-	            var perPage = arguments[1] === undefined ? 15 : arguments[1];
-	
-	            return this.offset((page - 1) * perPage).limit(perPage);
-	        }
-	    }, {
-	        key: 'toSql',
-	
-	        // Generators methods
-	        value: function toSql() {
-	            return this._grammar.compileSelect(this);
-	        }
-	    }, {
-	        key: 'get',
-	        value: function get() {
-	            var columns = arguments[0] === undefined ? null : arguments[0];
-	            return _regeneratorRuntime.async(function get$(context$2$0) {
-	                while (1) switch (context$2$0.prev = context$2$0.next) {
-	                    case 0:
-	                        this._columns = this._columns === null ? columns : this._columns;
-	                        context$2$0.next = 3;
-	                        return _regeneratorRuntime.awrap(this._connection.select(this.toSql()));
-	
-	                    case 3:
-	                        return context$2$0.abrupt('return', context$2$0.sent);
-	
-	                    case 4:
-	                    case 'end':
-	                        return context$2$0.stop();
-	                }
-	            }, null, this);
-	        }
-	    }, {
-	        key: 'first',
-	        value: function first() {
-	            var columns = arguments[0] === undefined ? null : arguments[0];
-	            var prev, result;
-	            return _regeneratorRuntime.async(function first$(context$2$0) {
-	                while (1) switch (context$2$0.prev = context$2$0.next) {
-	                    case 0:
-	                        prev = this._limit;
-	                        result = this.limit(1).get(columns);
-	
-	                        this._limit = prev;
-	                        context$2$0.next = 5;
-	                        return _regeneratorRuntime.awrap(result);
-	
-	                    case 5:
-	                        result = context$2$0.sent;
-	                        return context$2$0.abrupt('return', result.length === 0 ? null : result[0]);
-	
-	                    case 7:
-	                    case 'end':
-	                        return context$2$0.stop();
-	                }
-	            }, null, this);
-	        }
-	    }, {
-	        key: 'find',
-	        value: function find() {
-	            var pks = arguments[0] === undefined ? [] : arguments[0];
-	            var columns = arguments[1] === undefined ? null : arguments[1];
-	            var result;
-	            return _regeneratorRuntime.async(function find$(context$2$0) {
-	                while (1) switch (context$2$0.prev = context$2$0.next) {
-	                    case 0:
-	                        if (Array.isArray(pks)) {
-	                            result = this.where('id', 'in', pks).get(columns);
-	                        } else {
-	                            result = this.where('id', '=', pks).first(columns);
-	                        }
-	                        context$2$0.next = 3;
-	                        return _regeneratorRuntime.awrap(result);
-	
-	                    case 3:
-	                        return context$2$0.abrupt('return', context$2$0.sent);
-	
-	                    case 4:
-	                    case 'end':
-	                        return context$2$0.stop();
-	                }
-	            }, null, this);
-	        }
-	    }, {
-	        key: 'aggregate',
-	        value: function aggregate(fn, column) {
-	            var result;
-	            return _regeneratorRuntime.async(function aggregate$(context$2$0) {
-	                while (1) switch (context$2$0.prev = context$2$0.next) {
-	                    case 0:
-	                        this._aggregate = [fn, column];
-	                        result = this.get();
-	
-	                        this._aggregate = null;
-	                        context$2$0.next = 5;
-	                        return _regeneratorRuntime.awrap(result);
-	
-	                    case 5:
-	                        result = context$2$0.sent;
-	
-	                        if (!(result.length > 0)) {
-	                            context$2$0.next = 8;
-	                            break;
-	                        }
-	
-	                        return context$2$0.abrupt('return', result[0].aggregate);
-	
-	                    case 8:
-	                        throw 'Aggregate result was invalid.';
-	
-	                    case 9:
-	                    case 'end':
-	                        return context$2$0.stop();
-	                }
-	            }, null, this);
-	        }
-	    }, {
-	        key: 'count',
-	        value: function count() {
-	            var column = arguments[0] === undefined ? null : arguments[0];
-	            return _regeneratorRuntime.async(function count$(context$2$0) {
-	                while (1) switch (context$2$0.prev = context$2$0.next) {
-	                    case 0:
-	                        context$2$0.next = 2;
-	                        return _regeneratorRuntime.awrap(this.aggregate('count', column));
-	
-	                    case 2:
-	                        return context$2$0.abrupt('return', context$2$0.sent);
-	
-	                    case 3:
-	                    case 'end':
-	                        return context$2$0.stop();
-	                }
-	            }, null, this);
-	        }
-	    }, {
-	        key: 'insert',
-	        value: function insert(data) {
-	            return _regeneratorRuntime.async(function insert$(context$2$0) {
-	                while (1) switch (context$2$0.prev = context$2$0.next) {
-	                    case 0:
-	                        context$2$0.next = 2;
-	                        return _regeneratorRuntime.awrap(this._connection.insert(this._grammar.compileInsert(this, data), data));
-	
-	                    case 2:
-	                        return context$2$0.abrupt('return', context$2$0.sent);
-	
-	                    case 3:
-	                    case 'end':
-	                        return context$2$0.stop();
-	                }
-	            }, null, this);
-	        }
-	    }, {
-	        key: 'insertGetId',
-	        value: function insertGetId(values) {
-	            var sequence = arguments[1] === undefined ? null : arguments[1];
-	            var sql;
-	            return _regeneratorRuntime.async(function insertGetId$(context$2$0) {
-	                while (1) switch (context$2$0.prev = context$2$0.next) {
-	                    case 0:
-	                        sql = this._grammar.compileInsertGetId(this, values, sequence);
-	                        context$2$0.next = 3;
-	                        return _regeneratorRuntime.awrap(this._processor.processInsertGetId(this, sql, values, sequence));
-	
-	                    case 3:
-	                        return context$2$0.abrupt('return', context$2$0.sent);
-	
-	                    case 4:
-	                    case 'end':
-	                        return context$2$0.stop();
-	                }
-	            }, null, this);
-	        }
-	    }, {
-	        key: 'update',
-	        value: function update(data) {
-	            return _regeneratorRuntime.async(function update$(context$2$0) {
-	                while (1) switch (context$2$0.prev = context$2$0.next) {
-	                    case 0:
-	                        context$2$0.next = 2;
-	                        return _regeneratorRuntime.awrap(this._connection.update(this._grammar.compileUpdate(this, data), data));
-	
-	                    case 2:
-	                        return context$2$0.abrupt('return', context$2$0.sent);
-	
-	                    case 3:
-	                    case 'end':
-	                        return context$2$0.stop();
-	                }
-	            }, null, this);
-	        }
-	    }, {
-	        key: 'destroy',
-	        value: function destroy() {
-	            return _regeneratorRuntime.async(function destroy$(context$2$0) {
-	                while (1) switch (context$2$0.prev = context$2$0.next) {
-	                    case 0:
-	                        context$2$0.next = 2;
-	                        return _regeneratorRuntime.awrap(this._connection.destroy(this._grammar.compileDestroy(this)));
-	
-	                    case 2:
-	                        return context$2$0.abrupt('return', context$2$0.sent);
-	
-	                    case 3:
-	                    case 'end':
-	                        return context$2$0.stop();
-	                }
-	            }, null, this);
-	        }
-	    }, {
-	        key: 'getQueryGrammar',
-	
-	        // Getters for the query
-	        value: function getQueryGrammar() {
-	            return this._queryGrammar;
-	        }
-	    }, {
-	        key: 'getPostProcessor',
-	        value: function getPostProcessor() {
-	            return this._postProcessor;
-	        }
-	    }, {
-	        key: 'getConnection',
-	        value: function getConnection() {
-	            return this._connection;
-	        }
-	    }, {
-	        key: 'getComponent',
-	        value: function getComponent(name) {
-	            return this['_' + name];
-	        }
-	    }]);
-	
-	    return Builder;
-	})();
-	
-	exports['default'] = Builder;
-	module.exports = exports['default'];
-
-/***/ },
-/* 16 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var _Object$defineProperty = __webpack_require__(1)["default"];
-	
-	exports["default"] = (function () {
-	  function defineProperties(target, props) {
-	    for (var i = 0; i < props.length; i++) {
-	      var descriptor = props[i];
-	      descriptor.enumerable = descriptor.enumerable || false;
-	      descriptor.configurable = true;
-	      if ("value" in descriptor) descriptor.writable = true;
-	
-	      _Object$defineProperty(target, descriptor.key, descriptor);
-	    }
-	  }
-	
-	  return function (Constructor, protoProps, staticProps) {
-	    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-	    if (staticProps) defineProperties(Constructor, staticProps);
-	    return Constructor;
-	  };
-	})();
-	
-	exports.__esModule = true;
-
-/***/ },
-/* 17 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -843,7 +353,7 @@
 	exports.__esModule = true;
 
 /***/ },
-/* 18 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {// This method of obtaining a reference to the global object needs to be
@@ -864,7 +374,7 @@
 	// Force reevalutation of runtime.js.
 	g.regeneratorRuntime = undefined;
 	
-	module.exports = __webpack_require__(19);
+	module.exports = __webpack_require__(9);
 	
 	if (hadRuntime) {
 	  // Restore the original runtime.
@@ -879,7 +389,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 19 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process) {/**
@@ -894,13 +404,13 @@
 	
 	"use strict";
 	
-	var _Symbol = __webpack_require__(21)["default"];
+	var _Symbol = __webpack_require__(11)["default"];
 	
-	var _Symbol$iterator = __webpack_require__(32)["default"];
+	var _Symbol$iterator = __webpack_require__(24)["default"];
 	
-	var _Object$create = __webpack_require__(41)["default"];
+	var _Object$create = __webpack_require__(33)["default"];
 	
-	var _Promise = __webpack_require__(43)["default"];
+	var _Promise = __webpack_require__(35)["default"];
 	
 	!(function (global) {
 	  "use strict";
@@ -1019,7 +529,10 @@
 	    function invoke(method, arg) {
 	      var result = generator[method](arg);
 	      var value = result.value;
-	      return value instanceof AwaitArgument ? _Promise.resolve(value.arg).then(invokeNext, invokeThrow) : result;
+	      return value instanceof AwaitArgument ? _Promise.resolve(value.arg).then(invokeNext, invokeThrow) : _Promise.resolve(value).then(function (unwrapped) {
+	        result.value = unwrapped;
+	        return result;
+	      }, invokeThrow);
 	    }
 	
 	    if (typeof process === "object" && process.domain) {
@@ -1484,10 +997,10 @@
 	// object, this seems to be the most reliable technique that does not
 	// use indirect eval (which violates Content Security Policy).
 	typeof global === "object" ? global : typeof window === "object" ? window : typeof self === "object" ? self : undefined);
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(20)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(10)))
 
 /***/ },
-/* 20 */
+/* 10 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -1583,33 +1096,33 @@
 
 
 /***/ },
-/* 21 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(22), __esModule: true };
+	module.exports = { "default": __webpack_require__(12), __esModule: true };
 
 /***/ },
-/* 22 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(23);
-	module.exports = __webpack_require__(3).core.Symbol;
+	__webpack_require__(13);
+	module.exports = __webpack_require__(5).core.Symbol;
 
 /***/ },
-/* 23 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	// ECMAScript 6 symbols shim
-	var $        = __webpack_require__(3)
-	  , setTag   = __webpack_require__(24).set
-	  , uid      = __webpack_require__(27)
-	  , shared   = __webpack_require__(26)
-	  , $def     = __webpack_require__(9)
-	  , $redef   = __webpack_require__(28)
-	  , keyOf    = __webpack_require__(29)
-	  , enumKeys = __webpack_require__(30)
-	  , assertObject = __webpack_require__(31).obj
+	var $        = __webpack_require__(5)
+	  , setTag   = __webpack_require__(14).set
+	  , uid      = __webpack_require__(17)
+	  , shared   = __webpack_require__(16)
+	  , $def     = __webpack_require__(18)
+	  , $redef   = __webpack_require__(19)
+	  , keyOf    = __webpack_require__(20)
+	  , enumKeys = __webpack_require__(21)
+	  , assertObject = __webpack_require__(22).obj
 	  , ObjectProto = Object.prototype
 	  , DESC     = $.DESC
 	  , has      = $.has
@@ -1617,7 +1130,7 @@
 	  , getDesc  = $.getDesc
 	  , setDesc  = $.setDesc
 	  , desc     = $.desc
-	  , $names   = __webpack_require__(10)
+	  , $names   = __webpack_require__(23)
 	  , getNames = $names.get
 	  , toObject = $.toObject
 	  , $Symbol  = $.g.Symbol
@@ -1757,7 +1270,7 @@
 	    'hasInstance,isConcatSpreadable,iterator,match,replace,search,' +
 	    'species,split,toPrimitive,toStringTag,unscopables'
 	  ).split(','), function(it){
-	    var sym = __webpack_require__(25)(it);
+	    var sym = __webpack_require__(15)(it);
 	    symbolStatics[it] = useNative ? sym : wrap(sym);
 	  }
 	);
@@ -1791,11 +1304,11 @@
 	setTag($.g.JSON, 'JSON', true);
 
 /***/ },
-/* 24 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $        = __webpack_require__(3)
-	  , TAG      = __webpack_require__(25)('toStringTag')
+	var $        = __webpack_require__(5)
+	  , TAG      = __webpack_require__(15)('toStringTag')
 	  , toString = {}.toString;
 	function cof(it){
 	  return toString.call(it).slice(8, -1);
@@ -1811,21 +1324,21 @@
 	module.exports = cof;
 
 /***/ },
-/* 25 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var global = __webpack_require__(3).g
-	  , store  = __webpack_require__(26)('wks');
+	var global = __webpack_require__(5).g
+	  , store  = __webpack_require__(16)('wks');
 	module.exports = function(name){
 	  return store[name] || (store[name] =
-	    global.Symbol && global.Symbol[name] || __webpack_require__(27).safe('Symbol.' + name));
+	    global.Symbol && global.Symbol[name] || __webpack_require__(17).safe('Symbol.' + name));
 	};
 
 /***/ },
-/* 26 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $      = __webpack_require__(3)
+	var $      = __webpack_require__(5)
 	  , SHARED = '__core-js_shared__'
 	  , store  = $.g[SHARED] || ($.g[SHARED] = {});
 	module.exports = function(key){
@@ -1833,27 +1346,80 @@
 	};
 
 /***/ },
-/* 27 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var sid = 0;
 	function uid(key){
 	  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++sid + Math.random()).toString(36));
 	}
-	uid.safe = __webpack_require__(3).g.Symbol || uid;
+	uid.safe = __webpack_require__(5).g.Symbol || uid;
 	module.exports = uid;
 
 /***/ },
-/* 28 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(3).hide;
+	var $          = __webpack_require__(5)
+	  , global     = $.g
+	  , core       = $.core
+	  , isFunction = $.isFunction;
+	function ctx(fn, that){
+	  return function(){
+	    return fn.apply(that, arguments);
+	  };
+	}
+	// type bitmap
+	$def.F = 1;  // forced
+	$def.G = 2;  // global
+	$def.S = 4;  // static
+	$def.P = 8;  // proto
+	$def.B = 16; // bind
+	$def.W = 32; // wrap
+	function $def(type, name, source){
+	  var key, own, out, exp
+	    , isGlobal = type & $def.G
+	    , isProto  = type & $def.P
+	    , target   = isGlobal ? global : type & $def.S
+	        ? global[name] : (global[name] || {}).prototype
+	    , exports  = isGlobal ? core : core[name] || (core[name] = {});
+	  if(isGlobal)source = name;
+	  for(key in source){
+	    // contains in native
+	    own = !(type & $def.F) && target && key in target;
+	    if(own && key in exports)continue;
+	    // export native or passed
+	    out = own ? target[key] : source[key];
+	    // prevent global pollution for namespaces
+	    if(isGlobal && !isFunction(target[key]))exp = source[key];
+	    // bind timers to global for call from export context
+	    else if(type & $def.B && own)exp = ctx(out, global);
+	    // wrap global constructors for prevent change them in library
+	    else if(type & $def.W && target[key] == out)!function(C){
+	      exp = function(param){
+	        return this instanceof C ? new C(param) : C(param);
+	      };
+	      exp.prototype = C.prototype;
+	    }(out);
+	    else exp = isProto && isFunction(out) ? ctx(Function.call, out) : out;
+	    // export
+	    exports[key] = exp;
+	    if(isProto)(exports.prototype || (exports.prototype = {}))[key] = out;
+	  }
+	}
+	module.exports = $def;
 
 /***/ },
-/* 29 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $ = __webpack_require__(3);
+	module.exports = __webpack_require__(5).hide;
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(5);
 	module.exports = function(object, el){
 	  var O      = $.toObject(object)
 	    , keys   = $.getKeys(O)
@@ -1864,10 +1430,10 @@
 	};
 
 /***/ },
-/* 30 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $ = __webpack_require__(3);
+	var $ = __webpack_require__(5);
 	module.exports = function(it){
 	  var keys       = $.getKeys(it)
 	    , getDesc    = $.getDesc
@@ -1879,10 +1445,10 @@
 	};
 
 /***/ },
-/* 31 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $ = __webpack_require__(3);
+	var $ = __webpack_require__(5);
 	function assert(condition, msg1, msg2){
 	  if(!condition)throw TypeError(msg2 ? msg1 + msg2 : msg1);
 	}
@@ -1902,31 +1468,56 @@
 	module.exports = assert;
 
 /***/ },
-/* 32 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(33), __esModule: true };
+	// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
+	var $ = __webpack_require__(5)
+	  , toString = {}.toString
+	  , getNames = $.getNames;
+	
+	var windowNames = typeof window == 'object' && Object.getOwnPropertyNames
+	  ? Object.getOwnPropertyNames(window) : [];
+	
+	function getWindowNames(it){
+	  try {
+	    return getNames(it);
+	  } catch(e){
+	    return windowNames.slice();
+	  }
+	}
+	
+	module.exports.get = function getOwnPropertyNames(it){
+	  if(windowNames && toString.call(it) == '[object Window]')return getWindowNames(it);
+	  return getNames($.toObject(it));
+	};
 
 /***/ },
-/* 33 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(34);
-	__webpack_require__(38);
-	module.exports = __webpack_require__(25)('iterator');
+	module.exports = { "default": __webpack_require__(25), __esModule: true };
 
 /***/ },
-/* 34 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var set   = __webpack_require__(3).set
-	  , $at   = __webpack_require__(35)(true)
-	  , ITER  = __webpack_require__(27).safe('iter')
-	  , $iter = __webpack_require__(36)
+	__webpack_require__(26);
+	__webpack_require__(30);
+	module.exports = __webpack_require__(15)('iterator');
+
+/***/ },
+/* 26 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var set   = __webpack_require__(5).set
+	  , $at   = __webpack_require__(27)(true)
+	  , ITER  = __webpack_require__(17).safe('iter')
+	  , $iter = __webpack_require__(28)
 	  , step  = $iter.step;
 	
 	// 21.1.3.27 String.prototype[@@iterator]()
-	__webpack_require__(37)(String, 'String', function(iterated){
+	__webpack_require__(29)(String, 'String', function(iterated){
 	  set(this, ITER, {o: String(iterated), i: 0});
 	// 21.1.5.2.1 %StringIteratorPrototype%.next()
 	}, function(){
@@ -1941,12 +1532,12 @@
 	});
 
 /***/ },
-/* 35 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// true  -> String#at
 	// false -> String#codePointAt
-	var $ = __webpack_require__(3);
+	var $ = __webpack_require__(5);
 	module.exports = function(TO_STRING){
 	  return function(that, pos){
 	    var s = String($.assertDefined(that))
@@ -1963,18 +1554,18 @@
 	};
 
 /***/ },
-/* 36 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var $                 = __webpack_require__(3)
-	  , cof               = __webpack_require__(24)
+	var $                 = __webpack_require__(5)
+	  , cof               = __webpack_require__(14)
 	  , classof           = cof.classof
-	  , assert            = __webpack_require__(31)
+	  , assert            = __webpack_require__(22)
 	  , assertObject      = assert.obj
-	  , SYMBOL_ITERATOR   = __webpack_require__(25)('iterator')
+	  , SYMBOL_ITERATOR   = __webpack_require__(15)('iterator')
 	  , FF_ITERATOR       = '@@iterator'
-	  , Iterators         = __webpack_require__(26)('iterators')
+	  , Iterators         = __webpack_require__(16)('iterators')
 	  , IteratorPrototype = {};
 	// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
 	setIterator(IteratorPrototype, $.that);
@@ -2017,15 +1608,15 @@
 	};
 
 /***/ },
-/* 37 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $def            = __webpack_require__(9)
-	  , $redef          = __webpack_require__(28)
-	  , $               = __webpack_require__(3)
-	  , cof             = __webpack_require__(24)
-	  , $iter           = __webpack_require__(36)
-	  , SYMBOL_ITERATOR = __webpack_require__(25)('iterator')
+	var $def            = __webpack_require__(18)
+	  , $redef          = __webpack_require__(19)
+	  , $               = __webpack_require__(5)
+	  , cof             = __webpack_require__(14)
+	  , $iter           = __webpack_require__(28)
+	  , SYMBOL_ITERATOR = __webpack_require__(15)('iterator')
 	  , FF_ITERATOR     = '@@iterator'
 	  , KEYS            = 'keys'
 	  , VALUES          = 'values'
@@ -2072,13 +1663,13 @@
 	};
 
 /***/ },
-/* 38 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(39);
-	var $           = __webpack_require__(3)
-	  , Iterators   = __webpack_require__(36).Iterators
-	  , ITERATOR    = __webpack_require__(25)('iterator')
+	__webpack_require__(31);
+	var $           = __webpack_require__(5)
+	  , Iterators   = __webpack_require__(28).Iterators
+	  , ITERATOR    = __webpack_require__(15)('iterator')
 	  , ArrayValues = Iterators.Array
 	  , NL          = $.g.NodeList
 	  , HTC         = $.g.HTMLCollection
@@ -2091,13 +1682,13 @@
 	Iterators.NodeList = Iterators.HTMLCollection = ArrayValues;
 
 /***/ },
-/* 39 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $          = __webpack_require__(3)
-	  , setUnscope = __webpack_require__(40)
-	  , ITER       = __webpack_require__(27).safe('iter')
-	  , $iter      = __webpack_require__(36)
+	var $          = __webpack_require__(5)
+	  , setUnscope = __webpack_require__(32)
+	  , ITER       = __webpack_require__(17).safe('iter')
+	  , $iter      = __webpack_require__(28)
 	  , step       = $iter.step
 	  , Iterators  = $iter.Iterators;
 	
@@ -2105,7 +1696,7 @@
 	// 22.1.3.13 Array.prototype.keys()
 	// 22.1.3.29 Array.prototype.values()
 	// 22.1.3.30 Array.prototype[@@iterator]()
-	__webpack_require__(37)(Array, 'Array', function(iterated, kind){
+	__webpack_require__(29)(Array, 'Array', function(iterated, kind){
 	  $.set(this, ITER, {o: $.toObject(iterated), i: 0, k: kind});
 	// 22.1.5.2.1 %ArrayIteratorPrototype%.next()
 	}, function(){
@@ -2130,78 +1721,78 @@
 	setUnscope('entries');
 
 /***/ },
-/* 40 */
+/* 32 */
 /***/ function(module, exports) {
 
 	module.exports = function(){ /* empty */ };
 
 /***/ },
-/* 41 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(42), __esModule: true };
+	module.exports = { "default": __webpack_require__(34), __esModule: true };
 
 /***/ },
-/* 42 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $ = __webpack_require__(3);
+	var $ = __webpack_require__(5);
 	module.exports = function create(P, D){
 	  return $.create(P, D);
 	};
 
 /***/ },
-/* 43 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(44), __esModule: true };
+	module.exports = { "default": __webpack_require__(36), __esModule: true };
 
 /***/ },
-/* 44 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(45);
-	__webpack_require__(34);
+	__webpack_require__(37);
+	__webpack_require__(26);
+	__webpack_require__(30);
 	__webpack_require__(38);
-	__webpack_require__(46);
-	module.exports = __webpack_require__(3).core.Promise;
+	module.exports = __webpack_require__(5).core.Promise;
 
 /***/ },
-/* 45 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	// 19.1.3.6 Object.prototype.toString()
-	var cof = __webpack_require__(24)
+	var cof = __webpack_require__(14)
 	  , tmp = {};
-	tmp[__webpack_require__(25)('toStringTag')] = 'z';
-	if(__webpack_require__(3).FW && cof(tmp) != 'z'){
-	  __webpack_require__(28)(Object.prototype, 'toString', function toString(){
+	tmp[__webpack_require__(15)('toStringTag')] = 'z';
+	if(__webpack_require__(5).FW && cof(tmp) != 'z'){
+	  __webpack_require__(19)(Object.prototype, 'toString', function toString(){
 	    return '[object ' + cof.classof(this) + ']';
 	  }, true);
 	}
 
 /***/ },
-/* 46 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var $        = __webpack_require__(3)
-	  , ctx      = __webpack_require__(48)
-	  , cof      = __webpack_require__(24)
-	  , $def     = __webpack_require__(9)
-	  , assert   = __webpack_require__(31)
-	  , forOf    = __webpack_require__(49)
-	  , setProto = __webpack_require__(51).set
-	  , same     = __webpack_require__(47)
-	  , species  = __webpack_require__(52)
-	  , SPECIES  = __webpack_require__(25)('species')
-	  , RECORD   = __webpack_require__(27).safe('record')
+	var $        = __webpack_require__(5)
+	  , ctx      = __webpack_require__(40)
+	  , cof      = __webpack_require__(14)
+	  , $def     = __webpack_require__(18)
+	  , assert   = __webpack_require__(22)
+	  , forOf    = __webpack_require__(41)
+	  , setProto = __webpack_require__(43).set
+	  , same     = __webpack_require__(39)
+	  , species  = __webpack_require__(44)
+	  , SPECIES  = __webpack_require__(15)('species')
+	  , RECORD   = __webpack_require__(17).safe('record')
 	  , PROMISE  = 'Promise'
 	  , global   = $.g
 	  , process  = global.process
 	  , isNode   = cof(process) == 'process'
-	  , asap     = process && process.nextTick || __webpack_require__(53).set
+	  , asap     = process && process.nextTick || __webpack_require__(45).set
 	  , P        = global[PROMISE]
 	  , isFunction     = $.isFunction
 	  , isObject       = $.isObject
@@ -2371,7 +1962,7 @@
 	      $reject.call(record, err);
 	    }
 	  };
-	  __webpack_require__(56)(P.prototype, {
+	  __webpack_require__(48)(P.prototype, {
 	    // 25.4.5.3 Promise.prototype.then(onFulfilled, onRejected)
 	    then: function then(onFulfilled, onRejected){
 	      var S = assertObject(assertObject(this).constructor)[SPECIES];
@@ -2416,7 +2007,7 @@
 	      ? x : new this(function(res){ res(x); });
 	  }
 	});
-	$def($def.S + $def.F * !(useNative && __webpack_require__(57)(function(iter){
+	$def($def.S + $def.F * !(useNative && __webpack_require__(49)(function(iter){
 	  P.all(iter)['catch'](function(){});
 	})), PROMISE, {
 	  // 25.4.4.1 Promise.all(iterable)
@@ -2448,7 +2039,7 @@
 	});
 
 /***/ },
-/* 47 */
+/* 39 */
 /***/ function(module, exports) {
 
 	module.exports = Object.is || function is(x, y){
@@ -2456,11 +2047,11 @@
 	};
 
 /***/ },
-/* 48 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Optional / simple context binding
-	var assertFunction = __webpack_require__(31).fn;
+	var assertFunction = __webpack_require__(22).fn;
 	module.exports = function(fn, that, length){
 	  assertFunction(fn);
 	  if(~length && that === undefined)return fn;
@@ -2480,12 +2071,12 @@
 	};
 
 /***/ },
-/* 49 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var ctx  = __webpack_require__(48)
-	  , get  = __webpack_require__(36).get
-	  , call = __webpack_require__(50);
+	var ctx  = __webpack_require__(40)
+	  , get  = __webpack_require__(28).get
+	  , call = __webpack_require__(42);
 	module.exports = function(iterable, entries, fn, that){
 	  var iterator = get(iterable)
 	    , f        = ctx(fn, that, entries ? 2 : 1)
@@ -2498,10 +2089,10 @@
 	};
 
 /***/ },
-/* 50 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var assertObject = __webpack_require__(31).obj;
+	var assertObject = __webpack_require__(22).obj;
 	function close(iterator){
 	  var ret = iterator['return'];
 	  if(ret !== undefined)assertObject(ret.call(iterator));
@@ -2518,13 +2109,13 @@
 	module.exports = call;
 
 /***/ },
-/* 51 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Works with __proto__ only. Old v8 can't work with null proto objects.
 	/* eslint-disable no-proto */
-	var $      = __webpack_require__(3)
-	  , assert = __webpack_require__(31);
+	var $      = __webpack_require__(5)
+	  , assert = __webpack_require__(22);
 	function check(O, proto){
 	  assert.obj(O);
 	  assert(proto === null || $.isObject(proto), proto, ": can't set as prototype!");
@@ -2533,7 +2124,7 @@
 	  set: Object.setPrototypeOf || ('__proto__' in {} // eslint-disable-line
 	    ? function(buggy, set){
 	        try {
-	          set = __webpack_require__(48)(Function.call, $.getDesc(Object.prototype, '__proto__').set, 2);
+	          set = __webpack_require__(40)(Function.call, $.getDesc(Object.prototype, '__proto__').set, 2);
 	          set({}, []);
 	        } catch(e){ buggy = true; }
 	        return function setPrototypeOf(O, proto){
@@ -2548,11 +2139,11 @@
 	};
 
 /***/ },
-/* 52 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $       = __webpack_require__(3)
-	  , SPECIES = __webpack_require__(25)('species');
+	var $       = __webpack_require__(5)
+	  , SPECIES = __webpack_require__(15)('species');
 	module.exports = function(C){
 	  if($.DESC && !(SPECIES in C))$.setDesc(C, SPECIES, {
 	    configurable: true,
@@ -2561,15 +2152,15 @@
 	};
 
 /***/ },
-/* 53 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var $      = __webpack_require__(3)
-	  , ctx    = __webpack_require__(48)
-	  , cof    = __webpack_require__(24)
-	  , invoke = __webpack_require__(54)
-	  , cel    = __webpack_require__(55)
+	var $      = __webpack_require__(5)
+	  , ctx    = __webpack_require__(40)
+	  , cof    = __webpack_require__(14)
+	  , invoke = __webpack_require__(46)
+	  , cel    = __webpack_require__(47)
 	  , global             = $.g
 	  , isFunction         = $.isFunction
 	  , html               = $.html
@@ -2645,7 +2236,7 @@
 	};
 
 /***/ },
-/* 54 */
+/* 46 */
 /***/ function(module, exports) {
 
 	// Fast apply
@@ -2669,10 +2260,10 @@
 	};
 
 /***/ },
-/* 55 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $        = __webpack_require__(3)
+	var $        = __webpack_require__(5)
 	  , document = $.g.document
 	  , isObject = $.isObject
 	  // in old IE typeof document.createElement is 'object'
@@ -2682,20 +2273,20 @@
 	};
 
 /***/ },
-/* 56 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $redef = __webpack_require__(28);
+	var $redef = __webpack_require__(19);
 	module.exports = function(target, src){
 	  for(var key in src)$redef(target, key, src[key]);
 	  return target;
 	};
 
 /***/ },
-/* 57 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var SYMBOL_ITERATOR = __webpack_require__(25)('iterator')
+	var SYMBOL_ITERATOR = __webpack_require__(15)('iterator')
 	  , SAFE_CLOSING    = false;
 	try {
 	  var riter = [7][SYMBOL_ITERATOR]();
@@ -2716,7 +2307,7 @@
 	};
 
 /***/ },
-/* 58 */
+/* 50 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2728,311 +2319,111 @@
 	exports.__esModule = true;
 
 /***/ },
-/* 59 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _createClass = __webpack_require__(16)['default'];
+	var _inherits = __webpack_require__(52)['default'];
 	
-	var _classCallCheck = __webpack_require__(17)['default'];
+	var _get = __webpack_require__(53)['default'];
 	
-	var _Object$defineProperty = __webpack_require__(1)['default'];
+	var _createClass = __webpack_require__(2)['default'];
 	
-	_Object$defineProperty(exports, '__esModule', {
+	var _classCallCheck = __webpack_require__(7)['default'];
+	
+	var _regeneratorRuntime = __webpack_require__(8)['default'];
+	
+	var _interopRequireDefault = __webpack_require__(57)['default'];
+	
+	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
 	
-	var Grammar = (function () {
-	    function Grammar() {
-	        _classCallCheck(this, Grammar);
+	var _eventemitter3 = __webpack_require__(58);
 	
-	        this._toCompile = ['columns', 'aggregate', 'from', 'wheres', 'orders', 'groups', 'limit', 'offset'];
-	    }
+	var _eventemitter32 = _interopRequireDefault(_eventemitter3);
 	
-	    _createClass(Grammar, [{
-	        key: 'compileSelect',
-	        value: function compileSelect(query) {
-	            return this.compileComponents(query);
-	        }
-	    }, {
-	        key: 'compileInsert',
-	        value: function compileInsert(query) {
-	            return this.compileComponents(query);
-	        }
-	    }, {
-	        key: 'compileInsertGetId',
-	        value: function compileInsertGetId(query) {
-	            return this.compileComponents(query);
-	        }
-	    }, {
-	        key: 'compileUpdate',
-	        value: function compileUpdate(query) {
-	            return this.compileComponents(query);
-	        }
-	    }, {
-	        key: 'compileDestroy',
-	        value: function compileDestroy(query) {
-	            return this.compileComponents(query);
-	        }
-	    }, {
-	        key: 'compileComponents',
-	        value: function compileComponents(query) {
-	            var name, ucname;
-	            var result = {};
-	
-	            for (var i = 0; i < this._toCompile.length; i++) {
-	                name = this._toCompile[i];
-	                ucname = name.charAt(0).toUpperCase() + name.substring(1);
-	                result[name] = this['compile' + ucname](query.getComponent(name));
-	            }
-	            return result;
-	        }
-	    }, {
-	        key: 'compileColumns',
-	        value: function compileColumns(value) {
-	            return value === null ? undefined : value;
-	        }
-	    }, {
-	        key: 'compileAggregate',
-	        value: function compileAggregate(value) {
-	            return value === null ? undefined : value;
-	        }
-	    }, {
-	        key: 'compileFrom',
-	        value: function compileFrom(value) {
-	            return value === null ? undefined : value;
-	        }
-	    }, {
-	        key: 'compileWheres',
-	        value: function compileWheres(value) {
-	            return value === null ? undefined : value;
-	        }
-	    }, {
-	        key: 'compileOrders',
-	        value: function compileOrders(value) {
-	            return value === null ? undefined : value;
-	        }
-	    }, {
-	        key: 'compileLimit',
-	        value: function compileLimit(value) {
-	            return value === null ? undefined : value;
-	        }
-	    }, {
-	        key: 'compileOffset',
-	        value: function compileOffset(value) {
-	            return value === null ? undefined : value;
-	        }
-	    }, {
-	        key: 'compileGroups',
-	        value: function compileGroups(value) {
-	            return value === null ? undefined : value;
-	        }
-	    }]);
-	
-	    return Grammar;
-	})();
-	
-	exports['default'] = Grammar;
-	module.exports = exports['default'];
-
-/***/ },
-/* 60 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var _createClass = __webpack_require__(16)["default"];
-	
-	var _classCallCheck = __webpack_require__(17)["default"];
-	
-	var _Object$defineProperty = __webpack_require__(1)["default"];
-	
-	var _regeneratorRuntime = __webpack_require__(18)["default"];
-	
-	_Object$defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var Processor = (function () {
-	    function Processor() {
-	        _classCallCheck(this, Processor);
-	    }
-	
-	    _createClass(Processor, [{
-	        key: "processSelect",
-	        value: function processSelect(query, result) {
-	            return _regeneratorRuntime.async(function processSelect$(context$2$0) {
-	                while (1) switch (context$2$0.prev = context$2$0.next) {
-	                    case 0:
-	                        return context$2$0.abrupt("return", result);
-	
-	                    case 1:
-	                    case "end":
-	                        return context$2$0.stop();
-	                }
-	            }, null, this);
-	        }
-	    }, {
-	        key: "processInsert",
-	        value: function processInsert(query, result) {
-	            return _regeneratorRuntime.async(function processInsert$(context$2$0) {
-	                while (1) switch (context$2$0.prev = context$2$0.next) {
-	                    case 0:
-	                        return context$2$0.abrupt("return", result);
-	
-	                    case 1:
-	                    case "end":
-	                        return context$2$0.stop();
-	                }
-	            }, null, this);
-	        }
-	    }, {
-	        key: "processInsertGetId",
-	        value: function processInsertGetId(query, sql, values) {
-	            return _regeneratorRuntime.async(function processInsertGetId$(context$2$0) {
-	                while (1) switch (context$2$0.prev = context$2$0.next) {
-	                    case 0:
-	                        context$2$0.next = 2;
-	                        return _regeneratorRuntime.awrap(query.getConnection().insert(sql, values));
-	
-	                    case 2:
-	                        return context$2$0.abrupt("return", context$2$0.sent);
-	
-	                    case 3:
-	                    case "end":
-	                        return context$2$0.stop();
-	                }
-	            }, null, this);
-	        }
-	    }, {
-	        key: "processUpdate",
-	        value: function processUpdate(query, result) {
-	            return _regeneratorRuntime.async(function processUpdate$(context$2$0) {
-	                while (1) switch (context$2$0.prev = context$2$0.next) {
-	                    case 0:
-	                        return context$2$0.abrupt("return", result);
-	
-	                    case 1:
-	                    case "end":
-	                        return context$2$0.stop();
-	                }
-	            }, null, this);
-	        }
-	    }, {
-	        key: "processDelete",
-	        value: function processDelete(query, result) {
-	            return _regeneratorRuntime.async(function processDelete$(context$2$0) {
-	                while (1) switch (context$2$0.prev = context$2$0.next) {
-	                    case 0:
-	                        return context$2$0.abrupt("return", result);
-	
-	                    case 1:
-	                    case "end":
-	                        return context$2$0.stop();
-	                }
-	            }, null, this);
-	        }
-	    }]);
-	
-	    return Processor;
-	})();
-	
-	exports["default"] = Processor;
-	module.exports = exports["default"];
-
-/***/ },
-/* 61 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _inherits = __webpack_require__(62)['default'];
-	
-	var _get = __webpack_require__(63)['default'];
-	
-	var _createClass = __webpack_require__(16)['default'];
-	
-	var _classCallCheck = __webpack_require__(17)['default'];
-	
-	var _Object$defineProperty = __webpack_require__(1)['default'];
-	
-	var _regeneratorRuntime = __webpack_require__(18)['default'];
-	
-	var _interopRequireDefault = __webpack_require__(64)['default'];
-	
-	_Object$defineProperty(exports, '__esModule', {
-	    value: true
-	});
-	
-	var _utilsEventEmitter = __webpack_require__(65);
-	
-	var _utilsEventEmitter2 = _interopRequireDefault(_utilsEventEmitter);
-	
-	var _queryGrammarGrammar = __webpack_require__(59);
-	
-	var _queryGrammarGrammar2 = _interopRequireDefault(_queryGrammarGrammar);
-	
-	var _queryProcessorProcessor = __webpack_require__(60);
+	var _queryProcessorProcessor = __webpack_require__(1);
 	
 	var _queryProcessorProcessor2 = _interopRequireDefault(_queryProcessorProcessor);
 	
-	var _queryBuilder = __webpack_require__(15);
-	
-	var _queryBuilder2 = _interopRequireDefault(_queryBuilder);
-	
 	var Connection = (function (_EventEmitter) {
-	    function Connection(pdo) {
-	        var database = arguments[1] === undefined ? '' : arguments[1];
-	        var tablePrefix = arguments[2] === undefined ? '' : arguments[2];
-	        var config = arguments[3] === undefined ? {} : arguments[3];
+	    function Connection() {
+	        var config = arguments[0] === undefined ? {} : arguments[0];
 	
 	        _classCallCheck(this, Connection);
 	
 	        _get(Object.getPrototypeOf(Connection.prototype), 'constructor', this).call(this);
-	        this._pdo = null;
-	        this._database = null;
-	        this._tablePrefix = null;
 	        this._config = null;
 	        this._reconnector = null;
-	        this._queryGrammar = null;
+	        this._adapter = null;
 	        this._postProcessor = null;
-	        this._pdo = pdo;
-	        this._database = database;
-	        this._tablePrefix = tablePrefix;
 	        this._config = config;
 	
-	        this.useDefaultQueryGrammar();
 	        this.useDefaultPostProcessor();
 	    }
 	
 	    _inherits(Connection, _EventEmitter);
 	
 	    _createClass(Connection, [{
-	        key: 'table',
-	        value: function table(_table) {
-	            var query = new _queryBuilder2['default'](this, this.getQueryGrammar(), this.getPostProcessor());
-	            return query.from(_table);
+	        key: 'useDefaultPostProcessor',
+	        value: function useDefaultPostProcessor() {
+	            this._postProcessor = new _queryProcessorProcessor2['default']();
+	            return this;
+	        }
+	    }, {
+	        key: 'setReconnector',
+	
+	        // Getter and setter
+	        value: function setReconnector() {
+	            var reconnector = arguments[0] === undefined ? null : arguments[0];
+	
+	            this._reconnector = reconnector;
+	            return this;
+	        }
+	    }, {
+	        key: 'setConfig',
+	        value: function setConfig(name, value) {
+	            this._config[name] = value;
+	            return this;
+	        }
+	    }, {
+	        key: 'getPostProcessor',
+	        value: function getPostProcessor() {
+	            return this._postProcessor;
+	        }
+	    }, {
+	        key: 'getConfig',
+	        value: function getConfig() {
+	            var name = arguments[0] === undefined ? '' : arguments[0];
+	
+	            return typeof this._config[name] === 'undefined' ? null : this._config[name];
 	        }
 	    }, {
 	        key: 'select',
+	
+	        // Redirect calls to adapter
 	        value: function select(query, useReadPdo) {
 	            return _regeneratorRuntime.async(function select$(context$2$0) {
 	                while (1) switch (context$2$0.prev = context$2$0.next) {
 	                    case 0:
-	                        context$2$0.next = 2;
+	                        context$2$0.t0 = _regeneratorRuntime;
+	                        context$2$0.t1 = this._postProcessor;
+	                        context$2$0.t2 = query;
+	                        context$2$0.next = 5;
 	                        return _regeneratorRuntime.awrap(this.selectingStatement(query, useReadPdo));
 	
-	                    case 2:
-	                        context$2$0.t0 = context$2$0.sent;
-	                        context$2$0.t1 = this._postProcessor.processSelect(query, context$2$0.t0);
-	                        context$2$0.next = 6;
-	                        return _regeneratorRuntime.awrap(context$2$0.t1);
+	                    case 5:
+	                        context$2$0.t3 = context$2$0.sent;
+	                        context$2$0.t4 = context$2$0.t1.processSelect.call(context$2$0.t1, context$2$0.t2, context$2$0.t3);
+	                        context$2$0.next = 9;
+	                        return context$2$0.t0.awrap.call(context$2$0.t0, context$2$0.t4);
 	
-	                    case 6:
+	                    case 9:
 	                        return context$2$0.abrupt('return', context$2$0.sent);
 	
-	                    case 7:
+	                    case 10:
 	                    case 'end':
 	                        return context$2$0.stop();
 	                }
@@ -3044,19 +2435,22 @@
 	            return _regeneratorRuntime.async(function insert$(context$2$0) {
 	                while (1) switch (context$2$0.prev = context$2$0.next) {
 	                    case 0:
-	                        context$2$0.next = 2;
+	                        context$2$0.t0 = _regeneratorRuntime;
+	                        context$2$0.t1 = this._postProcessor;
+	                        context$2$0.t2 = query;
+	                        context$2$0.next = 5;
 	                        return _regeneratorRuntime.awrap(this.insertingStatement(query, data));
 	
-	                    case 2:
-	                        context$2$0.t0 = context$2$0.sent;
-	                        context$2$0.t1 = this._postProcessor.processInsert(query, context$2$0.t0);
-	                        context$2$0.next = 6;
-	                        return _regeneratorRuntime.awrap(context$2$0.t1);
+	                    case 5:
+	                        context$2$0.t3 = context$2$0.sent;
+	                        context$2$0.t4 = context$2$0.t1.processInsert.call(context$2$0.t1, context$2$0.t2, context$2$0.t3);
+	                        context$2$0.next = 9;
+	                        return context$2$0.t0.awrap.call(context$2$0.t0, context$2$0.t4);
 	
-	                    case 6:
+	                    case 9:
 	                        return context$2$0.abrupt('return', context$2$0.sent);
 	
-	                    case 7:
+	                    case 10:
 	                    case 'end':
 	                        return context$2$0.stop();
 	                }
@@ -3068,19 +2462,22 @@
 	            return _regeneratorRuntime.async(function update$(context$2$0) {
 	                while (1) switch (context$2$0.prev = context$2$0.next) {
 	                    case 0:
-	                        context$2$0.next = 2;
+	                        context$2$0.t0 = _regeneratorRuntime;
+	                        context$2$0.t1 = this._postProcessor;
+	                        context$2$0.t2 = query;
+	                        context$2$0.next = 5;
 	                        return _regeneratorRuntime.awrap(this.updatingStatement(query, data));
 	
-	                    case 2:
-	                        context$2$0.t0 = context$2$0.sent;
-	                        context$2$0.t1 = this._postProcessor.processUpdate(query, context$2$0.t0);
-	                        context$2$0.next = 6;
-	                        return _regeneratorRuntime.awrap(context$2$0.t1);
+	                    case 5:
+	                        context$2$0.t3 = context$2$0.sent;
+	                        context$2$0.t4 = context$2$0.t1.processUpdate.call(context$2$0.t1, context$2$0.t2, context$2$0.t3);
+	                        context$2$0.next = 9;
+	                        return context$2$0.t0.awrap.call(context$2$0.t0, context$2$0.t4);
 	
-	                    case 6:
+	                    case 9:
 	                        return context$2$0.abrupt('return', context$2$0.sent);
 	
-	                    case 7:
+	                    case 10:
 	                    case 'end':
 	                        return context$2$0.stop();
 	                }
@@ -3092,66 +2489,26 @@
 	            return _regeneratorRuntime.async(function destroy$(context$2$0) {
 	                while (1) switch (context$2$0.prev = context$2$0.next) {
 	                    case 0:
-	                        context$2$0.next = 2;
+	                        context$2$0.t0 = _regeneratorRuntime;
+	                        context$2$0.t1 = this._postProcessor;
+	                        context$2$0.t2 = query;
+	                        context$2$0.next = 5;
 	                        return _regeneratorRuntime.awrap(this.destroyingStatement(query));
 	
-	                    case 2:
-	                        context$2$0.t0 = context$2$0.sent;
-	                        context$2$0.t1 = this._postProcessor.processDestroy(query, context$2$0.t0);
-	                        context$2$0.next = 6;
-	                        return _regeneratorRuntime.awrap(context$2$0.t1);
+	                    case 5:
+	                        context$2$0.t3 = context$2$0.sent;
+	                        context$2$0.t4 = context$2$0.t1.processDestroy.call(context$2$0.t1, context$2$0.t2, context$2$0.t3);
+	                        context$2$0.next = 9;
+	                        return context$2$0.t0.awrap.call(context$2$0.t0, context$2$0.t4);
 	
-	                    case 6:
+	                    case 9:
 	                        return context$2$0.abrupt('return', context$2$0.sent);
 	
-	                    case 7:
+	                    case 10:
 	                    case 'end':
 	                        return context$2$0.stop();
 	                }
 	            }, null, this);
-	        }
-	    }, {
-	        key: 'setReconnector',
-	        value: function setReconnector() {
-	            var reconnector = arguments[0] === undefined ? null : arguments[0];
-	
-	            this._reconnector = reconnector;
-	            return this;
-	        }
-	    }, {
-	        key: 'getConfig',
-	        value: function getConfig() {
-	            var name = arguments[0] === undefined ? '' : arguments[0];
-	
-	            return typeof this._config[name] === 'undefined' ? null : this._config[name];
-	        }
-	    }, {
-	        key: 'setConfig',
-	        value: function setConfig(name, value) {
-	            this._config[name] = value;
-	            return this;
-	        }
-	    }, {
-	        key: 'useDefaultQueryGrammar',
-	        value: function useDefaultQueryGrammar() {
-	            this._queryGrammar = new _queryGrammarGrammar2['default']();
-	            return this;
-	        }
-	    }, {
-	        key: 'useDefaultPostProcessor',
-	        value: function useDefaultPostProcessor() {
-	            this._postProcessor = new _queryProcessorProcessor2['default']();
-	            return this;
-	        }
-	    }, {
-	        key: 'getQueryGrammar',
-	        value: function getQueryGrammar() {
-	            return this._queryGrammar;
-	        }
-	    }, {
-	        key: 'getPostProcessor',
-	        value: function getPostProcessor() {
-	            return this._postProcessor;
 	        }
 	    }, {
 	        key: 'connect',
@@ -3159,7 +2516,7 @@
 	            return _regeneratorRuntime.async(function connect$(context$2$0) {
 	                while (1) switch (context$2$0.prev = context$2$0.next) {
 	                    case 0:
-	                        throw 'This should be implemented by custom connection.';
+	                        throw '#connect(): This should be implemented by custom connection.';
 	
 	                    case 1:
 	                    case 'end':
@@ -3173,7 +2530,7 @@
 	            return _regeneratorRuntime.async(function disconnect$(context$2$0) {
 	                while (1) switch (context$2$0.prev = context$2$0.next) {
 	                    case 0:
-	                        throw 'This should be implemented by custom connection.';
+	                        throw '#disconnect(): This should be implemented by custom connection.';
 	
 	                    case 1:
 	                    case 'end':
@@ -3187,7 +2544,7 @@
 	            return _regeneratorRuntime.async(function selectingStatement$(context$2$0) {
 	                while (1) switch (context$2$0.prev = context$2$0.next) {
 	                    case 0:
-	                        throw 'This should be implemented by custom connection.';
+	                        throw '#selectingStatement(query): This should be implemented by custom connection.';
 	
 	                    case 1:
 	                    case 'end':
@@ -3201,7 +2558,7 @@
 	            return _regeneratorRuntime.async(function insertingStatement$(context$2$0) {
 	                while (1) switch (context$2$0.prev = context$2$0.next) {
 	                    case 0:
-	                        throw 'This should be implemented by custom connection.';
+	                        throw '#insertingStatement(query, data): This should be implemented by custom connection.';
 	
 	                    case 1:
 	                    case 'end':
@@ -3215,7 +2572,7 @@
 	            return _regeneratorRuntime.async(function updatingStatement$(context$2$0) {
 	                while (1) switch (context$2$0.prev = context$2$0.next) {
 	                    case 0:
-	                        throw 'This should be implemented by custom connection.';
+	                        throw '#updatingStatement(query, data): This should be implemented by custom connection.';
 	
 	                    case 1:
 	                    case 'end':
@@ -3229,7 +2586,7 @@
 	            return _regeneratorRuntime.async(function destroyingStatement$(context$2$0) {
 	                while (1) switch (context$2$0.prev = context$2$0.next) {
 	                    case 0:
-	                        throw 'This should be implemented by custom connection.';
+	                        throw '#destroyingStatement(query): This should be implemented by custom connection.';
 	
 	                    case 1:
 	                    case 'end':
@@ -3240,18 +2597,18 @@
 	    }]);
 	
 	    return Connection;
-	})(_utilsEventEmitter2['default']);
+	})(_eventemitter32['default']);
 	
 	exports['default'] = Connection;
 	module.exports = exports['default'];
 
 /***/ },
-/* 62 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	var _Object$create = __webpack_require__(41)["default"];
+	var _Object$create = __webpack_require__(33)["default"];
 	
 	exports["default"] = function (subClass, superClass) {
 	  if (typeof superClass !== "function" && superClass !== null) {
@@ -3272,12 +2629,12 @@
 	exports.__esModule = true;
 
 /***/ },
-/* 63 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	var _Object$getOwnPropertyDescriptor = __webpack_require__(11)["default"];
+	var _Object$getOwnPropertyDescriptor = __webpack_require__(54)["default"];
 	
 	exports["default"] = function get(_x, _x2, _x3) {
 	  var _again = true;
@@ -3288,6 +2645,7 @@
 	        receiver = _x3;
 	    desc = parent = getter = undefined;
 	    _again = false;
+	    if (object === null) object = Function.prototype;
 	
 	    var desc = _Object$getOwnPropertyDescriptor(object, property);
 	
@@ -3320,7 +2678,64 @@
 	exports.__esModule = true;
 
 /***/ },
-/* 64 */
+/* 54 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(55), __esModule: true };
+
+/***/ },
+/* 55 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(5);
+	__webpack_require__(56);
+	module.exports = function getOwnPropertyDescriptor(it, key){
+	  return $.getDesc(it, key);
+	};
+
+/***/ },
+/* 56 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $        = __webpack_require__(5)
+	  , $def     = __webpack_require__(18)
+	  , isObject = $.isObject
+	  , toObject = $.toObject;
+	$.each.call(('freeze,seal,preventExtensions,isFrozen,isSealed,isExtensible,' +
+	  'getOwnPropertyDescriptor,getPrototypeOf,keys,getOwnPropertyNames').split(',')
+	, function(KEY, ID){
+	  var fn     = ($.core.Object || {})[KEY] || Object[KEY]
+	    , forced = 0
+	    , method = {};
+	  method[KEY] = ID == 0 ? function freeze(it){
+	    return isObject(it) ? fn(it) : it;
+	  } : ID == 1 ? function seal(it){
+	    return isObject(it) ? fn(it) : it;
+	  } : ID == 2 ? function preventExtensions(it){
+	    return isObject(it) ? fn(it) : it;
+	  } : ID == 3 ? function isFrozen(it){
+	    return isObject(it) ? fn(it) : true;
+	  } : ID == 4 ? function isSealed(it){
+	    return isObject(it) ? fn(it) : true;
+	  } : ID == 5 ? function isExtensible(it){
+	    return isObject(it) ? fn(it) : false;
+	  } : ID == 6 ? function getOwnPropertyDescriptor(it, key){
+	    return fn(toObject(it), key);
+	  } : ID == 7 ? function getPrototypeOf(it){
+	    return fn(Object($.assertDefined(it)));
+	  } : ID == 8 ? function keys(it){
+	    return fn(toObject(it));
+	  } : __webpack_require__(23).get;
+	  try {
+	    fn('z');
+	  } catch(e){
+	    forced = 1;
+	  }
+	  $def($def.S + $def.F * forced, 'Object', method);
+	});
+
+/***/ },
+/* 57 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -3334,26 +2749,7 @@
 	exports.__esModule = true;
 
 /***/ },
-/* 65 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _Object$defineProperty = __webpack_require__(1)['default'];
-	
-	var _interopRequire = __webpack_require__(58)['default'];
-	
-	_Object$defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	var _eventemitter3 = __webpack_require__(66);
-	
-	exports['default'] = _interopRequire(_eventemitter3);
-	module.exports = exports['default'];
-
-/***/ },
-/* 66 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3621,42 +3017,52 @@
 
 
 /***/ },
-/* 67 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _createClass = __webpack_require__(16)['default'];
+	var _inherits = __webpack_require__(52)['default'];
 	
-	var _classCallCheck = __webpack_require__(17)['default'];
+	var _get = __webpack_require__(53)['default'];
 	
-	var _Object$defineProperty = __webpack_require__(1)['default'];
+	var _createClass = __webpack_require__(2)['default'];
 	
-	var _regeneratorRuntime = __webpack_require__(18)['default'];
+	var _classCallCheck = __webpack_require__(7)['default'];
 	
-	var _interopRequireDefault = __webpack_require__(64)['default'];
+	var _regeneratorRuntime = __webpack_require__(8)['default'];
 	
-	_Object$defineProperty(exports, '__esModule', {
+	var _interopRequireDefault = __webpack_require__(57)['default'];
+	
+	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
 	
-	var _UrlConnection = __webpack_require__(68);
+	var _eventemitter3 = __webpack_require__(58);
+	
+	var _eventemitter32 = _interopRequireDefault(_eventemitter3);
+	
+	var _UrlConnection = __webpack_require__(60);
 	
 	var _UrlConnection2 = _interopRequireDefault(_UrlConnection);
 	
-	var DatabaseManager = (function () {
+	var DatabaseManager = (function (_EventEmitter) {
 	    function DatabaseManager() {
 	        _classCallCheck(this, DatabaseManager);
+	
+	        _get(Object.getPrototypeOf(DatabaseManager.prototype), 'constructor', this).apply(this, arguments);
 	
 	        this._connections = {};
 	        this._configs = {};
 	        this._default = 'default';
-	        this._adapters = {
-	            url: function url(name, config) {
-	                return new _UrlConnection2['default'](null, config.database, config.prefix, config);
+	        this._drivers = {
+	            url: function url(config) {
+	                return new _UrlConnection2['default'](config);
 	            }
 	        };
 	    }
+	
+	    _inherits(DatabaseManager, _EventEmitter);
 	
 	    _createClass(DatabaseManager, [{
 	        key: 'connect',
@@ -3765,7 +3171,7 @@
 	                        driver = (config.driver || 'url').toLowerCase();
 	                        instance = null;
 	
-	                        if (!(typeof this._adapters[driver] === 'undefined')) {
+	                        if (!(typeof this._drivers[driver] === 'undefined')) {
 	                            context$2$0.next = 5;
 	                            break;
 	                        }
@@ -3773,7 +3179,7 @@
 	                        throw 'Unknown driver type ' + driver;
 	
 	                    case 5:
-	                        instance = this._adapters[driver](name, config);
+	                        instance = this._drivers[driver](config);
 	
 	                        context$2$0.next = 8;
 	                        return _regeneratorRuntime.awrap(instance.connect());
@@ -3868,9 +3274,9 @@
 	            this._configs[name] = config;
 	        }
 	    }, {
-	        key: 'addAdapter',
-	        value: function addAdapter(name, adapterFn) {
-	            this._adapters[name] = adapterFn;
+	        key: 'addDriver',
+	        value: function addDriver(name, driverFn) {
+	            this._drivers[name] = driverFn;
 	        }
 	    }, {
 	        key: 'getConfig',
@@ -3887,71 +3293,59 @@
 	    }]);
 	
 	    return DatabaseManager;
-	})();
+	})(_eventemitter32['default']);
 	
 	exports['default'] = new DatabaseManager();
 	module.exports = exports['default'];
 
 /***/ },
-/* 68 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _inherits = __webpack_require__(62)['default'];
+	var _inherits = __webpack_require__(52)['default'];
 	
-	var _createClass = __webpack_require__(16)['default'];
+	var _get = __webpack_require__(53)['default'];
 	
-	var _classCallCheck = __webpack_require__(17)['default'];
+	var _createClass = __webpack_require__(2)['default'];
 	
-	var _Object$defineProperty = __webpack_require__(1)['default'];
+	var _classCallCheck = __webpack_require__(7)['default'];
 	
-	var _regeneratorRuntime = __webpack_require__(18)['default'];
+	var _regeneratorRuntime = __webpack_require__(8)['default'];
 	
-	var _interopRequireDefault = __webpack_require__(64)['default'];
+	var _interopRequireDefault = __webpack_require__(57)['default'];
 	
-	_Object$defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
 	
-	var _qs = __webpack_require__(69);
+	var _qs = __webpack_require__(61);
 	
 	var _qs2 = _interopRequireDefault(_qs);
 	
-	var _queryGrammarUrlGrammar = __webpack_require__(74);
+	var _utilsHTTP = __webpack_require__(66);
 	
-	var _queryGrammarUrlGrammar2 = _interopRequireDefault(_queryGrammarUrlGrammar);
+	var _utilsHTTP2 = _interopRequireDefault(_utilsHTTP);
 	
-	var _queryProcessorUrlProcessor = __webpack_require__(75);
+	var _queryProcessorUrlProcessor = __webpack_require__(67);
 	
 	var _queryProcessorUrlProcessor2 = _interopRequireDefault(_queryProcessorUrlProcessor);
 	
-	var _Connection2 = __webpack_require__(61);
+	var _Connection2 = __webpack_require__(51);
 	
 	var _Connection3 = _interopRequireDefault(_Connection2);
-	
-	var _protocolHTTP = __webpack_require__(76);
-	
-	var _protocolHTTP2 = _interopRequireDefault(_protocolHTTP);
 	
 	var UrlConnection = (function (_Connection) {
 	    function UrlConnection() {
 	        _classCallCheck(this, UrlConnection);
 	
-	        if (_Connection != null) {
-	            _Connection.apply(this, arguments);
-	        }
+	        _get(Object.getPrototypeOf(UrlConnection.prototype), 'constructor', this).apply(this, arguments);
 	    }
 	
 	    _inherits(UrlConnection, _Connection);
 	
 	    _createClass(UrlConnection, [{
-	        key: 'useDefaultQueryGrammar',
-	        value: function useDefaultQueryGrammar() {
-	            this._queryGrammar = new _queryGrammarUrlGrammar2['default']();
-	            return this;
-	        }
-	    }, {
 	        key: 'useDefaultPostProcessor',
 	        value: function useDefaultPostProcessor() {
 	            this._postProcessor = new _queryProcessorUrlProcessor2['default']();
@@ -3980,31 +3374,54 @@
 	            }, null, this);
 	        }
 	    }, {
+	        key: '_buildQueryString',
+	
+	        // reformat a query to a url string that will obtain the post/get/delete request.
+	        value: function _buildQueryString(query) {
+	            var data = {};
+	            data._aggregate = query._aggregate === null ? undefined : query._aggregate;
+	            data._columns = query._columns === null ? undefined : query._columns.join(',');
+	            data._wheres = query._wheres === null ? undefined : query._wheres;
+	            data._limit = query._limit === null ? undefined : query._limit;
+	            data._offset = query._offset === null ? undefined : query._offset;
+	            data._orders = query._orders === null ? undefined : query._orders.map(function (order) {
+	                return order.join(',');
+	            }).join('|');
+	            data._groups = query._groups === null ? undefined : query._groups;
+	            data._with = query._with === null ? undefined : query._with.join(',');
+	            return _qs2['default'].stringify(data);
+	        }
+	    }, {
+	        key: '_buildSelectUrl',
+	        value: function _buildSelectUrl(query) {
+	            var baseUrl = query._from;
+	            var queryString = this._buildQueryString(query);
+	            if (queryString !== '') {
+	                baseUrl += (query._from.indexOf('?') > -1 ? '&' : '?') + queryString;
+	            }
+	            return baseUrl;
+	        }
+	    }, {
+	        key: '_buildModelUrl',
+	        value: function _buildModelUrl(query) {
+	            var baseUrl = query._from + '/' + query._model.getKey();
+	            var queryString = this._buildQueryString(query);
+	            if (queryString !== '') {
+	                baseUrl += (query._from.indexOf('?') > -1 ? '&' : '?') + queryString;
+	            }
+	            return baseUrl;
+	        }
+	    }, {
 	        key: 'selectingStatement',
+	
+	        // Actual implementation of the connection.
 	        value: function selectingStatement(query) {
-	            var from, k, baseUrl;
 	            return _regeneratorRuntime.async(function selectingStatement$(context$2$0) {
 	                while (1) switch (context$2$0.prev = context$2$0.next) {
 	                    case 0:
-	                        from = query.from;
+	                        return context$2$0.abrupt('return', _utilsHTTP2['default'].get(this.getConfig('database', '') + this._buildSelectUrl(query)));
 	
-	                        delete query.from;
-	
-	                        for (k in query) {
-	                            if (query.hasOwnProperty(k)) {
-	                                query['_' + k] = query[k];
-	                                delete query[k];
-	                            }
-	                        }
-	
-	                        baseUrl = this._database + from;
-	                        context$2$0.next = 6;
-	                        return _regeneratorRuntime.awrap(_protocolHTTP2['default'].get(baseUrl + (baseUrl.indexOf('?') > -1 ? '&' : '?') + _qs2['default'].stringify(query)));
-	
-	                    case 6:
-	                        return context$2$0.abrupt('return', context$2$0.sent);
-	
-	                    case 7:
+	                    case 1:
 	                    case 'end':
 	                        return context$2$0.stop();
 	                }
@@ -4013,22 +3430,12 @@
 	    }, {
 	        key: 'insertingStatement',
 	        value: function insertingStatement(query, data) {
-	            var from, baseUrl;
 	            return _regeneratorRuntime.async(function insertingStatement$(context$2$0) {
 	                while (1) switch (context$2$0.prev = context$2$0.next) {
 	                    case 0:
-	                        from = query.from;
+	                        return context$2$0.abrupt('return', _utilsHTTP2['default'].post(this.getConfig('database', '') + this._buildSelectUrl(query), data));
 	
-	                        delete query.from;
-	
-	                        baseUrl = this._database + from;
-	                        context$2$0.next = 5;
-	                        return _regeneratorRuntime.awrap(_protocolHTTP2['default'].post(baseUrl, data));
-	
-	                    case 5:
-	                        return context$2$0.abrupt('return', context$2$0.sent);
-	
-	                    case 6:
+	                    case 1:
 	                    case 'end':
 	                        return context$2$0.stop();
 	                }
@@ -4037,22 +3444,12 @@
 	    }, {
 	        key: 'updatingStatement',
 	        value: function updatingStatement(query, data) {
-	            var from, baseUrl;
 	            return _regeneratorRuntime.async(function updatingStatement$(context$2$0) {
 	                while (1) switch (context$2$0.prev = context$2$0.next) {
 	                    case 0:
-	                        from = query.from;
+	                        return context$2$0.abrupt('return', _utilsHTTP2['default'].post(this.getConfig('database', '') + this._buildModelUrl(query), data));
 	
-	                        delete query.from;
-	
-	                        baseUrl = this._database + from;
-	                        context$2$0.next = 5;
-	                        return _regeneratorRuntime.awrap(_protocolHTTP2['default'].post(baseUrl, data));
-	
-	                    case 5:
-	                        return context$2$0.abrupt('return', context$2$0.sent);
-	
-	                    case 6:
+	                    case 1:
 	                    case 'end':
 	                        return context$2$0.stop();
 	                }
@@ -4061,22 +3458,12 @@
 	    }, {
 	        key: 'destroyingStatement',
 	        value: function destroyingStatement(query) {
-	            var from, baseUrl;
 	            return _regeneratorRuntime.async(function destroyingStatement$(context$2$0) {
 	                while (1) switch (context$2$0.prev = context$2$0.next) {
 	                    case 0:
-	                        from = query.from;
+	                        return context$2$0.abrupt('return', _utilsHTTP2['default']['delete'](this.getConfig('database', '') + this._buildModelUrl(query)));
 	
-	                        delete query.from;
-	
-	                        baseUrl = this._database + from;
-	                        context$2$0.next = 5;
-	                        return _regeneratorRuntime.awrap(_protocolHTTP2['default']['delete'](baseUrl));
-	
-	                    case 5:
-	                        return context$2$0.abrupt('return', context$2$0.sent);
-	
-	                    case 6:
+	                    case 1:
 	                    case 'end':
 	                        return context$2$0.stop();
 	                }
@@ -4090,21 +3477,25 @@
 	exports['default'] = UrlConnection;
 	module.exports = exports['default'];
 
+	// nothing to do here
+
+	// nothing to do here too
+
 /***/ },
-/* 69 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(70);
+	module.exports = __webpack_require__(62);
 
 
 /***/ },
-/* 70 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Load modules
 	
-	var Stringify = __webpack_require__(71);
-	var Parse = __webpack_require__(73);
+	var Stringify = __webpack_require__(63);
+	var Parse = __webpack_require__(65);
 	
 	
 	// Declare internals
@@ -4119,12 +3510,12 @@
 
 
 /***/ },
-/* 71 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Load modules
 	
-	var Utils = __webpack_require__(72);
+	var Utils = __webpack_require__(64);
 	
 	
 	// Declare internals
@@ -4246,7 +3637,7 @@
 
 
 /***/ },
-/* 72 */
+/* 64 */
 /***/ function(module, exports) {
 
 	// Load modules
@@ -4442,12 +3833,12 @@
 
 
 /***/ },
-/* 73 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Load modules
 	
-	var Utils = __webpack_require__(72);
+	var Utils = __webpack_require__(64);
 	
 	
 	// Declare internals
@@ -4614,259 +4005,40 @@
 
 
 /***/ },
-/* 74 */
+/* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _inherits = __webpack_require__(62)['default'];
+	var _inherits = __webpack_require__(52)['default'];
 	
-	var _get = __webpack_require__(63)['default'];
+	var _get = __webpack_require__(53)['default'];
 	
-	var _createClass = __webpack_require__(16)['default'];
+	var _createClass = __webpack_require__(2)['default'];
 	
-	var _classCallCheck = __webpack_require__(17)['default'];
+	var _classCallCheck = __webpack_require__(7)['default'];
 	
-	var _Object$defineProperty = __webpack_require__(1)['default'];
+	var _Promise = __webpack_require__(35)['default'];
 	
-	var _interopRequireDefault = __webpack_require__(64)['default'];
+	var _interopRequireDefault = __webpack_require__(57)['default'];
 	
-	_Object$defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
 	
-	var _Grammar2 = __webpack_require__(59);
-	
-	var _Grammar3 = _interopRequireDefault(_Grammar2);
-	
-	var UrlGrammar = (function (_Grammar) {
-	    function UrlGrammar() {
-	        _classCallCheck(this, UrlGrammar);
-	
-	        if (_Grammar != null) {
-	            _Grammar.apply(this, arguments);
-	        }
-	    }
-	
-	    _inherits(UrlGrammar, _Grammar);
-	
-	    _createClass(UrlGrammar, [{
-	        key: 'compileComponents',
-	        value: function compileComponents(query) {
-	            var _ref = query._modelBuilder == null ? {} : query._modelBuilder;
-	
-	            var _with = _ref._with;
-	
-	            var result = _get(Object.getPrototypeOf(UrlGrammar.prototype), 'compileComponents', this).call(this, query);
-	            result['with'] = _with;
-	            return result;
-	        }
-	    }, {
-	        key: 'compileInsert',
-	        value: function compileInsert(query) {
-	            return { from: this.compileFrom(query._from) };
-	        }
-	    }, {
-	        key: 'compileInsertGetId',
-	        value: function compileInsertGetId(query) {
-	            return { from: this.compileFrom(query._from) };
-	        }
-	    }, {
-	        key: 'compileUpdate',
-	        value: function compileUpdate(query) {
-	            if (query._modelBuilder === null) {
-	                throw 'UrlConnection does not support updating without a model (due to rest limitations).';
-	            }
-	            var result = _get(Object.getPrototypeOf(UrlGrammar.prototype), 'compileComponents', this).call(this, query);
-	            result.from = this.compileFrom(query._from) + '/' + query._modelBuilder._model.getKey();
-	            return result;
-	        }
-	    }, {
-	        key: 'compileDestroy',
-	        value: function compileDestroy(query) {
-	            if (query._modelBuilder === null) {
-	                throw 'UrlConnection does not support deleting without a model (due to rest limitations).';
-	            }
-	            var result = _get(Object.getPrototypeOf(UrlGrammar.prototype), 'compileComponents', this).call(this, query);
-	            result.from = this.compileFrom(query._from) + '/' + query._modelBuilder._model.getKey();
-	            return result;
-	        }
-	    }, {
-	        key: 'compileColumns',
-	
-	        // &columns=id,name,surname
-	        value: function compileColumns(value) {
-	            return value === null ? undefined : value.join(',');
-	        }
-	    }, {
-	        key: 'compileOrders',
-	
-	        // &order=id,asc|time,desc
-	        value: function compileOrders(value) {
-	            return value === null ? undefined : value.map(function (item) {
-	                return item.join(',');
-	            }).join('|');
-	        }
-	    }]);
-	
-	    return UrlGrammar;
-	})(_Grammar3['default']);
-	
-	exports['default'] = UrlGrammar;
-	module.exports = exports['default'];
-
-/***/ },
-/* 75 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _createClass = __webpack_require__(16)['default'];
-	
-	var _classCallCheck = __webpack_require__(17)['default'];
-	
-	var _Object$defineProperty = __webpack_require__(1)['default'];
-	
-	var _regeneratorRuntime = __webpack_require__(18)['default'];
-	
-	_Object$defineProperty(exports, '__esModule', {
-	    value: true
-	});
-	
-	var UrlProcessor = (function () {
-	    function UrlProcessor() {
-	        _classCallCheck(this, UrlProcessor);
-	    }
-	
-	    _createClass(UrlProcessor, [{
-	        key: 'processSelect',
-	        value: function processSelect(query, result) {
-	            return _regeneratorRuntime.async(function processSelect$(context$2$0) {
-	                while (1) switch (context$2$0.prev = context$2$0.next) {
-	                    case 0:
-	                        return context$2$0.abrupt('return', result.value);
-	
-	                    case 1:
-	                    case 'end':
-	                        return context$2$0.stop();
-	                }
-	            }, null, this);
-	        }
-	    }, {
-	        key: 'processInsert',
-	        value: function processInsert(query, result) {
-	            return _regeneratorRuntime.async(function processInsert$(context$2$0) {
-	                while (1) switch (context$2$0.prev = context$2$0.next) {
-	                    case 0:
-	                        return context$2$0.abrupt('return', result.value);
-	
-	                    case 1:
-	                    case 'end':
-	                        return context$2$0.stop();
-	                }
-	            }, null, this);
-	        }
-	    }, {
-	        key: 'processInsertGetId',
-	        value: function processInsertGetId(query, sql, values) {
-	            var result;
-	            return _regeneratorRuntime.async(function processInsertGetId$(context$2$0) {
-	                while (1) switch (context$2$0.prev = context$2$0.next) {
-	                    case 0:
-	                        if (!(query._modelBuilder === null)) {
-	                            context$2$0.next = 2;
-	                            break;
-	                        }
-	
-	                        throw 'UrlConnection does not support insertGetId without a model (due to rest limitations).';
-	
-	                    case 2:
-	                        context$2$0.next = 4;
-	                        return _regeneratorRuntime.awrap(query.getConnection().insert(sql, values));
-	
-	                    case 4:
-	                        result = context$2$0.sent;
-	                        return context$2$0.abrupt('return', result[query._modelBuilder._model.getKeyName()]);
-	
-	                    case 6:
-	                    case 'end':
-	                        return context$2$0.stop();
-	                }
-	            }, null, this);
-	        }
-	    }, {
-	        key: 'processUpdate',
-	        value: function processUpdate(query, result) {
-	            return _regeneratorRuntime.async(function processUpdate$(context$2$0) {
-	                while (1) switch (context$2$0.prev = context$2$0.next) {
-	                    case 0:
-	                        return context$2$0.abrupt('return', result.value);
-	
-	                    case 1:
-	                    case 'end':
-	                        return context$2$0.stop();
-	                }
-	            }, null, this);
-	        }
-	    }, {
-	        key: 'processDestroy',
-	        value: function processDestroy(query, result) {
-	            return _regeneratorRuntime.async(function processDestroy$(context$2$0) {
-	                while (1) switch (context$2$0.prev = context$2$0.next) {
-	                    case 0:
-	                        return context$2$0.abrupt('return', result.value);
-	
-	                    case 1:
-	                    case 'end':
-	                        return context$2$0.stop();
-	                }
-	            }, null, this);
-	        }
-	    }]);
-	
-	    return UrlProcessor;
-	})();
-	
-	exports['default'] = UrlProcessor;
-	module.exports = exports['default'];
-
-/***/ },
-/* 76 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _inherits = __webpack_require__(62)['default'];
-	
-	var _createClass = __webpack_require__(16)['default'];
-	
-	var _classCallCheck = __webpack_require__(17)['default'];
-	
-	var _Object$defineProperty = __webpack_require__(1)['default'];
-	
-	var _Promise = __webpack_require__(43)['default'];
-	
-	var _interopRequireDefault = __webpack_require__(64)['default'];
-	
-	_Object$defineProperty(exports, '__esModule', {
-	    value: true
-	});
-	
-	var _qs = __webpack_require__(69);
+	var _qs = __webpack_require__(61);
 	
 	var _qs2 = _interopRequireDefault(_qs);
 	
-	var _utilsEventEmitter = __webpack_require__(65);
+	var _eventemitter3 = __webpack_require__(58);
 	
-	var _utilsEventEmitter2 = _interopRequireDefault(_utilsEventEmitter);
+	var _eventemitter32 = _interopRequireDefault(_eventemitter3);
 	
 	var HTTP = (function (_EventEmitter) {
 	    function HTTP() {
 	        _classCallCheck(this, HTTP);
 	
-	        if (_EventEmitter != null) {
-	            _EventEmitter.apply(this, arguments);
-	        }
+	        _get(Object.getPrototypeOf(HTTP.prototype), 'constructor', this).apply(this, arguments);
 	
 	        this._pending = 0;
 	    }
@@ -4975,30 +4147,139 @@
 	    }]);
 	
 	    return HTTP;
-	})(_utilsEventEmitter2['default']);
+	})(_eventemitter32['default']);
 	
 	exports['default'] = new HTTP();
 	module.exports = exports['default'];
 
 /***/ },
-/* 77 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _createClass = __webpack_require__(16)['default'];
+	var _createClass = __webpack_require__(2)['default'];
 	
-	var _classCallCheck = __webpack_require__(17)['default'];
+	var _classCallCheck = __webpack_require__(7)['default'];
 	
-	var _Object$defineProperty = __webpack_require__(1)['default'];
+	var _regeneratorRuntime = __webpack_require__(8)['default'];
 	
-	var _interopRequireDefault = __webpack_require__(64)['default'];
+	var _interopRequireDefault = __webpack_require__(57)['default'];
 	
-	_Object$defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
 	
-	var _DatabaseManager = __webpack_require__(67);
+	var _Processor = __webpack_require__(1);
+	
+	var _Processor2 = _interopRequireDefault(_Processor);
+	
+	var UrlProcessor = (function () {
+	    function UrlProcessor() {
+	        _classCallCheck(this, UrlProcessor);
+	    }
+	
+	    _createClass(UrlProcessor, [{
+	        key: 'processSelect',
+	        value: function processSelect(query, result) {
+	            return _regeneratorRuntime.async(function processSelect$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        return context$2$0.abrupt('return', result.value);
+	
+	                    case 1:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'processInsert',
+	        value: function processInsert(query, result) {
+	            return _regeneratorRuntime.async(function processInsert$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        return context$2$0.abrupt('return', result.value);
+	
+	                    case 1:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'processInsertGetId',
+	        value: function processInsertGetId(query, values) {
+	            var result;
+	            return _regeneratorRuntime.async(function processInsertGetId$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        context$2$0.next = 2;
+	                        return _regeneratorRuntime.awrap(query.getConnection().insert(query, values));
+	
+	                    case 2:
+	                        result = context$2$0.sent;
+	                        return context$2$0.abrupt('return', result[query._model.getKeyName()]);
+	
+	                    case 4:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'processUpdate',
+	        value: function processUpdate(query, result) {
+	            return _regeneratorRuntime.async(function processUpdate$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        return context$2$0.abrupt('return', result.value);
+	
+	                    case 1:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'processDestroy',
+	        value: function processDestroy(query, result) {
+	            return _regeneratorRuntime.async(function processDestroy$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        return context$2$0.abrupt('return', result.value);
+	
+	                    case 1:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }]);
+	
+	    return UrlProcessor;
+	})();
+	
+	exports['default'] = UrlProcessor;
+	module.exports = exports['default'];
+
+/***/ },
+/* 68 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = __webpack_require__(2)['default'];
+	
+	var _classCallCheck = __webpack_require__(7)['default'];
+	
+	var _interopRequireDefault = __webpack_require__(57)['default'];
+	
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	
+	var _DatabaseManager = __webpack_require__(59);
 	
 	var _DatabaseManager2 = _interopRequireDefault(_DatabaseManager);
 	
@@ -5023,50 +4304,449 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 78 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _inherits = __webpack_require__(62)['default'];
+	var _createClass = __webpack_require__(2)['default'];
 	
-	var _get = __webpack_require__(63)['default'];
+	var _classCallCheck = __webpack_require__(7)['default'];
 	
-	var _createClass = __webpack_require__(16)['default'];
+	var _regeneratorRuntime = __webpack_require__(8)['default'];
 	
-	var _classCallCheck = __webpack_require__(17)['default'];
-	
-	var _Object$defineProperty = __webpack_require__(1)['default'];
-	
-	var _regeneratorRuntime = __webpack_require__(18)['default'];
-	
-	var _Object$keys = __webpack_require__(79)['default'];
-	
-	var _interopRequireDefault = __webpack_require__(64)['default'];
-	
-	_Object$defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
 	
-	var _utilsEventEmitter = __webpack_require__(65);
+	var Query = (function () {
+	    function Query() {
+	        var model = arguments[0] === undefined ? null : arguments[0];
+	        var connection = arguments[1] === undefined ? null : arguments[1];
 	
-	var _utilsEventEmitter2 = _interopRequireDefault(_utilsEventEmitter);
+	        _classCallCheck(this, Query);
 	
-	var _DatabaseManager = __webpack_require__(67);
+	        this._columns = null;
+	        this._aggregate = null;
+	        this._from = null;
+	        this._wheres = null;
+	        this._orders = null;
+	        this._groups = null;
+	        this._limit = null;
+	        this._offset = null;
+	        this._with = null;
+	        this._model = null;
 	
-	var _DatabaseManager2 = _interopRequireDefault(_DatabaseManager);
+	        this._model = model;
+	        this._connection = connection;
+	    }
 	
-	var _Collection = __webpack_require__(81);
+	    _createClass(Query, [{
+	        key: 'select',
+	
+	        // Add members to query
+	        value: function select() {
+	            for (var _len = arguments.length, columns = Array(_len), _key = 0; _key < _len; _key++) {
+	                columns[_key] = arguments[_key];
+	            }
+	
+	            this._columns = Array.isArray(columns) ? columns : [columns];
+	            return this;
+	        }
+	    }, {
+	        key: 'addSelect',
+	        value: function addSelect() {
+	            var columns = arguments[0] === undefined ? null : arguments[0];
+	
+	            columns = Array.isArray(columns) ? columns : [columns];
+	            this._columns = this._columns === null ? columns : this._columns.concat(columns);
+	            return this;
+	        }
+	    }, {
+	        key: 'from',
+	        value: function from() {
+	            var _from2 = arguments[0] === undefined ? null : arguments[0];
+	
+	            this._from = _from2;
+	            return this;
+	        }
+	    }, {
+	        key: 'where',
+	        value: function where(column, operation, value) {
+	            var boolean = arguments[3] === undefined ? 'and' : arguments[3];
+	
+	            var where = {
+	                type: 'basic',
+	                column: column,
+	                operation: operation,
+	                value: value,
+	                boolean: boolean.toLowerCase()
+	            };
+	            this._wheres = this._wheres === null ? [where] : this._wheres.concat([where]);
+	            return this;
+	        }
+	    }, {
+	        key: 'orderBy',
+	        value: function orderBy(name) {
+	            var dir = arguments[1] === undefined ? 'asc' : arguments[1];
+	
+	            this._orders = this._orders === null ? [[name, dir]] : this._orders.concat([[name, dir]]);
+	            return this;
+	        }
+	    }, {
+	        key: 'limit',
+	        value: function limit() {
+	            var _limit2 = arguments[0] === undefined ? null : arguments[0];
+	
+	            this._limit = _limit2;
+	            return this;
+	        }
+	    }, {
+	        key: 'take',
+	        value: function take() {
+	            var limit = arguments[0] === undefined ? null : arguments[0];
+	
+	            return this.limit(limit);
+	        }
+	    }, {
+	        key: 'offset',
+	        value: function offset() {
+	            var _offset2 = arguments[0] === undefined ? null : arguments[0];
+	
+	            this._offset = _offset2;
+	            return this;
+	        }
+	    }, {
+	        key: 'skip',
+	        value: function skip() {
+	            var offset = arguments[0] === undefined ? null : arguments[0];
+	
+	            return this.offset(offset);
+	        }
+	    }, {
+	        key: 'forPage',
+	        value: function forPage(page) {
+	            var perPage = arguments[1] === undefined ? 15 : arguments[1];
+	
+	            return this.offset((page - 1) * perPage).limit(perPage);
+	        }
+	    }, {
+	        key: 'with',
+	        value: function _with(args) {
+	            args = Array.isArray(args) ? args : [args];
+	            if (args.length > 0) {
+	                this._with = this._with == null ? args : this._with.concat(args);
+	            }
+	            return this;
+	        }
+	    }, {
+	        key: 'scope',
+	        value: function scope() {
+	            var name = arguments[0] === undefined ? '' : arguments[0];
+	
+	            for (var _len2 = arguments.length, args = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+	                args[_key2 - 1] = arguments[_key2];
+	            }
+	
+	            this._wheres.push({
+	                type: 'scope',
+	                name: name,
+	                args: args
+	            });
+	            return this;
+	        }
+	    }, {
+	        key: 'getModels',
+	
+	        // Perform query methods
+	        value: function getModels() {
+	            var columns = arguments[0] === undefined ? null : arguments[0];
+	            var results, connection;
+	            return _regeneratorRuntime.async(function getModels$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        this._columns = this._columns === null ? columns : this._columns;
+	                        context$2$0.next = 3;
+	                        return _regeneratorRuntime.awrap(this._connection.select(this));
+	
+	                    case 3:
+	                        results = context$2$0.sent;
+	                        connection = this._model.getConnectionName();
+	                        return context$2$0.abrupt('return', this._model.constructor.hydrate(results, connection).all());
+	
+	                    case 6:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'get',
+	        value: function get() {
+	            var columns = arguments[0] === undefined ? null : arguments[0];
+	            var models;
+	            return _regeneratorRuntime.async(function get$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        context$2$0.next = 2;
+	                        return _regeneratorRuntime.awrap(this.getModels(columns));
+	
+	                    case 2:
+	                        models = context$2$0.sent;
+	                        return context$2$0.abrupt('return', this._model.newCollection(models));
+	
+	                    case 4:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'first',
+	        value: function first() {
+	            var columns = arguments[0] === undefined ? null : arguments[0];
+	            return _regeneratorRuntime.async(function first$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        context$2$0.next = 2;
+	                        return _regeneratorRuntime.awrap(this.take(1).get(columns));
+	
+	                    case 2:
+	                        return context$2$0.abrupt('return', context$2$0.sent.first());
+	
+	                    case 3:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'find',
+	        value: function find() {
+	            var pks = arguments[0] === undefined ? [] : arguments[0];
+	            var columns = arguments[1] === undefined ? null : arguments[1];
+	            var result;
+	            return _regeneratorRuntime.async(function find$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        if (Array.isArray(pks)) {
+	                            result = this.where(this._model.getQualifiedKeyName(), 'in', pks).get(columns);
+	                        } else {
+	                            result = this.where(this._model.getQualifiedKeyName(), '=', pks).first(columns);
+	                        }
+	                        context$2$0.next = 3;
+	                        return _regeneratorRuntime.awrap(result);
+	
+	                    case 3:
+	                        return context$2$0.abrupt('return', context$2$0.sent);
+	
+	                    case 4:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'aggregate',
+	        value: function aggregate(fn, column) {
+	            var result;
+	            return _regeneratorRuntime.async(function aggregate$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        this._aggregate = [fn, column];
+	                        result = this.get();
+	
+	                        this._aggregate = null;
+	                        context$2$0.next = 5;
+	                        return _regeneratorRuntime.awrap(result);
+	
+	                    case 5:
+	                        result = context$2$0.sent;
+	
+	                        if (!(result.length > 0)) {
+	                            context$2$0.next = 8;
+	                            break;
+	                        }
+	
+	                        return context$2$0.abrupt('return', result[0].aggregate);
+	
+	                    case 8:
+	                        throw 'Aggregate result was invalid.';
+	
+	                    case 9:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'count',
+	        value: function count() {
+	            var column = arguments[0] === undefined ? null : arguments[0];
+	            return _regeneratorRuntime.async(function count$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        context$2$0.next = 2;
+	                        return _regeneratorRuntime.awrap(this.aggregate('count', column));
+	
+	                    case 2:
+	                        return context$2$0.abrupt('return', context$2$0.sent);
+	
+	                    case 3:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'insert',
+	        value: function insert(data) {
+	            return _regeneratorRuntime.async(function insert$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        context$2$0.next = 2;
+	                        return _regeneratorRuntime.awrap(this._connection.insert(this, data));
+	
+	                    case 2:
+	                        return context$2$0.abrupt('return', context$2$0.sent);
+	
+	                    case 3:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'insertGetId',
+	        value: function insertGetId(values) {
+	            var sequence = arguments[1] === undefined ? null : arguments[1];
+	            return _regeneratorRuntime.async(function insertGetId$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        context$2$0.next = 2;
+	                        return _regeneratorRuntime.awrap(this._connection.getPostProcessor().processInsertGetId(this, values, sequence));
+	
+	                    case 2:
+	                        return context$2$0.abrupt('return', context$2$0.sent);
+	
+	                    case 3:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'update',
+	        value: function update(data) {
+	            return _regeneratorRuntime.async(function update$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        context$2$0.next = 2;
+	                        return _regeneratorRuntime.awrap(this._connection.update(this, data));
+	
+	                    case 2:
+	                        return context$2$0.abrupt('return', context$2$0.sent);
+	
+	                    case 3:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'destroy',
+	        value: function destroy() {
+	            return _regeneratorRuntime.async(function destroy$(context$2$0) {
+	                while (1) switch (context$2$0.prev = context$2$0.next) {
+	                    case 0:
+	                        context$2$0.next = 2;
+	                        return _regeneratorRuntime.awrap(this._connection.destroy(this));
+	
+	                    case 2:
+	                        return context$2$0.abrupt('return', context$2$0.sent);
+	
+	                    case 3:
+	                    case 'end':
+	                        return context$2$0.stop();
+	                }
+	            }, null, this);
+	        }
+	    }, {
+	        key: 'setModel',
+	
+	        // Getter and setter
+	        value: function setModel() {
+	            var model = arguments[0] === undefined ? null : arguments[0];
+	
+	            this._model = model;
+	            this.from(model.getTable());
+	            return this;
+	        }
+	    }, {
+	        key: 'setConnection',
+	        value: function setConnection() {
+	            var connection = arguments[0] === undefined ? null : arguments[0];
+	
+	            this._connection = null;
+	            return this;
+	        }
+	    }, {
+	        key: 'getModel',
+	        value: function getModel() {
+	            return this._model;
+	        }
+	    }, {
+	        key: 'getConnection',
+	        value: function getConnection() {
+	            return this._connection;
+	        }
+	    }]);
+	
+	    return Query;
+	})();
+	
+	exports['default'] = Query;
+	module.exports = exports['default'];
+
+/***/ },
+/* 70 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _inherits = __webpack_require__(52)['default'];
+	
+	var _get = __webpack_require__(53)['default'];
+	
+	var _createClass = __webpack_require__(2)['default'];
+	
+	var _classCallCheck = __webpack_require__(7)['default'];
+	
+	var _regeneratorRuntime = __webpack_require__(8)['default'];
+	
+	var _Object$keys = __webpack_require__(71)['default'];
+	
+	var _interopRequireDefault = __webpack_require__(57)['default'];
+	
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	
+	var _eventemitter3 = __webpack_require__(58);
+	
+	var _eventemitter32 = _interopRequireDefault(_eventemitter3);
+	
+	var _Collection = __webpack_require__(73);
 	
 	var _Collection2 = _interopRequireDefault(_Collection);
 	
-	var _Builder = __webpack_require__(82);
+	var _DatabaseManager = __webpack_require__(59);
 	
-	var _Builder2 = _interopRequireDefault(_Builder);
+	var _DatabaseManager2 = _interopRequireDefault(_DatabaseManager);
 	
-	var _queryBuilder = __webpack_require__(15);
+	var _queryQuery = __webpack_require__(69);
 	
-	var _queryBuilder2 = _interopRequireDefault(_queryBuilder);
+	var _queryQuery2 = _interopRequireDefault(_queryQuery);
 	
 	var Model = (function (_EventEmitter) {
 	    function Model() {
@@ -5075,7 +4755,6 @@
 	        _classCallCheck(this, Model);
 	
 	        _get(Object.getPrototypeOf(Model.prototype), 'constructor', this).call(this);
-	        this._connection = null;
 	        this._table = null;
 	        this._primaryKey = 'id';
 	        this._incrementing = true;
@@ -5083,12 +4762,11 @@
 	        this._attributes = {};
 	        this._original = {};
 	        this._relations = {};
-	        this._fillable = [];
-	        this._guarded = [];
 	        this._dates = [];
 	        this._casts = {};
 	        this._exists = false;
 	        this._with = [];
+	        this._connection = null;
 	        //this.bootIfNotBooted(); TODO: Needed?
 	        this.syncOriginal();
 	        this.fill(attributes);
@@ -5143,8 +4821,7 @@
 	        key: 'newQueryWithoutScopes',
 	        value: function newQueryWithoutScopes() {
 	            var conn = this.getConnection();
-	            var grammar = conn.getQueryGrammar();
-	            var builder = new _Builder2['default'](new _queryBuilder2['default'](conn, grammar, conn.getPostProcessor()));
+	            var builder = new _queryQuery2['default'](this, conn);
 	
 	            return builder.setModel(this)['with'](this._with);
 	        }
@@ -5583,7 +5260,7 @@
 	    }]);
 	
 	    return Model;
-	})(_utilsEventEmitter2['default']);
+	})(_eventemitter32['default']);
 	
 	exports['default'] = Model;
 	module.exports = exports['default'];
@@ -5591,31 +5268,29 @@
 	// TODO: implement
 
 /***/ },
-/* 79 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(80), __esModule: true };
+	module.exports = { "default": __webpack_require__(72), __esModule: true };
 
 /***/ },
-/* 80 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(8);
-	module.exports = __webpack_require__(3).core.Object.keys;
+	__webpack_require__(56);
+	module.exports = __webpack_require__(5).core.Object.keys;
 
 /***/ },
-/* 81 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	var _createClass = __webpack_require__(16)["default"];
+	var _createClass = __webpack_require__(2)["default"];
 	
-	var _classCallCheck = __webpack_require__(17)["default"];
+	var _classCallCheck = __webpack_require__(7)["default"];
 	
-	var _Object$defineProperty = __webpack_require__(1)["default"];
-	
-	_Object$defineProperty(exports, "__esModule", {
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 	
@@ -5644,8 +5319,7 @@
 	        key: "each",
 	        value: function each(fn) {
 	            return this._items.map(function (item) {
-	                fn(item);
-	                return item;
+	                return fn(item);
 	            });
 	        }
 	    }, {
@@ -5660,200 +5334,6 @@
 	
 	exports["default"] = Collection;
 	module.exports = exports["default"];
-
-/***/ },
-/* 82 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _createClass = __webpack_require__(16)['default'];
-	
-	var _classCallCheck = __webpack_require__(17)['default'];
-	
-	var _Object$defineProperty = __webpack_require__(1)['default'];
-	
-	var _regeneratorRuntime = __webpack_require__(18)['default'];
-	
-	var _Object$getOwnPropertyNames = __webpack_require__(6)['default'];
-	
-	var _interopRequireDefault = __webpack_require__(64)['default'];
-	
-	_Object$defineProperty(exports, '__esModule', {
-	    value: true
-	});
-	
-	var _queryBuilder = __webpack_require__(15);
-	
-	var _queryBuilder2 = _interopRequireDefault(_queryBuilder);
-	
-	var Builder = (function () {
-	    function Builder(query) {
-	        _classCallCheck(this, Builder);
-	
-	        this._with = null;
-	        this._model = null;
-	        this._query = null;
-	
-	        this._query = query;
-	        query._modelBuilder = this;
-	    }
-	
-	    _createClass(Builder, [{
-	        key: 'with',
-	        value: function _with() {
-	            for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	                args[_key] = arguments[_key];
-	            }
-	
-	            args = Array.isArray(args) ? args : [args];
-	            this._with = this._with == null ? args : this._with.concat(args);
-	            return this;
-	        }
-	    }, {
-	        key: 'scope',
-	        value: function scope() {
-	            for (var _len2 = arguments.length, args = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
-	                args[_key2 - 1] = arguments[_key2];
-	            }
-	
-	            var name = arguments[0] === undefined ? '' : arguments[0];
-	
-	            // Scopes are treated as additional wheres.
-	            this._wheres.push({
-	                type: 'scope',
-	                name: name,
-	                args: args
-	            });
-	            return this;
-	        }
-	    }, {
-	        key: 'get',
-	        value: function get() {
-	            var columns = arguments[0] === undefined ? null : arguments[0];
-	            var models;
-	            return _regeneratorRuntime.async(function get$(context$2$0) {
-	                while (1) switch (context$2$0.prev = context$2$0.next) {
-	                    case 0:
-	                        context$2$0.next = 2;
-	                        return _regeneratorRuntime.awrap(this.getModels(columns));
-	
-	                    case 2:
-	                        models = context$2$0.sent;
-	                        return context$2$0.abrupt('return', this._model.newCollection(models));
-	
-	                    case 4:
-	                    case 'end':
-	                        return context$2$0.stop();
-	                }
-	            }, null, this);
-	        }
-	    }, {
-	        key: 'first',
-	        value: function first() {
-	            var columns = arguments[0] === undefined ? null : arguments[0];
-	            return _regeneratorRuntime.async(function first$(context$2$0) {
-	                while (1) switch (context$2$0.prev = context$2$0.next) {
-	                    case 0:
-	                        context$2$0.next = 2;
-	                        return _regeneratorRuntime.awrap(this.take(1).get(columns));
-	
-	                    case 2:
-	                        return context$2$0.abrupt('return', context$2$0.sent.first());
-	
-	                    case 3:
-	                    case 'end':
-	                        return context$2$0.stop();
-	                }
-	            }, null, this);
-	        }
-	    }, {
-	        key: 'find',
-	        value: function find() {
-	            var pks = arguments[0] === undefined ? [] : arguments[0];
-	            var columns = arguments[1] === undefined ? null : arguments[1];
-	            var result;
-	            return _regeneratorRuntime.async(function find$(context$2$0) {
-	                while (1) switch (context$2$0.prev = context$2$0.next) {
-	                    case 0:
-	                        if (Array.isArray(pks)) {
-	                            result = this.where(this._model.getQualifiedKeyName(), 'in', pks).get(columns);
-	                        } else {
-	                            result = this.where(this._model.getQualifiedKeyName(), '=', pks).first(columns);
-	                        }
-	                        context$2$0.next = 3;
-	                        return _regeneratorRuntime.awrap(result);
-	
-	                    case 3:
-	                        return context$2$0.abrupt('return', context$2$0.sent);
-	
-	                    case 4:
-	                    case 'end':
-	                        return context$2$0.stop();
-	                }
-	            }, null, this);
-	        }
-	    }, {
-	        key: 'getModels',
-	        value: function getModels() {
-	            var columns = arguments[0] === undefined ? null : arguments[0];
-	            var results, connection;
-	            return _regeneratorRuntime.async(function getModels$(context$2$0) {
-	                while (1) switch (context$2$0.prev = context$2$0.next) {
-	                    case 0:
-	                        context$2$0.next = 2;
-	                        return _regeneratorRuntime.awrap(this._query.get(columns));
-	
-	                    case 2:
-	                        results = context$2$0.sent;
-	                        connection = this._model.getConnectionName();
-	                        return context$2$0.abrupt('return', this._model.constructor.hydrate(results, connection).all());
-	
-	                    case 5:
-	                    case 'end':
-	                        return context$2$0.stop();
-	                }
-	            }, null, this);
-	        }
-	    }, {
-	        key: 'setModel',
-	
-	        // Setters
-	        value: function setModel() {
-	            var model = arguments[0] === undefined ? null : arguments[0];
-	
-	            this._model = model;
-	            this._query.from(model.getTable());
-	            return this;
-	        }
-	    }]);
-	
-	    return Builder;
-	})();
-	
-	// Mirror methods from base builder.
-	var _passthru = ['insert', 'insertGetId', 'getBindings', 'toSql', 'exists', 'count', 'min', 'max', 'avg', 'sum'];
-	var _keys = _Object$getOwnPropertyNames(_queryBuilder2['default'].prototype);
-	
-	function wrapMethod(k) {
-	    return function () {
-	        for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-	            args[_key3] = arguments[_key3];
-	        }
-	
-	        var result = this._query[k].apply(this._query, args);
-	        return _passthru.indexOf(k) > -1 ? result : this;
-	    };
-	}
-	
-	for (var i = 0; i < _keys.length; i++) {
-	    if (_queryBuilder2['default'].prototype.hasOwnProperty(_keys[i]) && typeof Builder.prototype[_keys[i]] === 'undefined') {
-	        Builder.prototype[_keys[i]] = wrapMethod(_keys[i]);
-	    }
-	}
-	
-	exports['default'] = Builder;
-	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);

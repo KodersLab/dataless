@@ -15,8 +15,7 @@ export default class Collection{
 
     each(fn){
         return this._items.map(function(item){
-            fn(item);
-            return item;
+            return fn(item);
         });
     }
 

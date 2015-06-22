@@ -1,13 +1,12 @@
+import EventEmitter from 'eventemitter3';
 import UrlConnection from './UrlConnection';
 
-class DatabaseManager{
+class DatabaseManager extends EventEmitter{
     _connections = {};
     _configs = {};
     _default = 'default';
-    _adapters = {
-        url: (name, config) => {
-            return new UrlConnection(null, config.database, config.prefix, config);
-        }
+    _drivers = {
+        url: (config) => new UrlConnection(config)
     };
 
     async connect(name = null){
@@ -53,10 +52,10 @@ class DatabaseManager{
         var driver = (config.driver || 'url').toLowerCase();
 
         var instance = null;
-        if(typeof this._adapters[driver] === 'undefined'){
+        if(typeof this._drivers[driver] === 'undefined'){
             throw 'Unknown driver type ' + driver;
         }
-        instance = this._adapters[driver](name, config);
+        instance = this._drivers[driver](config);
 
         await instance.connect();
         return instance;
@@ -123,8 +122,8 @@ class DatabaseManager{
         this._configs[name] = config;
     }
 
-    addAdapter(name, adapterFn){
-        this._adapters[name] = adapterFn;
+    addDriver(name, driverFn){
+        this._drivers[name] = driverFn;
     }
 
     getConfig(name = null){
