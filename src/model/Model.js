@@ -53,6 +53,7 @@ export default class Model extends EventEmitter{
                 this._attributes[k] = attributes[k];
             }
         }
+        this.emit('changed');
     }
 
     newCollection(models){
@@ -300,13 +301,21 @@ export default class Model extends EventEmitter{
         for(var k in attributes)
         {
             if(attributes.hasOwnProperty(k)){
-                this._attributes[k] = attributes[k];
+                if(this.hasRelation(k)){
+                    this._relations[k] = this[k]().hydrate(attributes[k], this._connection);
+                }else{
+                    this._attributes[k] = attributes[k];
+                }
             }
         }
         if(sync)
         {
             this.syncOriginal();
         }
+    }
+    
+    hasRelation(name){
+        return typeof this[name] === 'function' && this[name]() instanceof Relation;        
     }
 
     set(name, value){
