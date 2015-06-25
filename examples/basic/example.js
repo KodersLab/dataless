@@ -39,8 +39,8 @@ class Setting extends Model{
 // the app function will be executed once the db is ready
 async function app(){ 
     // search profiles
-    var theProfile = await Profile.query().with('founder').select('id', 'name', 'founder_id').find(1);
-    var profiles = await Profile.query().with('founder').orderBy('id','DESC').where('active', '=', 'true').get();
+    var theProfile = await Profile.query().with('founder').select('id', 'name', 'founder_id').find(4);
+    var profiles = await Profile.query().with('founder').orderBy('id','DESC').where('logo', '=', null).limit(10).get();
     console.log(theProfile, profiles);
 
     // create a new record with some data

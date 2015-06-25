@@ -28,7 +28,7 @@ export default class UrlConnection extends Connection{
         data._orders = query._orders === null ? undefined : query._orders.map((order) => order.join(',')).join('|');
         data._groups = query._groups === null ? undefined : query._groups;
         data._with = query._with === null ? undefined : query._with.join(',');
-        return qs.stringify(data);
+        return qs.stringify(data, { arrayFormat: 'brackets' });
     }
 
     _buildSelectUrl(query){

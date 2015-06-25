@@ -111,9 +111,9 @@ export default class Query{
     async find(pks = [], columns = null){
         var result;
         if(Array.isArray(pks)){
-            result = this.where(this._model.getQualifiedKeyName(), 'in', pks).get(columns);
+            result = this.where(this._model.getKeyName(), 'in', pks).get(columns);
         }else{
-            result = this.where(this._model.getQualifiedKeyName(), '=', pks).first(columns);
+            result = this.where(this._model.getKeyName(), '=', pks).first(columns);
         }
         return await result;
     }
