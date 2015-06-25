@@ -2,6 +2,10 @@ import EventEmitter from 'eventemitter3';
 import Collection from './Collection';
 import DatabaseManager from '../DatabaseManager';
 import Query from '../query/Query';
+import Case from '../utils/Case';
+
+import Relation from './relation/Relation';
+import BelongsTo from './relation/BelongsTo';
 
 export default class Model extends EventEmitter{
     _table = null;
@@ -57,6 +61,7 @@ export default class Model extends EventEmitter{
     }
 
     newCollection(models){
+        if(typeof models === 'undefined'){ return new Collection(); }
         return new Collection(Array.isArray(models) ? models : [models]);
     }
 
@@ -313,10 +318,6 @@ export default class Model extends EventEmitter{
             this.syncOriginal();
         }
     }
-    
-    hasRelation(name){
-        return typeof this[name] === 'function' && this[name]() instanceof Relation;        
-    }
 
     set(name, value){
         return this.setAttribute(name, value);
@@ -324,5 +325,21 @@ export default class Model extends EventEmitter{
 
     get(name){
         return this.getAttribute(name);
+    }
+
+    // ============= RELATIONS ==============
+    hasRelation(name){
+        return typeof this[name] === 'function' && this[name]() instanceof Relation;
+    }
+
+    belongsTo(relation, ModelClass, foreignKey = null, otherKey = null)
+    {
+        var instance = new ModelClass();
+        foreignKey = foreignKey == null ? Case.snakeCase(relation) + '_id' : foreignKey;
+        otherKey = otherKey == null ? instance.getKeyName() : otherKey;
+
+        var query = instance.newQuery();
+
+        return new BelongsTo(query, this, foreignKey, otherKey, relation);
     }
 }

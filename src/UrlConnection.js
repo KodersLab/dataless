@@ -22,7 +22,7 @@ export default class UrlConnection extends Connection{
         var data = {};
         data._aggregate = query._aggregate === null ? undefined : query._aggregate;
         data._columns = query._columns === null ? undefined : query._columns.join(',');
-        data._wheres = query._wheres === null ? undefined : query._wheres;
+        data._wheres = query._wheres === null ? undefined : JSON.stringify(query._wheres);
         data._limit = query._limit === null ? undefined : query._limit;
         data._offset = query._offset === null ? undefined : query._offset;
         data._orders = query._orders === null ? undefined : query._orders.map((order) => order.join(',')).join('|');

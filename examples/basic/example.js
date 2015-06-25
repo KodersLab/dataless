@@ -11,12 +11,23 @@ DatabaseManager.addConnection('memory', {
 });
 
 // define your model
+class User extends Model{
+    // provide a table
+    _table = 'auth/users';
+}
+
+// define your model
 class Profile extends Model{
     // provide a table
     _table = 'auth/profiles';
 
     // provide a connection
     _connection = 'default';
+
+    // setup a relation
+    founder(){
+        return this.belongsTo('founder', User);
+    }
 }
 
 // Another model in memory store
@@ -28,8 +39,8 @@ class Setting extends Model{
 // the app function will be executed once the db is ready
 async function app(){ 
     // search profiles
-    var theProfile = await Profile.query().select('id', 'name').find(1);
-    var profiles = await Profile.query().orderBy('id','DESC').where('active', '=', 'true').get();
+    var theProfile = await Profile.query().with('founder').select('id', 'name', 'founder_id').find(1);
+    var profiles = await Profile.query().with('founder').orderBy('id','DESC').where('active', '=', 'true').get();
     console.log(theProfile, profiles);
 
     // create a new record with some data
