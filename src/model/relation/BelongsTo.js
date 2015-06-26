@@ -15,12 +15,12 @@ export default class BelongsTo extends Relation{
     }
 
     hydrate(items, connection){
-        return super.hydrate([items], connection).first();
+        return super.hydrate(items === null ? null : [items], connection).first();
     }
 
     addConstraints(){
         var table = this._related.getTable();
 
-        this._query.where([table, this._otherKey], '=', this._parent.getAttribute(this._foreignKey));
+        this._query.where(this._otherKey, '=', this._parent.getAttribute(this._foreignKey));
     }
 }

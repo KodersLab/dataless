@@ -1,6 +1,6 @@
 {
   "name": "dataless",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A javascript ORM with multiple adapters that aims to provide data access in browsers to many sources.",
   "main": "index.js",
   "scripts": {

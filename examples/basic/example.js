@@ -14,6 +14,11 @@ DatabaseManager.addConnection('memory', {
 class User extends Model{
     // provide a table
     _table = 'auth/users';
+
+    // a mutator
+    getFullnameAttribute(){
+        return this._attributes['name'] + ' ' + this._attributes['surname'];
+    }
 }
 
 // define your model
@@ -42,6 +47,7 @@ async function app(){
     var theProfile = await Profile.query().with('founder').select('id', 'name', 'founder_id').find(4);
     var profiles = await Profile.query().with('founder').orderBy('id','DESC').where('logo', '=', null).limit(10).get();
     console.log(theProfile, profiles);
+    console.log('Profile #4 is funded by ' + theProfile.get('founder').get('fullname'));
 
     // create a new record with some data
     var profile = new Profile();

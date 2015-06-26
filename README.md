@@ -1,14 +1,32 @@
 # dataless
-A javascript DBAL with multiple adapters that aims to provide data access in browsers.
+A javascript ORM with multiple adapters that aims to provide data access in browsers.
 
 
 ----------
-## Todo
+## Features
 
- - [ ] Support object memory adapter via lodash
- - [ ] Support mutation (rpc calls to a function set on the db)
- - [ ] Provide laravel relay adapter
- - [ ] DOCS!!! D:
+ - [ ] Support multiple databases adapter
+   - [X] REST adapter
+   - [ ] Local In-Memory adapter (WIP)
+ - [X] Entity abstraction layer with basic query operations
+ - [X] Support model definition
+   - [ ] Basic definition
+     - [X] Define table
+     - [X] Primary Key
+     - [ ] Date fields
+     - [ ] Field to type casting
+   - [X] Basic Create / Read / Update / Delete operations
+   - [X] Model event hooks
+   - [X] Getter and Setter mutators
+   - [ ] Define model relationships
+     - [X] BelongsTo
+     - [ ] HasMany
+     - [ ] HasOne
+     - [ ] BelongsToMany
+   - [ ] Perform advanced query on a relationship on a model
+   - [X] Eager load relationships
+   - [ ] Call remote functions defined on remote entity (rest endpoint or db functions)
+ - [ ] DOCS D:
 
 ## Code example
 
@@ -26,12 +44,28 @@ DatabaseManager.addConnection('memory', {
 });
 
 // define your model
+class User extends Model{
+    // provide a table
+    _table = 'auth/users';
+
+    // a mutator
+    getFullnameAttribute(){
+        return this._attributes['name'] + ' ' + this._attributes['surname'];
+    }
+}
+
+// define your model
 class Profile extends Model{
     // provide a table
     _table = 'auth/profiles';
 
     // provide a connection
     _connection = 'default';
+
+    // setup a relation
+    founder(){
+        return this.belongsTo('founder', User);
+    }
 }
 
 // Another model in memory store
@@ -43,9 +77,10 @@ class Setting extends Model{
 // the app function will be executed once the db is ready
 async function app(){ 
     // search profiles
-    var theProfile = await Profile.query().select('id', 'name').find(1);
-    var profiles = await Profile.query().orderBy('id','DESC').where('active', '=', 'true').get();
+    var theProfile = await Profile.query().with('founder').select('id', 'name', 'founder_id').find(4);
+    var profiles = await Profile.query().with('founder').orderBy('id','DESC').where('logo', '=', null).limit(10).get();
     console.log(theProfile, profiles);
+    console.log('Profile #4 is funded by ' + theProfile.get('founder').get('fullname'));
 
     // create a new record with some data
     var profile = new Profile();

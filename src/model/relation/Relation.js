@@ -17,8 +17,14 @@ export default class Relation{
         throw '#addConstraints(): should be implemented by the relation.';
     }
 
+    touchOwners(){
+        throw '#touchOwners(): should be implemented by the relation.';
+    }
+
     hydrate(items, connection){
         if(items === null){ return this._related.newCollection(); }
-        return this._related.constructor.hydrate(items, connection);
+        return this._related.constructor.hydrate(items, connection).map((model) => {
+            return model.setParent(this._parent);
+        });
     }
 }

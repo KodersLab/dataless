@@ -10,13 +10,15 @@ export default class Collection{
     }
 
     map(fn){
-        return this._items.map(fn);
+        this._items = this._items.map(fn);
+        return this;
     }
 
     each(fn){
-        return this._items.map(function(item){
+        this._items.map(function(item){
             return fn(item);
         });
+        return this;
     }
 
     first(){

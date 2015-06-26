@@ -19,6 +19,8 @@ export default class Model extends EventEmitter{
     _casts = {};
     _exists = false;
     _with = [];
+    _parent = null;
+    _touches = [];
 
     _connection = null;
 
@@ -218,9 +220,22 @@ export default class Model extends EventEmitter{
         await (this.setKeysForSaveQuery(this.newQuery())).destroy();
     }
 
+    _touchRelationOwners(relation){
+        relation.touchOwners();
+    }
+
     touchOwners()
     {
-        // TODO: implement
+        for(var relation in this._touches) {
+            if(this._touches.hasOwnProperty(relation)){
+                this[relation]().touch();
+                if (this.getAttribute(relation) instanceof Model) {
+                    this.getAttribute(relation).touchOwners();
+                } else if (this.getAttribute(relation) instanceof Collection) {
+                    this.getAttribute(relation).each(this._touchRelationOwners);
+                }
+            }
+        }
     }
 
     getDirty()
@@ -245,14 +260,45 @@ export default class Model extends EventEmitter{
     }
 
     setAttribute(key, value){
-        // TODO: full implementation
+        if(this.hasSetMutator(key)){
+            this['set' + Case.studlyCase(key) + 'Attribute'](value);
+            return this;
+        }
         this._attributes[key] = value;
+        return this;
     }
 
-    getAttribute(key){
-        return typeof this._attributes[key] === 'undefined' ? null : this._attributes[key];
+    hasSetMutator(key){
+        return typeof this['set' + Case.studlyCase(key) + 'Attribute'] === 'function';
     }
 
+    getAttribute(key)
+    {
+        if (typeof this._attributes[key] !== 'undefined' || this.hasGetMutator(key))
+        {
+            return this.getAttributeValue(key);
+        }
+
+        if (typeof this._relations[key] !== 'undefined')
+        {
+            return this._relations[key];
+        }
+        return null;
+    }
+
+    hasGetMutator(key){
+        return typeof this['get' + Case.studlyCase(key) + 'Attribute'] === 'function';
+    }
+
+    getAttributeValue(key){
+        if(this.hasGetMutator(key)){
+            return this['get' + Case.studlyCase(key) + 'Attribute']();
+        }
+        if(typeof this._attributes[key] !== 'undefined'){
+            return this._attributes[key];
+        }
+        return null;
+    }
 
     syncOriginal()
     {
@@ -266,8 +312,9 @@ export default class Model extends EventEmitter{
         return this;
     }
 
-    fireModelEvent(){
+    fireModelEvent(name){
         // TODO: implement
+        this.emit(name);
         return true;
     }
 
@@ -297,6 +344,11 @@ export default class Model extends EventEmitter{
 
     setConnection(name = null){
         this._connection = name;
+        return this;
+    }
+
+    setParent(parent = null){
+        this._parent = parent;
         return this;
     }
 

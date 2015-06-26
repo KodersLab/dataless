@@ -16995,9 +16995,9 @@
 	                while (1) switch (context$2$0.prev = context$2$0.next) {
 	                    case 0:
 	                        if (Array.isArray(pks)) {
-	                            result = this.where(this._model.getQualifiedKeyName(), 'in', pks).get(columns);
+	                            result = this.where(this._model.getKeyName(), 'in', pks).get(columns);
 	                        } else {
-	                            result = this.where(this._model.getQualifiedKeyName(), '=', pks).first(columns);
+	                            result = this.where(this._model.getKeyName(), '=', pks).first(columns);
 	                        }
 	                        context$2$0.next = 3;
 	                        return _regeneratorRuntime.awrap(result);
@@ -17243,6 +17243,8 @@
 	        this._casts = {};
 	        this._exists = false;
 	        this._with = [];
+	        this._parent = null;
+	        this._touches = [];
 	        this._connection = null;
 	        //this.bootIfNotBooted(); TODO: Needed?
 	        this.syncOriginal();
@@ -17601,8 +17603,24 @@
 	            }, null, this);
 	        }
 	    }, {
+	        key: '_touchRelationOwners',
+	        value: function _touchRelationOwners(relation) {
+	            relation.touchOwners();
+	        }
+	    }, {
 	        key: 'touchOwners',
-	        value: function touchOwners() {}
+	        value: function touchOwners() {
+	            for (var relation in this._touches) {
+	                if (this._touches.hasOwnProperty(relation)) {
+	                    this[relation]().touch();
+	                    if (this.getAttribute(relation) instanceof Model) {
+	                        this.getAttribute(relation).touchOwners();
+	                    } else if (this.getAttribute(relation) instanceof _Collection2['default']) {
+	                        this.getAttribute(relation).each(this._touchRelationOwners);
+	                    }
+	                }
+	            }
+	        }
 	    }, {
 	        key: 'getDirty',
 	        value: function getDirty() {
@@ -17623,13 +17641,45 @@
 	    }, {
 	        key: 'setAttribute',
 	        value: function setAttribute(key, value) {
-	            // TODO: full implementation
+	            if (this.hasSetMutator(key)) {
+	                this['set' + _utilsCase2['default'].studlyCase(key) + 'Attribute'](value);
+	                return this;
+	            }
 	            this._attributes[key] = value;
+	            return this;
+	        }
+	    }, {
+	        key: 'hasSetMutator',
+	        value: function hasSetMutator(key) {
+	            return typeof this['set' + _utilsCase2['default'].studlyCase(key) + 'Attribute'] === 'function';
 	        }
 	    }, {
 	        key: 'getAttribute',
 	        value: function getAttribute(key) {
-	            return typeof this._attributes[key] === 'undefined' ? null : this._attributes[key];
+	            if (typeof this._attributes[key] !== 'undefined' || this.hasGetMutator(key)) {
+	                return this.getAttributeValue(key);
+	            }
+	
+	            if (typeof this._relations[key] !== 'undefined') {
+	                return this._relations[key];
+	            }
+	            return null;
+	        }
+	    }, {
+	        key: 'hasGetMutator',
+	        value: function hasGetMutator(key) {
+	            return typeof this['get' + _utilsCase2['default'].studlyCase(key) + 'Attribute'] === 'function';
+	        }
+	    }, {
+	        key: 'getAttributeValue',
+	        value: function getAttributeValue(key) {
+	            if (this.hasGetMutator(key)) {
+	                return this['get' + _utilsCase2['default'].studlyCase(key) + 'Attribute']();
+	            }
+	            if (typeof this._attributes[key] !== 'undefined') {
+	                return this._attributes[key];
+	            }
+	            return null;
 	        }
 	    }, {
 	        key: 'syncOriginal',
@@ -17684,6 +17734,14 @@
 	            var name = arguments[0] === undefined ? null : arguments[0];
 	
 	            this._connection = name;
+	            return this;
+	        }
+	    }, {
+	        key: 'setParent',
+	        value: function setParent() {
+	            var parent = arguments[0] === undefined ? null : arguments[0];
+	
+	            this._parent = parent;
 	            return this;
 	        }
 	    }, {
@@ -17771,8 +17829,6 @@
 	exports['default'] = Model;
 	module.exports = exports['default'];
 
-	// TODO: implement
-
 /***/ },
 /* 74 */
 /***/ function(module, exports, __webpack_require__) {
@@ -17819,14 +17875,16 @@
 	    }, {
 	        key: "map",
 	        value: function map(fn) {
-	            return this._items.map(fn);
+	            this._items = this._items.map(fn);
+	            return this;
 	        }
 	    }, {
 	        key: "each",
 	        value: function each(fn) {
-	            return this._items.map(function (item) {
+	            this._items.map(function (item) {
 	                return fn(item);
 	            });
+	            return this;
 	        }
 	    }, {
 	        key: "first",
@@ -17866,6 +17924,25 @@
 	            return name.replace(/([A-Z])/g, function ($1) {
 	                return '_' + $1.toLowerCase();
 	            });
+	        }
+	    }, {
+	        key: 'camelCase',
+	        value: function camelCase(input) {
+	            return input.toLowerCase().replace(/_(.)/g, function (match, group1) {
+	                return group1.toUpperCase();
+	            });
+	        }
+	    }, {
+	        key: 'studlyCase',
+	        value: function studlyCase(input) {
+	            return this.upperCaseFirst(this.camelCase(input));
+	        }
+	    }, {
+	        key: 'upperCaseFirst',
+	        value: function upperCaseFirst(str) {
+	            str += '';
+	            var f = str.charAt(0).toUpperCase();
+	            return f + str.substr(1);
 	        }
 	    }]);
 	
@@ -17911,12 +17988,21 @@
 	            throw '#addConstraints(): should be implemented by the relation.';
 	        }
 	    }, {
+	        key: 'touchOwners',
+	        value: function touchOwners() {
+	            throw '#touchOwners(): should be implemented by the relation.';
+	        }
+	    }, {
 	        key: 'hydrate',
 	        value: function hydrate(items, connection) {
+	            var _this = this;
+	
 	            if (items === null) {
 	                return this._related.newCollection();
 	            }
-	            return this._related.constructor.hydrate(items, connection);
+	            return this._related.constructor.hydrate(items, connection).map(function (model) {
+	                return model.setParent(_this._parent);
+	            });
 	        }
 	    }]);
 	
