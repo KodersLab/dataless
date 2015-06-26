@@ -17694,8 +17694,9 @@
 	        }
 	    }, {
 	        key: 'fireModelEvent',
-	        value: function fireModelEvent() {
+	        value: function fireModelEvent(name) {
 	            // TODO: implement
+	            this.emit(name);
 	            return true;
 	        }
 	    }, {
@@ -18061,14 +18062,14 @@
 	    }, {
 	        key: 'hydrate',
 	        value: function hydrate(items, connection) {
-	            return _get(Object.getPrototypeOf(BelongsTo.prototype), 'hydrate', this).call(this, [items], connection).first();
+	            return _get(Object.getPrototypeOf(BelongsTo.prototype), 'hydrate', this).call(this, items === null ? null : [items], connection).first();
 	        }
 	    }, {
 	        key: 'addConstraints',
 	        value: function addConstraints() {
 	            var table = this._related.getTable();
 	
-	            this._query.where([table, this._otherKey], '=', this._parent.getAttribute(this._foreignKey));
+	            this._query.where(this._otherKey, '=', this._parent.getAttribute(this._foreignKey));
 	        }
 	    }]);
 	
