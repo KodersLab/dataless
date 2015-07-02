@@ -4,6 +4,7 @@ import UrlProcessor from './query/processor/UrlProcessor';
 import Connection from './Connection';
 
 export default class UrlConnection extends Connection{
+    // change the post processor to be the url one, which picks data from .value instead of root.
     useDefaultPostProcessor(){
         this._postProcessor = new UrlProcessor();
         return this;
@@ -19,6 +20,7 @@ export default class UrlConnection extends Connection{
 
     // reformat a query to a url string that will obtain the post/get/delete request.
     _buildQueryString(query){
+        // create a copy of the object with reformatted data.
         var data = {};
         data._aggregate = query._aggregate === null ? undefined : query._aggregate;
         data._columns = query._columns === null ? undefined : query._columns.join(',');
@@ -28,23 +30,39 @@ export default class UrlConnection extends Connection{
         data._orders = query._orders === null ? undefined : query._orders.map((order) => order.join(',')).join('|');
         data._groups = query._groups === null ? undefined : query._groups;
         data._with = query._with === null ? undefined : query._with.join(',');
+        // return as a string.
         return qs.stringify(data);
     }
 
     _buildSelectUrl(query){
-        var baseUrl = query._from;
+        // by default, base url is the model table.
+        var baseUrl = query._model._table;
+        // append query string.
         var queryString = this._buildQueryString(query);
         if(queryString !== ''){
-            baseUrl += (query._from.indexOf('?') > -1 ? '&' : '?') + queryString;
+            baseUrl += (baseUrl.indexOf('?') > -1 ? '&' : '?') + queryString;
         }
         return baseUrl;
     }
 
     _buildModelUrl(query){
-        var baseUrl = query._from + '/' + query._model.getKey();
+        var model = query._model;
+        var baseUrl = [];
+
+        // Loop through parent and build the url.
+        while(model != null){
+            // if the model is parentless, stop there.
+            if(model._parentless === true){ break; }
+            // push fragment into baseUrl and then change current model.
+            baseUrl.push(model._table + '/' + model.getKey());
+            model = model.getParent();
+        }
+        // create a string.
+        baseUrl = baseUrl.join('/');
+        // handle query string append.
         var queryString = this._buildQueryString(query);
         if(queryString !== ''){
-            baseUrl += (query._from.indexOf('?') > -1 ? '&' : '?') + queryString;
+            baseUrl += (baseUrl.indexOf('?') > -1 ? '&' : '?') + queryString;
         }
         return baseUrl;
     }
