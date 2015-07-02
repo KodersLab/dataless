@@ -11,28 +11,11 @@ DatabaseManager.addConnection('memory', {
 });
 
 // define your model
-class User extends Model{
-    // provide a table
-    _table = 'auth/users';
-
-    // a mutator
-    getFullnameAttribute(){
-        return this._attributes['name'] + ' ' + this._attributes['surname'];
-    }
-}
-
-// define your model
 class Profile extends Model{
     // provide a table
     _table = 'auth/profiles';
-
     // provide a connection
     _connection = 'default';
-
-    // setup a relation
-    founder(){
-        return this.belongsTo('founder', User);
-    }
 }
 
 // Another model in memory store
@@ -43,12 +26,6 @@ class Setting extends Model{
 
 // the app function will be executed once the db is ready
 async function app(){ 
-    // search profiles
-    var theProfile = await Profile.query().with('founder').select('id', 'name', 'founder_id').find(4);
-    var profiles = await Profile.query().with('founder').orderBy('id','DESC').where('logo', '=', null).limit(10).get();
-    console.log(theProfile, profiles);
-    console.log('Profile #4 is funded by ' + theProfile.get('founder').get('fullname'));
-
     // create a new record with some data
     var profile = new Profile();
     profile.set('name', 'Matt');

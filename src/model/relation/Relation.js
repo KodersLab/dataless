@@ -21,6 +21,10 @@ export default class Relation{
         throw '#touchOwners(): should be implemented by the relation.';
     }
 
+    async getResults(){
+        throw '#getResults(): should be implemented by the relation.';
+    }
+
     hydrate(items, connection){
         if(items === null){ return this._related.newCollection(); }
         return this._related.constructor.hydrate(items, connection).map((model) => {

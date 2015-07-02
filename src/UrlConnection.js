@@ -18,7 +18,7 @@ export default class UrlConnection extends Connection{
         // nothing to do here too
     }
 
-    // reformat a query to a url string that will obtain the post/get/delete request.
+    // build the query string for model filtering.
     _buildQueryString(query){
         // create a copy of the object with reformatted data.
         var data = {};
@@ -34,6 +34,7 @@ export default class UrlConnection extends Connection{
         return qs.stringify(data);
     }
 
+    // build the url used to perform a select.
     _buildSelectUrl(query){
         // by default, base url is the model table.
         var baseUrl = query._model._table;
@@ -45,16 +46,17 @@ export default class UrlConnection extends Connection{
         return baseUrl;
     }
 
+    // build the model-specific url.
     _buildModelUrl(query){
         var model = query._model;
         var baseUrl = [];
 
         // Loop through parent and build the url.
         while(model != null){
-            // if the model is parentless, stop there.
-            if(model._parentless === true){ break; }
             // push fragment into baseUrl and then change current model.
             baseUrl.push(model._table + '/' + model.getKey());
+            // if the model is parentless, stop there.
+            if(model._parentless === true){ break; }
             model = model.getParent();
         }
         // create a string.
@@ -67,7 +69,25 @@ export default class UrlConnection extends Connection{
         return baseUrl;
     }
 
-    // Actual implementation of the connection.
+    // ensures that we are trying to fetch only a record, by PK.
+    _warnUniqueModel(query, name){
+        // checks where conditions, if many are provided except the PK being something, warn the user.
+        if(Array.isArray(query._wheres) &&
+            (
+                query._wheres.length > 1 ||
+                (
+                    query._wheres[0].type !== 'basic' ||
+                    query._wheres[0].column !== query._model.getKeyName() ||
+                    query._wheres[0].operator !== '='
+                )
+            )
+        ){
+            console.warn('You are using the ' + name + ' method with multiple wheres, or a where clauses different from the PK being something. ' +
+                         'This is not supported by the UrlConnection. Consider looping the list and perform each by each.');
+        }
+    }
+
+    // == Actual implementation of the connection. ==
     async selectingStatement(query){
         return HTTP.get(this.getConfig('database', '') + this._buildSelectUrl(query));
     }
@@ -77,10 +97,12 @@ export default class UrlConnection extends Connection{
     }
 
     async updatingStatement(query, data){
+        this._warnUniqueModel(query, 'update');
         return HTTP.post(this.getConfig('database', '') + this._buildModelUrl(query), data);
     }
 
     async destroyingStatement(query){
+        this._warnUniqueModel(query, 'delete');
         return HTTP.delete(this.getConfig('database', '') + this._buildModelUrl(query));
     }
 }

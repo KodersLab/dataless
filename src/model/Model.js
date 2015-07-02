@@ -359,7 +359,7 @@ export default class Model extends EventEmitter{
         {
             if(attributes.hasOwnProperty(k)){
                 if(this.hasRelation(k)){
-                    this._relations[k] = this[k]().hydrate(attributes[k], this._connection);
+                    this.setRelation(k, this[k]().hydrate(attributes[k], this._connection));
                 }else{
                     this._attributes[k] = attributes[k];
                 }
@@ -369,6 +369,10 @@ export default class Model extends EventEmitter{
         {
             this.syncOriginal();
         }
+    }
+
+    setRelation(name, value){
+        this._relations[name] = value;
     }
 
     set(name, value){
