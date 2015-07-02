@@ -8,6 +8,7 @@ A javascript ORM with multiple adapters that aims to provide data access in brow
  - [ ] Support multiple databases adapter
    - [X] REST adapter
    - [ ] Local In-Memory adapter (WIP)
+   - [ ] SQLite adapter
  - [X] Entity abstraction layer with basic query operations
  - [X] Support model definition
    - [ ] Basic definition
@@ -25,6 +26,7 @@ A javascript ORM with multiple adapters that aims to provide data access in brow
      - [ ] BelongsToMany
    - [ ] Perform advanced query on a relationship on a model
    - [X] Eager load relationships
+   - [ ] $refs, How can we handler refs? (maybe share the _attributes and _original object)
    - [ ] Call remote functions defined on remote entity (rest endpoint or db functions)
  - [ ] DOCS D:
 
